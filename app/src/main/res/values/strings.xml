@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Flashcards</string>
+    <string name="registerText">Register</string>
+    <string name="loginText">Login</string>
+    <string name="email">email</string>
+    <string name="passwd">Password</string>
+    <string name="sign">Signup</string>
+    <string name="login">Login</string>
+    <string name="not_account">Not account</string>
+</resources>
