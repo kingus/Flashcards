@@ -12,12 +12,13 @@ public class LoginViewModel extends ViewModel {
 
     private LoginRepository loginRepository;
     private MutableLiveData<Boolean> signgInStatus = new MutableLiveData<>();
+    private static LoginViewModel instance;
+
 
     public MutableLiveData<Boolean> getSigngInStatus() {
         return signgInStatus;
     }
 
-    private static LoginViewModel instance;
 
 
     public LoginViewModel() {
