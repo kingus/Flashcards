@@ -18,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
 
     LoginViewModel loginViewModel;
     private EditText mEmail, mPassword;
-    private Button btnSignIn;
+    private Button btnSignIn, btnSignUp;
 
     public LoginActivity() {
         this.loginViewModel = LoginViewModel.getInstance();
@@ -31,7 +31,17 @@ public class LoginActivity extends AppCompatActivity {
 
         mEmail = findViewById(R.id.et_email);
         mPassword = findViewById(R.id.et_password);
-        btnSignIn = findViewById(R.id.btn_sign_up);
+        btnSignIn = findViewById(R.id.btn_sign_in);
+        btnSignUp  = findViewById(R.id.btn_sign_up);
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(myIntent);
+            }
+        });
+
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+
 
 
     }

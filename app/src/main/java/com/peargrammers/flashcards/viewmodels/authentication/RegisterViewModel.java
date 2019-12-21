@@ -1,10 +1,15 @@
 package com.peargrammers.flashcards.viewmodels.authentication;
 
+import android.text.TextUtils;
+import android.util.Patterns;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.peargrammers.flashcards.repositories.authentication.RegisterRepository;
+
+import java.util.regex.Pattern;
 
 public class RegisterViewModel extends ViewModel {
 
@@ -44,6 +49,21 @@ public class RegisterViewModel extends ViewModel {
         registerRepository.createAccount(email, password);
 
     }
+
+    public boolean validateUserRegister(String email, String password1, String password2){
+        if (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches() && password1.equals(password2) && password1.length() > 6)
+            return true;
+        else
+            return false;
+    }
+
+    public boolean validateUserLogin(String email, String password1){
+        if (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches() && password1.length() > 6)
+            return true;
+        else
+            return false;
+    }
+
 
 
 
