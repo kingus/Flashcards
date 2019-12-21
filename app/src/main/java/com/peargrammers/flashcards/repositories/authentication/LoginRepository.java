@@ -38,13 +38,14 @@ public class LoginRepository {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "LOGIN GIT");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Log.d(TAG, user.toString());
+                            Log.d("LOGIN_REPOSITORY", "LOGIN GIT  - REPOSITORY");
+                            //FirebaseUser user = mAuth.getCurrentUser();
+                            //Log.d("LOGIN_REPOSITORY", user.toString());
                             signgInStatus.postValue(true);
 
                         } else {
-                            Log.w(TAG, "LOGIN ZLE", task.getException());
+                            //Log.w(TAG, "LOGIN ZLE", task.getException());
+                            Log.d("LOGIN_REPOSITORY", "LOGIN ZLE  - REPOZITORY");
                             signgInStatus.postValue(false);
                         }
                     }

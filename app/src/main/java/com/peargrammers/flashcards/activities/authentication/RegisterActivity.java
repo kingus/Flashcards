@@ -30,9 +30,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
 
-        mEmail = (EditText) findViewById(R.id.et_email);
-        mPassword = (EditText) findViewById(R.id.et_password);
-        btnSignUp = (Button) findViewById(R.id.btn_sign_up);
+        mEmail = findViewById(R.id.et_email);
+        mPassword = findViewById(R.id.et_password);
+        btnSignUp = findViewById(R.id.btn_sign_up);
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                         else{
                             Toast.makeText(RegisterActivity.this, "Nie dziala pysiu.",Toast.LENGTH_SHORT).show();
                         }
+                        //registerViewModel.getSigngUpStatus().removeObservers(RegisterActivity.this);
                     }
                 });
                 registerViewModel.createAccount(email, password);

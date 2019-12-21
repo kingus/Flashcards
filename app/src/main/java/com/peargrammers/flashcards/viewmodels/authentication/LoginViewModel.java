@@ -1,5 +1,7 @@
 package com.peargrammers.flashcards.viewmodels.authentication;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -20,6 +22,18 @@ public class LoginViewModel extends ViewModel {
 
     public LoginViewModel() {
         loginRepository = LoginRepository.getInstance();
+        loginRepository.getSigngInStatus().observeForever(new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    Log.d("LOGIN_VIEW_MODEL", "LOGIN GIT - view_model");
+                    signgInStatus.postValue(true);
+                } else {
+                    Log.d("LOGIN_VIEW_MODEL", "LOGIN ZLE - view_model");
+                    signgInStatus.postValue(false);
+                }
+            }
+        });
     }
 
     public static LoginViewModel getInstance(){
@@ -31,16 +45,7 @@ public class LoginViewModel extends ViewModel {
 
     public void signIn(String email, String password){
         //validation
-        loginRepository.getSigngInStatus().observeForever(new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    signgInStatus.postValue(true);
-                } else {
-                    signgInStatus.postValue(false);
-                }
-            }
-        });
+
         loginRepository.signIn(email, password);
 
     }

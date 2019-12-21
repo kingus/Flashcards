@@ -40,24 +40,30 @@ public class LoginActivity extends AppCompatActivity {
                 String password = mPassword.getText().toString();
                 Log.i("email", email);
                 Log.i("password", password);
-                loginViewModel.getSigngInStatus().observe(LoginActivity.this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(Boolean aBoolean) {
-                        if (aBoolean) {
-                            Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivity(myIntent);
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Złe hasłko czy coś :(.",Toast.LENGTH_SHORT).show();
 
-                        }
-                    }
-
-                });
                 loginViewModel.signIn(email, password);
 
             }
         });
 
+        loginViewModel.getSigngInStatus().observe(LoginActivity.this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    Log.d("LOGIN_ACTIVITY", "LOGIN GIT - activity");
+
+                    Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(myIntent);
+                } else {
+                    Log.d("LOGIN_ACTIVITY", "LOGIN ZLE - activity");
+
+                    Toast.makeText(LoginActivity.this, "Złe hasłko czy coś :(.",Toast.LENGTH_SHORT).show();
+
+                }
+                //loginViewModel.getSigngInStatus().removeObservers(LoginActivity.this);
+            }
+
+        });
 
 
     }
