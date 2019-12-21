@@ -1,5 +1,6 @@
 package com.peargrammers.flashcards.activities.authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,8 +19,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     RegisterViewModel registerViewModel;
 
-    private EditText mEmail, mPassword;
-    private Button btnSignUp;
+    private EditText mEmail, mPassword1, mPassword2;
+    private Button btnSignUp, btnSignIn;
 
     public RegisterActivity() {
         registerViewModel = RegisterViewModel.getInstance();
@@ -31,34 +32,49 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.register_activity);
 
         mEmail = findViewById(R.id.et_email);
-        mPassword = findViewById(R.id.et_password);
+        mPassword1 = findViewById(R.id.et_password1);
+        mPassword2 = findViewById(R.id.et_password2);
         btnSignUp = findViewById(R.id.btn_sign_up);
+        btnSignIn  = findViewById(R.id.btn_sign_in);
+
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(myIntent);
+            }
+        });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = mEmail.getText().toString();
-                String password = mPassword.getText().toString();
+                String password1 = mPassword1.getText().toString();
+                String password2 = mPassword2.getText().toString();
                 Log.i("email", email);
-                Log.i("password", password);
-                registerViewModel.getSigngUpStatus().observe(RegisterActivity.this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(@Nullable Boolean aBoolean) {
-                        if(aBoolean){
-                            Toast.makeText(RegisterActivity.this, "Supi.",Toast.LENGTH_SHORT).show();
+                Log.i("password", password1);
+                if (registerViewModel.validateUserRegister(email, password1, password2)) {
+
+                    registerViewModel.getSigngUpStatus().observe(RegisterActivity.this, new Observer<Boolean>() {
+                        @Override
+                        public void onChanged(@Nullable Boolean aBoolean) {
+                            if (aBoolean) {
+                                Toast.makeText(RegisterActivity.this, "Supi.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Nie dziala pysiu.", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else{
-                            Toast.makeText(RegisterActivity.this, "Nie dziala pysiu.",Toast.LENGTH_SHORT).show();
-                        }
-                        //registerViewModel.getSigngUpStatus().removeObservers(RegisterActivity.this);
-                    }
-                });
-                registerViewModel.createAccount(email, password);
+                    });
+                    registerViewModel.createAccount(email, password1);
+
+                }
+                else
+                    Log.i("nana", "buuuu");
             }
         });
+
+
     }
-
-
 
     public void onStart() {
         super.onStart();

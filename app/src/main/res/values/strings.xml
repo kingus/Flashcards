@@ -3,8 +3,10 @@
     <string name="registerText">Register</string>
     <string name="loginText">Login</string>
     <string name="email">email</string>
-    <string name="passwd">Password</string>
-    <string name="sign">Signup</string>
+    <string name="passwd">password</string>
+    <string name="reap_passwd">repeat password</string>
+    <string name="sign">Sign Up</string>
     <string name="login">Login</string>
-    <string name="not_account">Not account</string>
+    <string name="not_account">Don\'t have an account?</string>
+    <string name="have_account">Already have an account?</string>
 </resources>
