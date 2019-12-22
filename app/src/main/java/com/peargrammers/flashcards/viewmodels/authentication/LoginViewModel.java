@@ -12,6 +12,8 @@ public class LoginViewModel extends ViewModel {
 
     private LoginRepository loginRepository;
     private MutableLiveData<Boolean> signgInStatus = new MutableLiveData<>();
+    private MutableLiveData<String> signInException = new MutableLiveData<>();
+
     private static LoginViewModel instance;
 
 
@@ -19,11 +21,11 @@ public class LoginViewModel extends ViewModel {
         return signgInStatus;
     }
 
-
+    public MutableLiveData<String> getSignInException() { return signInException; }
 
     public LoginViewModel() {
         loginRepository = LoginRepository.getInstance();
-        loginRepository.getSigngInStatus().observeForever(new Observer<Boolean>() {
+        loginRepository.getSignInStatus().observeForever(new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
@@ -33,6 +35,12 @@ public class LoginViewModel extends ViewModel {
                     Log.d("LOGIN_VIEW_MODEL", "LOGIN ZLE - view_model");
                     signgInStatus.postValue(false);
                 }
+            }
+        });
+        loginRepository.getSignInException().observeForever(new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                signInException.postValue(s);
             }
         });
     }

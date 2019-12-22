@@ -7,15 +7,15 @@ import androidx.databinding.BaseObservable;
 public class User extends BaseObservable {
 
     @NonNull
-    private String email, password;
+    private String email, name;
 
     public User(){
 
     }
 
-    public User(@NonNull String email, @NonNull String password){
+    public User(@NonNull String email, @NonNull String name){
         this.email=email;
-        this.password=password;
+        this.name=name;
     }
 
     @NonNull
@@ -28,14 +28,14 @@ public class User extends BaseObservable {
     }
 
     @NonNull
-    public String getPassword() {
-        return password;
+    public String getName() {
+        return name;
     }
 
-    public void setPassword(@NonNull String password) {
-        this.password = password;
+    public void setName(@NonNull String password) {
+        this.name = password;
     }
 
-    public boolean isValidData(){
-        return !TextUtils.isEmpty(getEmail()) && Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches() && getPassword().length() > 6;    }
+//    public boolean isValidData(){
+//        return !TextUtils.isEmpty(getEmail()) && Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches() && getPassword().length() > 6;    }
 }

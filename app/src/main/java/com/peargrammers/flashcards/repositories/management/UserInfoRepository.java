@@ -6,10 +6,27 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.peargrammers.flashcards.models.authentication.User;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class UserInfoRepository {
     private static UserInfoRepository instance;
     private FirebaseAuth mAuth;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("/USERS");
+
+
+
     private MutableLiveData<String> userEmail = new MutableLiveData<>();
 
     public MutableLiveData<String> getUserEmail() {
@@ -18,6 +35,33 @@ public class UserInfoRepository {
 
     public UserInfoRepository() {
         this.mAuth = FirebaseAuth.getInstance();
+        //      to git
+        // myRef.child("UID"+mAuth.getCurrentUser().getUid()).child("name").setValue("Szymek");
+
+        Map<String, User> users = new HashMap<>();
+        users.put("UID:"+mAuth.getCurrentUser().getUid(), new User("gruz@wp.org", "AlanTuring"));
+        users.put("gracehop", new User("buziaczek@onet.pl", "Grace Hopper"));
+
+        myRef.setValue(users);
+
+
+        //myRef.setValue(new User("grusza123@gmail.com", "Szymon"));
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                String value = dataSnapshot.getValue(String.class);
+//
+//                Log.d(TAG, "Value is: " + value);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
 
     }
 
@@ -31,27 +75,12 @@ public class UserInfoRepository {
     public void getCurrentUserEmail() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            // Name, email address, and profile photo Url
             String name = user.getDisplayName();
             String email = user.getEmail();
-//            Uri photoUrl = user.getPhotoUrl();
-//
-            // Check if user's email is verified
-//            boolean emailVerified = user.isEmailVerified();
-//
-//            Log.d("HOME_LOG_name", name);
-  //          Log.d("HOME_LOG_email", email);
 
             userEmail.postValue(email);
 
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-//            String uid = user.getUid();
-
         } else {
-          //  Log.d("HOME_LOG", "nie ma usera :)");
             userEmail.postValue("default_username");
 
         }
