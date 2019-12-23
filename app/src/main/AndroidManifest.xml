@@ -13,7 +13,13 @@
         android:supportsRtl="true"
 
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.authentication.HomeActivity"></activity>
+        <activity android:name=".activities.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.HOME" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +41,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.ContactActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.CONTACT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.EditActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.UserActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.USER" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
