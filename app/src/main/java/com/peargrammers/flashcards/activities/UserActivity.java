@@ -25,6 +25,8 @@ public class UserActivity  extends AppCompatActivity {
         navigationView = findViewById(R.id.space);
         NavBar.setNavBar(navigationView);
 
+
+
         navigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {

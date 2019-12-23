@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@id/space"
+
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true">
+    
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="158dp"
+        android:layout_height="49dp"
+        android:background="@drawable/mybutton"
+        android:text="Let's play!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="240dp"
+        android:layout_height="41dp"
+        android:layout_gravity="center"
+        android:text="Username!"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_welcome" />
+
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Buenos días,"
+        android:textSize="36sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.266"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_username"
+        app:layout_constraintVertical_bias="0.074" />
+
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="194dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/lang2"
+        android:textAlignment="center"
+        android:textColor="#111"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/logo_app_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textAlignment="center"
+        android:textSize="40sp" />
+
+</FrameLayout>
