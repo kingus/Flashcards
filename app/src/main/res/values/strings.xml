@@ -10,4 +10,7 @@
     <string name="login">Login</string>
     <string name="not_account">Don\'t have an account?</string>
     <string name="have_account">Already have an account?</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.viewmodels.authentication.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {

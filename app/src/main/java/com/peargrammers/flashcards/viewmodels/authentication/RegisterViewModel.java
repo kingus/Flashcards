@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 public class RegisterViewModel extends ViewModel {
 
+    private static RegisterViewModel instance;
     private RegisterRepository registerRepository;
     private MutableLiveData<Boolean> signgUpStatus = new MutableLiveData<>();
 
@@ -20,7 +21,7 @@ public class RegisterViewModel extends ViewModel {
         return signgUpStatus;
     }
 
-    private static RegisterViewModel instance;
+
 
 
     public RegisterViewModel() {
