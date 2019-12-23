@@ -34,7 +34,7 @@ public class RegisterViewModel extends ViewModel {
         return instance;
     }
 
-    public void createAccount(String email, String password){
+    public void createAccount(String name, String email, String password){
         //validation
         registerRepository.getSigngUpStatus().observeForever(new Observer<Boolean>() {
             @Override
@@ -46,7 +46,7 @@ public class RegisterViewModel extends ViewModel {
                 }
             }
         });
-        registerRepository.createAccount(email, password);
+        registerRepository.createAccount(name, email, password);
 
     }
 

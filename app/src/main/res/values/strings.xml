@@ -4,6 +4,7 @@
     <string name="loginText">Login</string>
     <string name="email">email</string>
     <string name="passwd">password</string>
+    <string name="name">name</string>
     <string name="reap_passwd">repeat password</string>
     <string name="sign">Sign Up</string>
     <string name="login">Login</string>

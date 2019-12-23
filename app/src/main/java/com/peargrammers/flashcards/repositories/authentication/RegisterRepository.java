@@ -10,12 +10,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.peargrammers.flashcards.models.User;
 
 import static android.content.ContentValues.TAG;
 
 public class RegisterRepository {
     private static RegisterRepository instance;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference dbUsersRef;
     private MutableLiveData<Boolean> signgUpStatus = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getSigngUpStatus() {
@@ -24,6 +29,9 @@ public class RegisterRepository {
 
     public RegisterRepository() {
         this.mAuth = FirebaseAuth.getInstance();
+        this.mDatabase = FirebaseDatabase.getInstance();
+        this.dbUsersRef = mDatabase.getReference("/USERS");
+
     }
 
 
@@ -35,15 +43,28 @@ public class RegisterRepository {
     }
 
 
-    public void createAccount(String email, String password) {
+    public void createAccount(final String name, final String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "createUserWithEmail:success");
-                    FirebaseUser user = mAuth.getCurrentUser();
+                    FirebaseUser newUser = mAuth.getCurrentUser();
+                    final Task<Void> voidTask = dbUsersRef.child(newUser.getUid()).setValue(new User(name, email));
+                    voidTask.addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(voidTask.isSuccessful()) {
+                                Log.d(TAG, "createUserWithEmail: ADD USER TO DATABASE");
+                            } else {
+                                Log.d(TAG, "createUserWithEmail: ERROR WHILE ADDING USER TO DATABASE");
+
+                            }
+                        }
+                    });
                     signgUpStatus.postValue(true);
+
 
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());

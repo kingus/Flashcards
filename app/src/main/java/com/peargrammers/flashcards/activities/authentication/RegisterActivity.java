@@ -19,7 +19,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     RegisterViewModel registerViewModel;
 
-    private EditText mEmail, mPassword1, mPassword2;
+    private EditText mName, mEmail, mPassword1, mPassword2;
     private Button btnSignUp, btnSignIn;
 
     public RegisterActivity() {
@@ -31,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
 
+        mName = findViewById(R.id.et_name);
         mEmail = findViewById(R.id.et_email);
         mPassword1 = findViewById(R.id.et_password1);
         mPassword2 = findViewById(R.id.et_password2);
@@ -48,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = mName.getText().toString();
                 String email = mEmail.getText().toString();
                 String password1 = mPassword1.getText().toString();
                 String password2 = mPassword2.getText().toString();
@@ -65,11 +67,11 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     });
-                    registerViewModel.createAccount(email, password1);
+                    registerViewModel.createAccount(name, email, password1);
 
                 }
-                else
-                    Log.i("nana", "buuuu");
+//                else
+//                    Log.i("nana", "buuuu");
             }
         });
 

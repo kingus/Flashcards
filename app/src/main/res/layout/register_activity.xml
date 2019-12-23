@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.authentication.LoginActivity">
 
     <TextView
@@ -27,42 +27,55 @@
 
 
     <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="7dp"
+        android:ems="50"
+        android:hint="@string/name"
+        android:inputType="text"
+        android:textColor="#111"
+        android:textCursorDrawable="@color/colorBlack" />
+
+
+    <EditText
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="50"
-        android:layout_marginTop="40dp"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="7dp"
+        android:ems="50"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
         android:textColor="#111"
-        android:textCursorDrawable="@color/colorBlack"/>
+        android:textCursorDrawable="@color/colorBlack" />
 
 
     <EditText
         android:id="@+id/et_password1"
-        android:drawableStart="@drawable/ic_key"
-        android:drawablePadding="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_key"
+        android:drawablePadding="7dp"
         android:ems="10"
         android:hint="@string/passwd"
         android:inputType="textPassword"
         android:textColor="#111"
-        android:textCursorDrawable="@color/colorBlack"/>
+        android:textCursorDrawable="@color/colorBlack" />
 
     <EditText
         android:id="@+id/et_password2"
-        android:drawableStart="@drawable/ic_key"
-        android:drawablePadding="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_key"
+        android:drawablePadding="7dp"
         android:ems="10"
         android:hint="@string/reap_passwd"
         android:inputType="textPassword"
         android:textColor="#111"
-        android:textCursorDrawable="@color/colorBlack"/>
+        android:textCursorDrawable="@color/colorBlack" />
 
     <Button
         android:id="@+id/btn_sign_up"
@@ -79,19 +92,19 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/have_account"
         android:layout_marginTop="30dp"
-        android:paddingEnd="30dp"
+        android:gravity="end"
         android:paddingStart="30dp"
-        android:gravity="end"/>
+        android:paddingEnd="30dp"
+        android:text="@string/have_account" />
 
     <Button
         android:id="@+id/btn_sign_in"
-        android:background="@drawable/mybutton"
-        android:layout_marginTop="15dp"
         android:layout_width="100dp"
         android:layout_height="20dp"
         android:layout_gravity="end"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="30dp"
+        android:background="@drawable/mybutton"
         android:text="@string/login" />
 </LinearLayout>
