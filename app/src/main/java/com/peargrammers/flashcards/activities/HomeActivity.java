@@ -50,10 +50,14 @@ public class HomeActivity extends AppCompatActivity {
         NavBar.setNavBar(navigationView);
 
         setFragment(homeFragment);
+        navigationView.changeCurrentItem(-1);
+
         navigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
                 setFragment(homeFragment);
+                navigationView.changeCurrentItem(-1);
+
             }
 
             @Override
@@ -92,10 +96,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setFragment(Fragment fragment){
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_frame, fragment);
-        fragmentTransaction.commit();
-        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).commit();
 
         Log.i("FRAGMENT", "changed");
