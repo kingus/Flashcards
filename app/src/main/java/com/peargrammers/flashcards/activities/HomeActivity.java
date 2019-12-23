@@ -53,8 +53,7 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
-                Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
-                startActivity(myIntent);
+                setFragment(homeFragment);
             }
 
             @Override
