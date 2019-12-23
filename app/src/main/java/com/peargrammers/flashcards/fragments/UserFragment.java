@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.activities.UserActivity;
 import com.peargrammers.flashcards.models.User;
 import com.peargrammers.flashcards.viewmodels.management.UserViewModel;
 

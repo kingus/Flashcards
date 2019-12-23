@@ -64,7 +64,7 @@
             android:layout_width="158dp"
             android:layout_height="49dp"
             android:background="@drawable/mybutton"
-            android:text="Let's play!"
+            android:text="@string/lets_play"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.119"

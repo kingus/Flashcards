@@ -10,6 +10,14 @@
     <string name="login">Login</string>
     <string name="not_account">Don\'t have an account?</string>
     <string name="have_account">Already have an account?</string>
+    <string name="yours_catalogs">Yours catalogs</string>
+    <string name="add_catalog">Add new catalog</string>
+    <string name="new_catalog_name">Name</string>
+    <string name="new_catalog_category">Category</string>
+    <string name="lets_play">Let\'s play!</string>
+    <string name="save_and_add">Save and add next catalog</string>
+    <string name="save_and_go_yours_catalogs">Save and go to yours catalogs</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

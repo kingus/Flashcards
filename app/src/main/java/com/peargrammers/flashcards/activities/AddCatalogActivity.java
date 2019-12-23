@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.peargrammers.flashcards.R;
 
-public class CatalogsActivity extends AppCompatActivity {
+public class AddCatalogActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.catalogs_activity);
+        setContentView(R.layout.activity_add_catalog);
     }
 }
