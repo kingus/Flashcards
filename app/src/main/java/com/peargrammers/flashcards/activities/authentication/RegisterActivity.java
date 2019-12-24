@@ -17,7 +17,7 @@ import com.peargrammers.flashcards.viewmodels.authentication.RegisterViewModel;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    RegisterViewModel registerViewModel;
+    private RegisterViewModel registerViewModel;
 
     private EditText mName, mEmail, mPassword1, mPassword2;
     private Button btnSignUp, btnSignIn;
@@ -46,6 +46,17 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        registerViewModel.getSigngUpStatus().observe(RegisterActivity.this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if (aBoolean) {
+                    Toast.makeText(RegisterActivity.this, "Supi.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Nie dziala pysiu.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,16 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.i("password", password1);
                 if (registerViewModel.validateUserRegister(email, password1, password2)) {
 
-                    registerViewModel.getSigngUpStatus().observe(RegisterActivity.this, new Observer<Boolean>() {
-                        @Override
-                        public void onChanged(@Nullable Boolean aBoolean) {
-                            if (aBoolean) {
-                                Toast.makeText(RegisterActivity.this, "Supi.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(RegisterActivity.this, "Nie dziala pysiu.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                    //przeniesiono obserwacje z tego miejsca nad listener
                     registerViewModel.createAccount(name, email, password1);
 
                 }

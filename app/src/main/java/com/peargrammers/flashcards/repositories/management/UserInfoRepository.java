@@ -39,34 +39,36 @@ public class UserInfoRepository {
         this.mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         dbUsersRef = mDatabase.getReference("/USERS");
-        //      to git
-        // myRef.child("UID"+mAuth.getCurrentUser().getUid()).child("name").setValue("Szymek");
-        //adding multiple posts at the same time
-//        Map<String, User> users = new HashMap<>();
-//        users.put("UID:"+mAuth.getCurrentUser().getUid(), new User("gruz@wp.org", "AlanTuring"));
-//        users.put("gracehop", new User("buziaczek@onet.pl", "Grace Hopper"));
-//
-//        myRef.setValue(users);
+
+        /*
+              to git
+         myRef.child("UID"+mAuth.getCurrentUser().getUid()).child("name").setValue("Szymek");
+        adding multiple posts at the same time
+        Map<String, User> users = new HashMap<>();
+        users.put("UID:"+mAuth.getCurrentUser().getUid(), new User("gruz@wp.org", "AlanTuring"));
+        users.put("gracehop", new User("buziaczek@onet.pl", "Grace Hopper"));
+
+        myRef.setValue(users);
 
 
-        //myRef.setValue(new User("grusza123@gmail.com", "Szymon"));
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                // This method is called once with the initial value and again
-//                // whenever data at this location is updated.
-//                String value = dataSnapshot.getValue(String.class);
-//
-//                Log.d(TAG, "Value is: " + value);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-//            }
-//        });
+        myRef.setValue(new User("grusza123@gmail.com", "Szymon"));
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
 
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+*/
     }
 
     public static UserInfoRepository getInstance() {

@@ -26,6 +26,16 @@ public class RegisterViewModel extends ViewModel {
 
     public RegisterViewModel() {
         registerRepository = RegisterRepository.getInstance();
+        registerRepository.getSigngUpStatus().observeForever(new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    signgUpStatus.postValue(true);
+                } else {
+                    signgUpStatus.postValue(false);
+                }
+            }
+        });
     }
 
     public static RegisterViewModel getInstance(){
@@ -37,16 +47,7 @@ public class RegisterViewModel extends ViewModel {
 
     public void createAccount(String name, String email, String password){
         //validation
-        registerRepository.getSigngUpStatus().observeForever(new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    signgUpStatus.postValue(true);
-                } else {
-                    signgUpStatus.postValue(false);
-                }
-            }
-        });
+        //obserwacja przenisiona z tego miejsca do kostruktora
         registerRepository.createAccount(name, email, password);
 
     }

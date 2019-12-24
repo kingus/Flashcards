@@ -12,6 +12,8 @@ public class Catalog extends BaseObservable {
     private String name, category;
     private Map<String, Flashcard> flashcards;
 
+
+
     public Catalog() { }
 
     public Catalog(@NotNull String name, @NotNull String category) {
@@ -34,5 +36,13 @@ public class Catalog extends BaseObservable {
 
     public void setCategory(@NotNull String category) {
         this.category = category;
+    }
+
+    public Map<String, Flashcard> getFlashcards() {
+        return flashcards;
+    }
+
+    public void setFlashcards(Map<String, Flashcard> flashcards) {
+        this.flashcards = flashcards;
     }
 }

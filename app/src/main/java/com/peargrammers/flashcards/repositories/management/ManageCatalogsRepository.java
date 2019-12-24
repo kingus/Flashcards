@@ -1,51 +1,99 @@
 package com.peargrammers.flashcards.repositories.management;
 
-import android.net.Uri;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.peargrammers.flashcards.models.Catalog;
+import com.peargrammers.flashcards.models.Flashcard;
 
-public class ManagementRepository {
-    private static ManagementRepository instance;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
+public class ManageCatalogsRepository {
+    private static ManageCatalogsRepository instance;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference dbCurrentUserRef;
 
-    public ManagementRepository() {
+    private MutableLiveData<Boolean> ifAddCatalogProperly = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Catalog>> usersCatalogsList = new MutableLiveData<>();
+
+
+
+    public ManageCatalogsRepository() {
         this.mAuth = FirebaseAuth.getInstance();
+        this.mDatabase = FirebaseDatabase.getInstance();
+        this.dbCurrentUserRef = mDatabase.getReference("/USERS/" + mAuth.getUid());
+        Log.d(TAG, "################ sciezka do current USER CATALOGS" + this.dbCurrentUserRef.toString());
+
     }
 
-    public static ManagementRepository getInstance() {
+    public static ManageCatalogsRepository getInstance() {
         if (instance == null) {
-            instance = new ManagementRepository();
+            instance = new ManageCatalogsRepository();
         }
         return instance;
     }
 
-    public String getCurrentUserEmail() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-//            Uri photoUrl = user.getPhotoUrl();
-//
-            // Check if user's email is verified
-//            boolean emailVerified = user.isEmailVerified();
-//
-            Log.d("HOME_LOG_name", name);
-            Log.d("HOME_LOG_email", email);
+    public MutableLiveData<Boolean> getIfAddCatalogProperly() {
+        return ifAddCatalogProperly;
+    }
 
+    public MutableLiveData<ArrayList<Catalog>> getUsersCatalogsList() {
+        return usersCatalogsList;
+    }
 
+    public void getUsersCatalogsListDB() {
+        ValueEventListener usersCatalogsListListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Catalog> catalogs = new ArrayList<>();
+                for (DataSnapshot elem: dataSnapshot.getChildren()) {
+                    Log.d(TAG, "################ DATASNAPSHOT" + elem.toString());
 
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-//            String uid = user.getUid();
-            return email;
-        } else {
-            Log.d("HOME_LOG", "nie ma usera :)");
-            return "DEFOULT_EMAIL";
-        }
+                    Catalog tmp = elem.getValue(Catalog.class);
+                    if (tmp.getFlashcards() == null) {
+                        tmp.setFlashcards(new HashMap<String, Flashcard>());
+                    }
+                    catalogs.add(tmp);
+                }
+                usersCatalogsList.postValue(catalogs);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        dbCurrentUserRef.child("catalogs").orderByKey().addValueEventListener(usersCatalogsListListener);
+    }
+
+    public void addNewCatalog(String name, String category) {
+
+        // do przerobienia, dodanie jeszcze do listy katalogow
+        dbCurrentUserRef.child("catalogs").push().setValue(new Catalog(name, category)).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    ifAddCatalogProperly.postValue(true);
+                } else {
+                    ifAddCatalogProperly.postValue(true);
+                }
+            }
+        });
     }
 
 }
