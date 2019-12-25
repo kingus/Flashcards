@@ -18,13 +18,13 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
 
 
     public static class CatalogViewHolder extends RecyclerView.ViewHolder {
-        public TextView mTextView1;
-        public TextView mTextView2;
+        public TextView catalogName;
+        public TextView catalogCategory;
 
         public CatalogViewHolder(View itemView) {
             super(itemView);
-            mTextView1 = itemView.findViewById(R.id.textView);
-            mTextView2 = itemView.findViewById(R.id.textView2);
+            catalogName = itemView.findViewById(R.id.tv_catalog_name);
+            catalogCategory = itemView.findViewById(R.id.tv_catalog_category);
         }
     }
     @Override
@@ -49,9 +49,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
     @Override
     public void onBindViewHolder(@NonNull CatalogViewHolder holder, int position) {
         Catalog currentCatalog = catalogs.get(position);
-        holder.mTextView1.setText(currentCatalog.getCategory());
-        holder.mTextView2.setText(currentCatalog.getName());
+        holder.catalogName.setText(currentCatalog.getName());
+        holder.catalogCategory.setText(currentCatalog.getCategory());
     }
-
-
 }
