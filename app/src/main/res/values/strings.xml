@@ -10,7 +10,7 @@
     <string name="login">Login</string>
     <string name="not_account">Don\'t have an account?</string>
     <string name="have_account">Already have an account?</string>
-    <string name="yours_catalogs">Yours catalogs</string>
+    <string name="your_catalogs">Your catalogs</string>
     <string name="add_catalog">Add new catalog</string>
     <string name="new_catalog_name">Name</string>
     <string name="new_catalog_category">Category</string>

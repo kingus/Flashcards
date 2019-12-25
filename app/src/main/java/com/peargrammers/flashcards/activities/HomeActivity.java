@@ -12,6 +12,7 @@ import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.activities.authentication.NavBar;
+import com.peargrammers.flashcards.fragments.CatalogFragmentV2;
 import com.peargrammers.flashcards.fragments.ContactFragment;
 import com.peargrammers.flashcards.fragments.CatalogFragment;
 import com.peargrammers.flashcards.fragments.HomeFragment;
@@ -26,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     ContactFragment contactFragment;
     HomeFragment homeFragment;
     CatalogFragment catalogFragment;
+    CatalogFragmentV2 catalogFragment2;
     UserFragment userFragment;
     FrameLayout mainFrame;
 
@@ -34,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
         this.contactFragment = new ContactFragment();
         this.homeFragment = new HomeFragment();
         this.catalogFragment = new CatalogFragment();
+        this.catalogFragment2 = new CatalogFragmentV2();
         this.userFragment = new UserFragment();
     }
 
@@ -68,6 +71,9 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case 2:
                         setFragment(userFragment);
+                        break;
+                    case 3:
+                        setFragment(catalogFragment2);
                         break;
                 }
             }

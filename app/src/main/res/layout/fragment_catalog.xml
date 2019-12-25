@@ -17,7 +17,7 @@
             style="@android:style/Widget.DeviceDefault.TextView.SpinnerItem"
             android:layout_width="282dp"
             android:layout_height="47dp"
-            android:text="@string/yours_catalogs"
+            android:text="@string/your_catalogs"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
