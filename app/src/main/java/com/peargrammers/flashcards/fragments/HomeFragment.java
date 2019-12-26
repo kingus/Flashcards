@@ -24,7 +24,6 @@ import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 public class HomeFragment extends Fragment {
 
     HomeViewModel homeViewModel;
-    private TextView tv_username;
 
     public HomeFragment() {
         this.homeViewModel = HomeViewModel.getInstance();
@@ -46,16 +45,5 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tv_username = view.findViewById(R.id.tv_username);
-
-
-        homeViewModel.getUserEmail().observe(HomeFragment.this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                tv_username.setText(s);
-            }
-        });
-
-        homeViewModel.getCurrentUserEmail();
     }
 }
