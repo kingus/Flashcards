@@ -5,12 +5,20 @@ import com.google.firebase.database.annotations.NotNull;
 public class Flashcard {
     @NotNull
     private String backside, frontside;
+    @NotNull
+    private int smallBox;
 
     public Flashcard() { }
 
     public Flashcard(@NotNull String backside, @NotNull String frontside) {
         this.backside = backside;
         this.frontside = frontside;
+        this.smallBox = 0;
+    }
+    public Flashcard(@NotNull String backside, @NotNull String frontside, @NotNull int smallBox) {
+        this.backside = backside;
+        this.frontside = frontside;
+        this.smallBox = smallBox;
     }
     @NotNull
     public String getBackside() {
@@ -27,5 +35,14 @@ public class Flashcard {
 
     public void setFrontside(@NotNull String frontside) {
         this.frontside = frontside;
+    }
+
+    @NotNull
+    public int getSmallBox() {
+        return smallBox;
+    }
+
+    public void setSmallBox(@NotNull int smallBox) {
+        this.smallBox = smallBox;
     }
 }

@@ -13,6 +13,11 @@ public class CatalogsViewModel extends ViewModel {
     private static CatalogsViewModel instance;
     private ManageCatalogsRepository manageCatalogsRepository;
     private MutableLiveData<ArrayList<Catalog>> usersCatalogsList = new MutableLiveData<>();
+    private MutableLiveData<Boolean> ifRemoveCatalogProperly = new MutableLiveData<>();
+
+    public MutableLiveData<Boolean> getIfRemoveCatalogProperly() {
+        return ifRemoveCatalogProperly;
+    }
 
     public MutableLiveData<ArrayList<Catalog>> getUsersCatalogsList() {
         return usersCatalogsList;
@@ -24,6 +29,17 @@ public class CatalogsViewModel extends ViewModel {
             @Override
             public void onChanged(ArrayList<Catalog> catalogs) {
                 usersCatalogsList.postValue(catalogs);
+            }
+        });
+        manageCatalogsRepository.getIfRemoveCatalogProperly().observeForever(new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    ifRemoveCatalogProperly.postValue(true);
+
+                } else {
+                    ifRemoveCatalogProperly.postValue(false);
+                }
             }
         });
     }

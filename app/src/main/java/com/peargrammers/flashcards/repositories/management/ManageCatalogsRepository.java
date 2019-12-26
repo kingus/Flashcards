@@ -30,6 +30,8 @@ public class ManageCatalogsRepository {
     private DatabaseReference dbRef;
 
     private MutableLiveData<Boolean> ifAddCatalogProperly = new MutableLiveData<>();
+    private MutableLiveData<Boolean> ifRemoveCatalogProperly = new MutableLiveData<>();
+    private MutableLiveData<Boolean> ifEditedCatalogProperly = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Catalog>> usersCatalogsList = new MutableLiveData<>();
 
 
@@ -56,6 +58,14 @@ public class ManageCatalogsRepository {
 
     public MutableLiveData<ArrayList<Catalog>> getUsersCatalogsList() {
         return usersCatalogsList;
+    }
+
+    public MutableLiveData<Boolean> getIfRemoveCatalogProperly() {
+        return ifRemoveCatalogProperly;
+    }
+
+    public MutableLiveData<Boolean> getIfEditedCatalogProperly() {
+        return ifEditedCatalogProperly;
     }
 
     public void getUsersCatalogsListDB() {
@@ -123,8 +133,45 @@ public class ManageCatalogsRepository {
         });
     }
     public void removeCatalogFromList(String CID) {
-        dbCurrentUserRef.child("catalogs").child(CID).removeValue();
+        String key = dbCurrentUserRef.child("catalogs").child(CID).getKey();
 
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/CATALOGS/" + key, null);
+        childUpdates.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + key, null);
+
+        //dbCurrentUserRef.child("catalogs").child(CID).removeValue();
+        dbRef.updateChildren(childUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    ifRemoveCatalogProperly.postValue(true);
+                } else {
+                    ifRemoveCatalogProperly.postValue(true);
+                }
+            }
+
+         });
     }
+    public void editCatalog(String CID, String name, String category) {
+        //dbCurrentUserRef.child("catalogs").child(CID).removeValue();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/CATALOGS/" + CID + "/name", name);
+        childUpdates.put("/CATALOGS/" + CID + "/category", category);
+        childUpdates.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + CID + "/name", name);
+        childUpdates.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + CID + "/category", category);
+
+        dbRef.updateChildren(childUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    ifEditedCatalogProperly.postValue(true);
+                } else {
+                    ifEditedCatalogProperly.postValue(true);
+                }
+            }
+        });
+    }
+
 
 }

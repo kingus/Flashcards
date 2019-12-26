@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import com.peargrammers.flashcards.repositories.management.ManageCatalogsRepository;
-import com.peargrammers.flashcards.viewmodels.authentication.RegisterViewModel;
 
 public class AddCatalogViewModel extends ViewModel {
 

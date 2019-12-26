@@ -18,7 +18,7 @@ import com.peargrammers.flashcards.fragments.UserFragment;
 import com.peargrammers.flashcards.viewmodels.authentication.LogOutViewModel;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 
-public class HomeActivity extends AppCompatActivity {
+public class  HomeActivity extends AppCompatActivity {
 
     HomeViewModel homeViewModel;
     LogOutViewModel logOutViewModel;

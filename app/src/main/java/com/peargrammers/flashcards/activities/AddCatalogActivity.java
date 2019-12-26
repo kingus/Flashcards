@@ -1,6 +1,5 @@
 package com.peargrammers.flashcards.activities;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -12,13 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.activities.authentication.LoginActivity;
-import com.peargrammers.flashcards.activities.authentication.RegisterActivity;
 import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
+import com.peargrammers.flashcards.viewmodels.management.EditCatalogViewModel;
 
 public class AddCatalogActivity extends AppCompatActivity {
 

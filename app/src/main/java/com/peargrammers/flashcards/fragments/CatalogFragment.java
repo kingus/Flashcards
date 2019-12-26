@@ -19,14 +19,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.peargrammers.flashcards.CatalogAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.activities.AddCatalogActivity;
+import com.peargrammers.flashcards.activities.EditCatalogActivity;
+import com.peargrammers.flashcards.activities.authentication.LoginActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
+import com.peargrammers.flashcards.viewmodels.management.EditCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
 
 import java.util.ArrayList;
@@ -45,9 +49,9 @@ public class CatalogFragment extends Fragment {
     private AddCatalogViewModel addCatalogViewModel;
     private FloatingActionButton floatingActionButton;
 
-    final FragmentActivity catalogActivity = getActivity();
+    private final FragmentActivity catalogActivity = getActivity();
 
-    ArrayList<Catalog> catalogsList = new ArrayList<>();
+    private ArrayList<Catalog> catalogsList = new ArrayList<>();
 
     private Catalog removedCatalog = null;
 
@@ -76,11 +80,6 @@ public class CatalogFragment extends Fragment {
         floatingActionButton  = view.findViewById(R.id.floatingActionButton);
 
 
-
-
-
-
-
         catalogsViewModel.getUsersCatalogsList().observe(CatalogFragment.this, new Observer<ArrayList<Catalog>>() {
             @Override
             public void onChanged(ArrayList<Catalog> catalogs) {
@@ -106,6 +105,15 @@ public class CatalogFragment extends Fragment {
         catalogsViewModel.getUsetsCatalogListDB();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
+
+
+        catalogsViewModel.getIfRemoveCatalogProperly().observe(getActivity(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Toast.makeText(getActivity(), "Catalog removed", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
     }
 
@@ -144,6 +152,12 @@ public class CatalogFragment extends Fragment {
                             }).show();
                     break;
                 case ItemTouchHelper.RIGHT:
+                    //EditCatalogActivity editCatalogActivity = EditCatalogActivity.get
+
+                    EditCatalogViewModel.getInstance().setEditedCatalog(catalogsList.get(position));
+
+                    Intent myIntent = new Intent(getActivity(), EditCatalogActivity.class);
+                    startActivity(myIntent);
                     break;
             }
         }
