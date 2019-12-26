@@ -14,23 +14,39 @@ import java.util.ArrayList;
 
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder> {
     private ArrayList<Catalog> catalogs;
+    public static RecyclerViewClickInterface recyclerViewClickInterface;
 
-
-
-    public static class CatalogViewHolder extends RecyclerView.ViewHolder {
-        public TextView catalogName;
-        public TextView catalogCategory;
-
-        public CatalogViewHolder(View itemView) {
-            super(itemView);
-            catalogName = itemView.findViewById(R.id.tv_catalog_name);
-            catalogCategory = itemView.findViewById(R.id.tv_catalog_category);
-        }
+    public CatalogAdapter(ArrayList<Catalog> exList, RecyclerViewClickInterface recyclerViewClickInterface){
+        catalogs = new ArrayList<>();
+        catalogs = exList;
+        this.recyclerViewClickInterface = recyclerViewClickInterface;
     }
     @Override
     public int getItemCount() {
         return catalogs.size();
     }
+
+    public static class CatalogViewHolder extends RecyclerView.ViewHolder {
+        public TextView catalogName;
+        public TextView catalogCategory;
+
+
+        public CatalogViewHolder(View itemView) {
+            super(itemView);
+            catalogName = itemView.findViewById(R.id.tv_catalog_name);
+            catalogCategory = itemView.findViewById(R.id.tv_catalog_category);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    recyclerViewClickInterface.onItemClick(getAdapterPosition());
+                }
+            });
+        }
+    }
+
 
     @NonNull
     @Override
@@ -41,10 +57,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
 
     }
 
-    public CatalogAdapter(ArrayList<Catalog> exList){
-        catalogs = new ArrayList<>();
-        catalogs = exList;
-    }
+
 
     @Override
     public void onBindViewHolder(@NonNull CatalogViewHolder holder, int position) {

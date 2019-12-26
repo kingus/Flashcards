@@ -25,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.peargrammers.flashcards.CatalogAdapter;
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.AddCatalogActivity;
 import com.peargrammers.flashcards.activities.EditCatalogActivity;
 import com.peargrammers.flashcards.activities.authentication.LoginActivity;
@@ -40,7 +41,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CatalogFragment extends Fragment {
+public class CatalogFragment extends Fragment implements RecyclerViewClickInterface {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -79,7 +80,7 @@ public class CatalogFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         floatingActionButton  = view.findViewById(R.id.floatingActionButton);
 
-
+        final RecyclerViewClickInterface rvci = this;
         catalogsViewModel.getUsersCatalogsList().observe(CatalogFragment.this, new Observer<ArrayList<Catalog>>() {
             @Override
             public void onChanged(ArrayList<Catalog> catalogs) {
@@ -87,8 +88,8 @@ public class CatalogFragment extends Fragment {
                 catalogsList.addAll(catalogs);
                 mLayoutManager = new LinearLayoutManager(catalogActivity);
                 mRecyclerView.setLayoutManager(mLayoutManager);
-                mAdapter = new CatalogAdapter(catalogsList);
 
+                mAdapter = new CatalogAdapter(catalogsList, rvci);
                 mRecyclerView.setAdapter(mAdapter);
             }
         });
@@ -176,4 +177,9 @@ public class CatalogFragment extends Fragment {
         }
     };
 
+    @Override
+    public void onItemClick(int position) {
+        //Catalog clicked
+        System.out.println("CLICKED");
+    }
 }
