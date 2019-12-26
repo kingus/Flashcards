@@ -7,14 +7,12 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.activities.authentication.NavBar;
-import com.peargrammers.flashcards.fragments.CatalogFragmentV2;
-import com.peargrammers.flashcards.fragments.ContactFragment;
 import com.peargrammers.flashcards.fragments.CatalogFragment;
+import com.peargrammers.flashcards.fragments.ContactFragment;
 import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.fragments.UserFragment;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
@@ -22,12 +20,10 @@ import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 public class HomeActivity extends AppCompatActivity {
 
     HomeViewModel homeViewModel;
-    private TextView tv_username;
     SpaceNavigationView navigationView;
     ContactFragment contactFragment;
     HomeFragment homeFragment;
     CatalogFragment catalogFragment;
-    CatalogFragmentV2 catalogFragment2;
     UserFragment userFragment;
     FrameLayout mainFrame;
 
@@ -36,7 +32,6 @@ public class HomeActivity extends AppCompatActivity {
         this.contactFragment = new ContactFragment();
         this.homeFragment = new HomeFragment();
         this.catalogFragment = new CatalogFragment();
-        this.catalogFragment2 = new CatalogFragmentV2();
         this.userFragment = new UserFragment();
     }
 
@@ -57,7 +52,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onCentreButtonClick() {
                 setFragment(homeFragment);
                 navigationView.changeCurrentItem(-1);
-
             }
 
             @Override
@@ -73,7 +67,6 @@ public class HomeActivity extends AppCompatActivity {
                         setFragment(userFragment);
                         break;
                     case 3:
-                        setFragment(catalogFragment2);
                         break;
                 }
             }
@@ -84,24 +77,11 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-//        tv_username = findViewById(R.id.tv_username);
-//
-//        homeViewModel.getUserEmail().observe(HomeActivity.this, new Observer<String>() {
-//            @Override
-//            public void onChanged(String s) {
-//                tv_username.setText(s);
-//            }
-//        });
-//
-//        homeViewModel.getCurrentUserEmail();
-
     }
 
     private void setFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).commit();
-
         Log.i("FRAGMENT", "changed");
     }
 }

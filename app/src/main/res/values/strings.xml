@@ -18,7 +18,10 @@
     <string name="save_and_add">Save and add next</string>
     <string name="save_and_go_yours_catalogs">Save and back</string>
     <string name="cancel">Cancel</string>
-
+    <string name="folders">Folders</string>
+    <string name="cards">Flashcards</string>
+    <string name="learnt">Learnt words</string>
+    <string name="username">Username</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -27,7 +27,7 @@ import java.util.Date;
 public class UserFragment extends Fragment {
 
     UserViewModel userViewModel;
-    TextView tv_name, tv_email, tv_catalogs_amount, tv_creation_timestamp;
+    TextView tv_username, tv_username2, tv_email, tv_catalogs_number, tv_flashcards_number, tv_joined;
 
     public UserFragment() {
         // Required empty public constructor
@@ -48,20 +48,24 @@ public class UserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         userViewModel = UserViewModel.getInstance();
-        tv_name = view.findViewById(R.id.tv_name);
+        tv_username = view.findViewById(R.id.tv_username);
+        tv_username2 = view.findViewById(R.id.tv_username2);
         tv_email = view.findViewById(R.id.tv_email);
-        tv_catalogs_amount = view.findViewById(R.id.tv_catalogs_amount);
-        tv_creation_timestamp = view.findViewById(R.id.tv_creation_timestamp);
+        tv_catalogs_number = view.findViewById(R.id.folders_number);
+        tv_joined = view.findViewById(R.id.tv_joined);
+        tv_flashcards_number = view.findViewById(R.id.tv_cards_number);
 
         userViewModel.getLoggedUser().observe(UserFragment.this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
-                tv_name.setText(user.getName());
+                tv_username.setText(user.getName());
+                tv_username2.setText(user.getName());
                 tv_email.setText(user.getEmail());
-                tv_catalogs_amount.setText(Integer.toString(user.getCatalogs().size()));
+                tv_catalogs_number.setText(Integer.toString(user.getCatalogs().size()));
+                tv_flashcards_number.setText("100");
                 Date date = new Date(user.getCreationTimestamp());
-                Format format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-                tv_creation_timestamp.setText(format.format(date));
+                Format format = new SimpleDateFormat("dd MMMM yyyy");
+                tv_joined.setText(format.format(date));
 
             }
         });
