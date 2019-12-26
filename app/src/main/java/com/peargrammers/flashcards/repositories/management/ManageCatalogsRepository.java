@@ -64,6 +64,9 @@ public class ManageCatalogsRepository {
                     Log.d(TAG, "################ DATASNAPSHOT" + elem.toString());
 
                     Catalog tmp = elem.getValue(Catalog.class);
+
+                    tmp.setCID(elem.getKey());
+
                     if (tmp.getFlashcards() == null) {
                         tmp.setFlashcards(new HashMap<String, Flashcard>());
                     }
@@ -94,6 +97,10 @@ public class ManageCatalogsRepository {
                 }
             }
         });
+    }
+    public void removeCatalogFromList(String CID) {
+        dbCurrentUserRef.child("catalogs").child(CID).removeValue();
+
     }
 
 }

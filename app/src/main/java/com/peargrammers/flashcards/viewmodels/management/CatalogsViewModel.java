@@ -37,5 +37,9 @@ public class CatalogsViewModel extends ViewModel {
     public void getUsetsCatalogListDB() {
         manageCatalogsRepository.getUsersCatalogsListDB();
     }
+    public void removeCatalogFromList(String CID) {
+        manageCatalogsRepository.removeCatalogFromList(CID);
+
+    }
 
 }

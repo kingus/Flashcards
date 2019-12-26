@@ -26,6 +26,7 @@ import com.peargrammers.flashcards.CatalogAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.activities.AddCatalogActivity;
 import com.peargrammers.flashcards.models.Catalog;
+import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
 
 import java.util.ArrayList;
@@ -41,13 +42,19 @@ public class CatalogFragmentV2 extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private CatalogsViewModel catalogsViewModel;
+    private AddCatalogViewModel addCatalogViewModel;
     private FloatingActionButton floatingActionButton;
 
     final FragmentActivity catalogActivity = getActivity();
 
+    ArrayList<Catalog> catalogsList = new ArrayList<>();
+
+    private Catalog removedCatalog = null;
+
 
     public CatalogFragmentV2() {
         catalogsViewModel = CatalogsViewModel.getInstance();
+        addCatalogViewModel = AddCatalogViewModel.getInstance();
         // Required empty public constructor
     }
 
@@ -70,11 +77,14 @@ public class CatalogFragmentV2 extends Fragment {
 
 
 
-        final ArrayList<Catalog> catalogsList = new ArrayList<>();
+
+
+
 
         catalogsViewModel.getUsersCatalogsList().observe(CatalogFragmentV2.this, new Observer<ArrayList<Catalog>>() {
             @Override
             public void onChanged(ArrayList<Catalog> catalogs) {
+                catalogsList.clear();
                 catalogsList.addAll(catalogs);
                 mLayoutManager = new LinearLayoutManager(catalogActivity);
                 mRecyclerView.setLayoutManager(mLayoutManager);
@@ -99,7 +109,6 @@ public class CatalogFragmentV2 extends Fragment {
 
     }
 
-    String deletedCatalog = null;
 
     ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
         @Override
@@ -110,18 +119,24 @@ public class CatalogFragmentV2 extends Fragment {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
-            int position = viewHolder.getAdapterPosition();
+            final int position = viewHolder.getAdapterPosition();
 
             switch(direction){
                 case ItemTouchHelper.LEFT:
                     Log.i("REMOVE", String.valueOf(position));
+                    catalogsViewModel.removeCatalogFromList(catalogsList.get(position).getCID());
+
+                    removedCatalog = catalogsList.remove(position);
                     //deletedCatalog = method removing the catalog and returning a catalog
                     //mAdapter.notifyItemRemoved(position);
-                    Snackbar.make(mRecyclerView, deletedCatalog, Snackbar.LENGTH_LONG)
+                    Snackbar.make(mRecyclerView, "Undo", Snackbar.LENGTH_LONG)
                             .setAction("Undo", new View.OnClickListener(){
                                 @Override
                                 public void onClick(View v) {
                                     //method that'll add removed catalog to the list
+                                    addCatalogViewModel.addNewCatalog(removedCatalog.getName(), removedCatalog.getCategory());
+                                    catalogsList.add(position,removedCatalog);
+
                                     System.out.println("UNDO CLICKED");
                                     //NEEDED
                                     //mAdapter.notifyItemInserted();
@@ -136,7 +151,7 @@ public class CatalogFragmentV2 extends Fragment {
         @Override
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
             new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(getActivity(), R.color.leadningColor))
+                    .addSwipeLeftBackgroundColor(ContextCompat.getColor(getActivity(), R.color.red))
                     .addSwipeLeftActionIcon(R.drawable.ic_delete)
                     .addSwipeRightBackgroundColor(ContextCompat.getColor(getActivity(), R.color.leadningColor))
                     .addSwipeRightActionIcon(R.drawable.ic_edit)

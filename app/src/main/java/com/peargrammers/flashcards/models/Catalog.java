@@ -8,11 +8,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Catalog extends BaseObservable {
+    private String CID;
     @NotNull
     private String name, category;
     private Map<String, Flashcard> flashcards;
 
 
+    public String getCID() {
+        return CID;
+    }
+
+    public void setCID(String CID) {
+        this.CID = CID;
+    }
 
     public Catalog() { }
 
