@@ -10,9 +10,16 @@ import java.util.Map;
 public class Catalog extends BaseObservable {
     private String CID;
     @NotNull
-    private String name, category;
+    private String name, category, owner;
     private Map<String, Flashcard> flashcards;
 
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
     public String getCID() {
         return CID;
@@ -24,6 +31,12 @@ public class Catalog extends BaseObservable {
 
     public Catalog() { }
 
+    public Catalog(@NotNull String name, @NotNull String category, @NotNull String owner) {
+        this.name = name;
+        this.category = category;
+        this.owner = owner;
+        this.flashcards = new HashMap<>();
+    }
     public Catalog(@NotNull String name, @NotNull String category) {
         this.name = name;
         this.category = category;

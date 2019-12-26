@@ -9,6 +9,8 @@ import java.util.Map;
 
 public class User extends BaseObservable {
 
+
+    private long creationTimestamp;
     @NonNull
     private String email, name;
     private Map<String, Catalog> catalogs;
@@ -24,6 +26,14 @@ public class User extends BaseObservable {
         this.name=name;
         this.catalogs = new HashMap<>();
 
+    }
+
+    public long getCreationTimestamp() {
+        return creationTimestamp;
+    }
+
+    public void setCreationTimestamp(long creationTimestamp) {
+        this.creationTimestamp = creationTimestamp;
     }
 
     @NonNull

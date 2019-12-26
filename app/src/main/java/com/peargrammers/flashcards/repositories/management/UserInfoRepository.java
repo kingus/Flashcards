@@ -99,7 +99,7 @@ public class UserInfoRepository {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User loggedUserDB = dataSnapshot.getValue(User.class);
-
+                loggedUserDB.setCreationTimestamp(mAuth.getCurrentUser().getMetadata().getCreationTimestamp());
                 if (loggedUserDB.getCatalogs() == null) {
                     loggedUserDB.setCatalogs(new HashMap<String, Catalog>());
                 }

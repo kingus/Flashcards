@@ -17,13 +17,17 @@ import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.models.User;
 import com.peargrammers.flashcards.viewmodels.management.UserViewModel;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class UserFragment extends Fragment {
 
     UserViewModel userViewModel;
-    TextView tv_name, tv_email, tv_catalogs_amount;
+    TextView tv_name, tv_email, tv_catalogs_amount, tv_creation_timestamp;
 
     public UserFragment() {
         // Required empty public constructor
@@ -47,6 +51,7 @@ public class UserFragment extends Fragment {
         tv_name = view.findViewById(R.id.tv_name);
         tv_email = view.findViewById(R.id.tv_email);
         tv_catalogs_amount = view.findViewById(R.id.tv_catalogs_amount);
+        tv_creation_timestamp = view.findViewById(R.id.tv_creation_timestamp);
 
         userViewModel.getLoggedUser().observe(UserFragment.this, new Observer<User>() {
             @Override
@@ -54,6 +59,10 @@ public class UserFragment extends Fragment {
                 tv_name.setText(user.getName());
                 tv_email.setText(user.getEmail());
                 tv_catalogs_amount.setText(Integer.toString(user.getCatalogs().size()));
+                Date date = new Date(user.getCreationTimestamp());
+                Format format = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+                tv_creation_timestamp.setText(format.format(date));
+
             }
         });
 

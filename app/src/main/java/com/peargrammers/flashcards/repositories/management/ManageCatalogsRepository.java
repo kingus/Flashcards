@@ -18,6 +18,7 @@ import com.peargrammers.flashcards.models.Flashcard;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -26,6 +27,7 @@ public class ManageCatalogsRepository {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference dbCurrentUserRef;
+    private DatabaseReference dbRef;
 
     private MutableLiveData<Boolean> ifAddCatalogProperly = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Catalog>> usersCatalogsList = new MutableLiveData<>();
@@ -36,6 +38,7 @@ public class ManageCatalogsRepository {
         this.mAuth = FirebaseAuth.getInstance();
         this.mDatabase = FirebaseDatabase.getInstance();
         this.dbCurrentUserRef = mDatabase.getReference("/USERS/" + mAuth.getUid());
+        this.dbRef = mDatabase.getReference();
         Log.d(TAG, "################ sciezka do current USER CATALOGS" + this.dbCurrentUserRef.toString());
 
     }
@@ -87,7 +90,16 @@ public class ManageCatalogsRepository {
     public void addNewCatalog(String name, String category) {
 
         // do przerobienia, dodanie jeszcze do listy katalogow
-        dbCurrentUserRef.child("catalogs").push().setValue(new Catalog(name, category)).addOnCompleteListener(new OnCompleteListener<Void>() {
+        String key = dbCurrentUserRef.child("catalogs").push().getKey();
+        Catalog catalog = new Catalog(name, category);
+        Catalog catalogWithOwner = new Catalog(name, category, mAuth.getCurrentUser().getUid());
+
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/CATALOGS/" + key, catalogWithOwner);
+        childUpdates.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + key, catalog);
+
+        dbRef.updateChildren(childUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -95,6 +107,18 @@ public class ManageCatalogsRepository {
                 } else {
                     ifAddCatalogProperly.postValue(true);
                 }
+
+
+//        DatabaseReference currentRef =  dbCurrentUserRef.child("catalogs").push();
+//        String currentCID = currentRef.getKey();
+//                currentRef.setValue(new Catalog(name, category)).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if (task.isSuccessful()) {
+//                    ifAddCatalogProperly.postValue(true);
+//                } else {
+//                    ifAddCatalogProperly.postValue(true);
+//                }
             }
         });
     }
