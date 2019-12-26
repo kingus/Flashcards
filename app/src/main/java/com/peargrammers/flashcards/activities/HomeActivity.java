@@ -3,10 +3,10 @@ package com.peargrammers.flashcards.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
+
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.peargrammers.flashcards.R;
@@ -15,11 +15,13 @@ import com.peargrammers.flashcards.fragments.CatalogFragment;
 import com.peargrammers.flashcards.fragments.ContactFragment;
 import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.fragments.UserFragment;
+import com.peargrammers.flashcards.viewmodels.authentication.LogOutViewModel;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 
 public class HomeActivity extends AppCompatActivity {
 
     HomeViewModel homeViewModel;
+    LogOutViewModel logOutViewModel;
     SpaceNavigationView navigationView;
     ContactFragment contactFragment;
     HomeFragment homeFragment;
@@ -29,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public HomeActivity() {
         this.homeViewModel = HomeViewModel.getInstance();
+        this.logOutViewModel = LogOutViewModel.getInstance();
         this.contactFragment = new ContactFragment();
         this.homeFragment = new HomeFragment();
         this.catalogFragment = new CatalogFragment();
@@ -44,9 +47,9 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.initWithSaveInstanceState(savedInstanceState);
         NavBar.setNavBar(navigationView);
 
+
         setFragment(homeFragment);
         navigationView.changeCurrentItem(-1);
-
         navigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
@@ -67,6 +70,8 @@ public class HomeActivity extends AppCompatActivity {
                         setFragment(userFragment);
                         break;
                     case 3:
+                        logOutViewModel.logOut();
+                        finish();
                         break;
                 }
             }
