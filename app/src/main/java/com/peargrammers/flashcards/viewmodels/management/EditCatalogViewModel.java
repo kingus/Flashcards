@@ -26,6 +26,8 @@ public class EditCatalogViewModel extends ViewModel {
         return editedCatalog;
     }
 
+
+
     public EditCatalogViewModel() {
         manageCatalogsRepository = ManageCatalogsRepository.getInstance();
         manageCatalogsRepository.getIfAddCatalogProperly().observeForever(new Observer<Boolean>() {

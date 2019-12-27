@@ -1,4 +1,4 @@
-package com.peargrammers.flashcards.activities;
+package com.peargrammers.flashcards.activities.management;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
-import com.peargrammers.flashcards.viewmodels.management.EditCatalogViewModel;
 
 public class AddCatalogActivity extends AppCompatActivity {
 

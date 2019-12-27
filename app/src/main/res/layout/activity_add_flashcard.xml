@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.management.AddCatalogActivity">
+    tools:context=".activities.management.AddFlashcardActivity">
 
     <Button
-        android:id="@+id/btn_save_catalog_and_add_next"
+        android:id="@+id/btn_save_flashcard_and_add_next"
         android:layout_width="158dp"
         android:layout_height="49dp"
         android:layout_marginEnd="24dp"
@@ -16,20 +16,20 @@
         android:text="@string/save_and_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_save_catalog_and_back"
+        app:layout_constraintTop_toTopOf="@+id/btn_save_flashcard_and_back"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btn_save_catalog_and_back"
+        android:id="@+id/btn_save_flashcard_and_back"
         android:layout_width="158dp"
         android:layout_height="49dp"
         android:background="@drawable/mybutton"
         android:text="@string/save_and_go_yours_catalogs"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_save_catalog_and_add_next"
+        app:layout_constraintEnd_toStartOf="@+id/btn_save_flashcard_and_add_next"
         app:layout_constraintHorizontal_bias="0.593"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_new_catalog_catgory"
+        app:layout_constraintTop_toBottomOf="@+id/et_new_flashcard_backside"
         app:layout_constraintVertical_bias="0.272" />
 
     <Button
@@ -39,18 +39,18 @@
         android:background="@drawable/mybutton"
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_save_catalog_and_add_next"
+        app:layout_constraintEnd_toStartOf="@+id/btn_save_flashcard_and_add_next"
         app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_new_catalog_catgory"
+        app:layout_constraintTop_toBottomOf="@+id/et_new_flashcard_backside"
         app:layout_constraintVertical_bias="0.532" />
 
     <TextView
-        android:id="@+id/tv_add_catalog"
+        android:id="@+id/tv_add_flashcard"
         style="@android:style/Widget.DeviceDefault.TextView.SpinnerItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_catalog"
+        android:text="@string/add_flashcard"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,62 +61,62 @@
         app:layout_constraintVertical_bias="0.115" />
 
     <EditText
-        android:id="@+id/et_new_cataog_name"
+        android:id="@+id/et_new_flashcard_frontside"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="catalog name"
+        android:hint="@string/new_flashcard_frontside"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_new_catalog_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_new_flashcard_frontside"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/et_new_catalog_catgory"
+        android:id="@+id/et_new_flashcard_backside"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="catalog category"
+        android:hint="@string/new_flashcard_backside"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_new_catalog_category"
+        app:layout_constraintTop_toBottomOf="@+id/tv_new_flashcard_backside"
         app:layout_constraintVertical_bias="0.023" />
 
     <TextView
-        android:id="@+id/tv_new_catalog_name"
+        android:id="@+id/tv_new_flashcard_frontside"
         style="@android:style/Widget.DeviceDefault.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/new_catalog_name"
+        android:text="@string/new_flashcard_frontside"
         android:textColor="@color/colorBlack"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.107"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_add_catalog"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_flashcard"
         app:layout_constraintVertical_bias="0.003" />
 
     <TextView
-        android:id="@+id/tv_new_catalog_category"
+        android:id="@+id/tv_new_flashcard_backside"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/new_catalog_category"
+        android:text="@string/new_flashcard_backside"
         android:textColor="@color/colorBlack"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_new_cataog_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_new_flashcard_frontside"
         app:layout_constraintVertical_bias="0.02" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

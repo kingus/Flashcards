@@ -12,8 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.EditCatalogActivity"></activity>
-        <activity android:name=".activities.AddCatalogActivity" />
+        <activity android:name=".activities.management.EditFlashcardActivity"></activity>
+        <activity android:name=".activities.management.AddFlashcardActivity" />
+        <activity android:name=".activities.management.FlashcardsActivity" />
+        <activity android:name=".activities.management.EditCatalogActivity" />
+        <activity android:name=".activities.management.AddCatalogActivity" />
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

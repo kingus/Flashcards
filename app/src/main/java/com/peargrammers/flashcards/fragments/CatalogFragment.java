@@ -26,13 +26,14 @@ import com.google.android.material.snackbar.Snackbar;
 import com.peargrammers.flashcards.CatalogAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.RecyclerViewClickInterface;
-import com.peargrammers.flashcards.activities.AddCatalogActivity;
-import com.peargrammers.flashcards.activities.EditCatalogActivity;
-import com.peargrammers.flashcards.activities.authentication.LoginActivity;
+import com.peargrammers.flashcards.activities.management.AddCatalogActivity;
+import com.peargrammers.flashcards.activities.management.EditCatalogActivity;
+import com.peargrammers.flashcards.activities.management.FlashcardsActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.EditCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
+import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 
 import java.util.ArrayList;
 
@@ -180,6 +181,11 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
     @Override
     public void onItemClick(int position) {
         //Catalog clicked
-        System.out.println("CLICKED");
+        //ManageFlashcardsRepository.getInstance().addFlashcardToCatalog("-Lx463hTbRtrZVwXVT4k", new Flashcard("kot", "kot"));
+        FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
+        Intent myIntent = new Intent(getActivity(), FlashcardsActivity.class);
+        startActivity(myIntent);
+
+
     }
 }
