@@ -1,6 +1,7 @@
 package com.peargrammers.flashcards.fragments;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,10 +31,14 @@ import com.peargrammers.flashcards.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.management.AddCatalogActivity;
 import com.peargrammers.flashcards.activities.management.EditCatalogActivity;
 import com.peargrammers.flashcards.activities.management.FlashcardsActivity;
+import com.peargrammers.flashcards.activities.management.AddCatalogActivity;
+import com.peargrammers.flashcards.activities.management.EditCatalogActivity;
+import com.peargrammers.flashcards.activities.management.FlashcardsActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.EditCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
+import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 
 import java.util.ArrayList;
@@ -187,5 +193,42 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
         startActivity(myIntent);
 
 
+        System.out.println("CLICKED");
+
+    }
+
+    public void showDialog(final int position){
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View view = layoutInflater.inflate(R.layout.alert_remove_catalog, null);
+        Button acceptBut = view.findViewById(R.id.accept);
+        Button declineBut = view.findViewById(R.id.decline);
+        final AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setView(view).create();
+        alertDialog.show();
+        acceptBut.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Log.i("REMOVE", String.valueOf(position));
+                alertDialog.hide();
+                catalogsViewModel.removeCatalogFromList(catalogsList.get(position).getCID());
+                removedCatalog = catalogsList.remove(position);
+                Snackbar.make(mRecyclerView, "Undo", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        addCatalogViewModel.addNewCatalog(removedCatalog.getName(), removedCatalog.getCategory());
+                        catalogsList.add(position,removedCatalog);
+                        System.out.println("UNDO CLICKED");
+                    }
+                }).show();
+            }
+        });
+
+        declineBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("nana");
+                alertDialog.hide();
+            }
+        });
     }
 }

@@ -20,7 +20,19 @@
             app:autoFlipBackTime="1000"
             android:foregroundGravity="center"
             android:padding="5dp">
+            <!-- Back Layout Goes Here -->
 
+            <TextView
+                android:id="@+id/tv_backside"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="57sp"
+                android:gravity="center"
+                android:text="back"
+                android:background="@drawable/card2"
+                android:textColor="@color/red">
+            </TextView>
+            <!-- Front Layout Goes Here -->
 
             <TextView
                 android:id="@+id/tv_frontside"
@@ -33,17 +45,7 @@
                 android:background="@drawable/card"
                 android:textColor="@color/colorBlack">
             </TextView>
-            <!-- Front Layout Goes Here -->
-            <TextView
-                android:id="@+id/tv_backside"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="57sp"
-                android:gravity="center"
-                android:text="back"
-                android:background="@drawable/card"
-                android:textColor="@color/red">
-            </TextView>
+
     </com.wajahatkarim3.easyflipview.EasyFlipView>
 
 </RelativeLayout>
