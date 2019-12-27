@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.viewmodels.authentication.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
@@ -67,12 +68,18 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Log.d("LOGIN_ACTIVITY", "LOGIN ZLE - activity");
 
-                    Toast.makeText(LoginActivity.this, "Złe hasłko czy coś :(.",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, "Złe hasłko czy coś :(.",Toast.LENGTH_SHORT).show();
 
                 }
-                //loginViewModel.getSigngInStatus().removeObservers(LoginActivity.this);
+                //loginViewModel.getSignInStatus().removeObservers(LoginActivity.this);
             }
 
+        });
+        loginViewModel.getSignInException().observe(LoginActivity.this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Toast.makeText(LoginActivity.this, s, Toast.LENGTH_SHORT).show();
+            }
         });
 
 }
