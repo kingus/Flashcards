@@ -74,4 +74,6 @@ public class EditCatalogActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

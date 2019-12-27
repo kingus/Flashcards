@@ -87,7 +87,7 @@ public class  HomeActivity extends AppCompatActivity {
 
     }
 
-    private void setFragment(Fragment fragment){
+    public void setFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).commit();
         Log.i("FRAGMENT", "changed");

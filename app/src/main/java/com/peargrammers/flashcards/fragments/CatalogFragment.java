@@ -181,5 +181,6 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
     public void onItemClick(int position) {
         //Catalog clicked
         System.out.println("CLICKED");
+
     }
 }
