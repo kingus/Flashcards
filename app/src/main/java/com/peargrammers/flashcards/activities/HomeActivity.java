@@ -15,6 +15,7 @@ import com.peargrammers.flashcards.fragments.CatalogFragment;
 import com.peargrammers.flashcards.fragments.ContactFragment;
 import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.fragments.UserFragment;
+import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
 import com.peargrammers.flashcards.viewmodels.authentication.LogOutViewModel;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 
@@ -26,6 +27,7 @@ public class  HomeActivity extends AppCompatActivity {
     ContactFragment contactFragment;
     HomeFragment homeFragment;
     CatalogFragment catalogFragment;
+    ViewFlashcards viewFlashcards;
     UserFragment userFragment;
     FrameLayout mainFrame;
 
@@ -36,6 +38,7 @@ public class  HomeActivity extends AppCompatActivity {
         this.homeFragment = new HomeFragment();
         this.catalogFragment = new CatalogFragment();
         this.userFragment = new UserFragment();
+        this.viewFlashcards = new ViewFlashcards();
     }
 
     @Override
@@ -61,7 +64,7 @@ public class  HomeActivity extends AppCompatActivity {
             public void onItemClick(int itemIndex, String itemName) {
                 switch (itemIndex){
                     case 0:
-                        setFragment(contactFragment);
+                        setFragment(viewFlashcards);
                         break;
                     case 1:
                         setFragment(catalogFragment);
