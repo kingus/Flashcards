@@ -3,6 +3,7 @@ package com.peargrammers.flashcards.models;
 import com.google.firebase.database.annotations.NotNull;
 
 public class Flashcard {
+    private String FID;
     @NotNull
     private String backside, frontside;
     @NotNull
@@ -44,5 +45,13 @@ public class Flashcard {
 
     public void setSmallBox(@NotNull int smallBox) {
         this.smallBox = smallBox;
+    }
+
+    public String getFID() {
+        return FID;
+    }
+
+    public void setFID(String FID) {
+        this.FID = FID;
     }
 }

@@ -99,7 +99,8 @@ public class ManageCatalogsRepository {
 
     public void addNewCatalog(String name, String category) {
 
-        // do przerobienia, dodanie jeszcze do listy katalogow
+        //przerobic na dodawnaie obiektu tak aby przy UNDO dodawały sie tez fiszki
+
         String key = dbCurrentUserRef.child("catalogs").push().getKey();
         Catalog catalog = new Catalog(name, category);
         Catalog catalogWithOwner = new Catalog(name, category, mAuth.getCurrentUser().getUid());
