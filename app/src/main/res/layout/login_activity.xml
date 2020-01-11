@@ -26,31 +26,46 @@
         android:textSize="30sp" />
 
 
+
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="match_parent"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/circular_bar"
+        android:layout_marginBottom="12dp">
+
+    </ProgressBar>
+
+
     <EditText
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="50"
-        android:layout_marginTop="40dp"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
+        android:layout_marginTop="20dp"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="7dp"
+        android:ems="50"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:text="testowyuser@gmail.com"
         android:textColor="#111"
-        android:textCursorDrawable="@color/colorBlack"/>
+        android:textCursorDrawable="@color/colorBlack" />
 
 
     <EditText
         android:id="@+id/et_password"
-        android:drawableStart="@drawable/ic_key"
-        android:drawablePadding="7dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_key"
+        android:drawablePadding="7dp"
         android:ems="10"
         android:hint="@string/passwd"
         android:inputType="textPassword"
+        android:text="testowy"
         android:textColor="#111"
-        android:textCursorDrawable="@color/colorBlack"/>
+        android:textCursorDrawable="@color/colorBlack" />
 
     <Button
         android:id="@+id/btn_sign_in"
@@ -78,7 +93,7 @@
         android:background="@drawable/mybutton"
         android:layout_marginTop="15dp"
         android:layout_width="100dp"
-        android:layout_height="25dp"
+        android:layout_height="20dp"
         android:layout_gravity="end"
         android:layout_marginEnd="30dp"
         android:text="@string/sign" />

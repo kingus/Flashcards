@@ -4,40 +4,43 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
-import android.widget.TextView;
+
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.activities.authentication.NavBar;
+import com.peargrammers.flashcards.fragments.CatalogFragment;
 import com.peargrammers.flashcards.fragments.ContactFragment;
-import com.peargrammers.flashcards.fragments.EditFragment;
 import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.fragments.UserFragment;
+import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
+import com.peargrammers.flashcards.viewmodels.authentication.LogOutViewModel;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 
-public class HomeActivity extends AppCompatActivity {
+public class  HomeActivity extends AppCompatActivity {
 
     HomeViewModel homeViewModel;
-    private TextView tv_username;
+    LogOutViewModel logOutViewModel;
     SpaceNavigationView navigationView;
     ContactFragment contactFragment;
     HomeFragment homeFragment;
-    EditFragment editFragment;
+    CatalogFragment catalogFragment;
+    ViewFlashcards viewFlashcards;
     UserFragment userFragment;
     FrameLayout mainFrame;
 
     public HomeActivity() {
         this.homeViewModel = HomeViewModel.getInstance();
+        this.logOutViewModel = LogOutViewModel.getInstance();
         this.contactFragment = new ContactFragment();
         this.homeFragment = new HomeFragment();
-        this.editFragment = new EditFragment();
+        this.catalogFragment = new CatalogFragment();
         this.userFragment = new UserFragment();
+        this.viewFlashcards = new ViewFlashcards();
     }
 
     @Override
@@ -49,28 +52,31 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.initWithSaveInstanceState(savedInstanceState);
         NavBar.setNavBar(navigationView);
 
-        setFragment(homeFragment);
-        navigationView.changeCurrentItem(-1);
 
+        changeFragment(homeFragment);
+        navigationView.changeCurrentItem(-1);
         navigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
-                setFragment(homeFragment);
+                changeFragment(homeFragment);
                 navigationView.changeCurrentItem(-1);
-
             }
 
             @Override
             public void onItemClick(int itemIndex, String itemName) {
                 switch (itemIndex){
                     case 0:
-                        setFragment(contactFragment);
+                        changeFragment(viewFlashcards);
                         break;
                     case 1:
-                        setFragment(editFragment);
+                        changeFragment(catalogFragment);
                         break;
                     case 2:
-                        setFragment(userFragment);
+                        changeFragment(userFragment);
+                        break;
+                    case 3:
+                        logOutViewModel.logOut();
+                        finish();
                         break;
                 }
             }
@@ -81,24 +87,22 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
-//        tv_username = findViewById(R.id.tv_username);
-//
-//        homeViewModel.getUserEmail().observe(HomeActivity.this, new Observer<String>() {
-//            @Override
-//            public void onChanged(String s) {
-//                tv_username.setText(s);
-//            }
-//        });
-//
-//        homeViewModel.getCurrentUserEmail();
-
     }
 
-    private void setFragment(Fragment fragment){
+    public void changeFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).commit();
-
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(fragment.toString());
+        fragmentTransaction.replace(R.id.main_frame, fragment).commit();
         Log.i("FRAGMENT", "changed");
     }
+//public void changeFragment(Fragment fragment){
+//        FragmentManager fragmentManager2 = getSupportFragmentManager();
+//    FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+//    fragmentTransaction2.addToBackStack(fragment.toString());
+//    fragmentTransaction2.hide(HomeActivity.this);
+//    fragmentTransaction2.replace(R.id.main_frame, fragment);
+//    fragmentTransaction2.commit();
+//    Log.i("FRAGMENT", "changed");
+//}
 }

@@ -11,15 +11,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.HOME" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activities.management.EditFlashcardActivity"></activity>
+        <activity android:name=".activities.management.AddFlashcardActivity" />
+        <activity android:name=".activities.management.FlashcardsActivity" />
+        <activity android:name=".activities.management.EditCatalogActivity" />
+        <activity android:name=".activities.management.AddCatalogActivity" />
+        <activity android:name=".activities.HomeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,28 +39,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ContactActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.CONTACT" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activities.EditActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.EDIT" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activities.UserActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.USER" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
     </application>
 
 </manifest>

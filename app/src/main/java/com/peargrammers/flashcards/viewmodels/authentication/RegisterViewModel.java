@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 public class RegisterViewModel extends ViewModel {
 
+    private static RegisterViewModel instance;
     private RegisterRepository registerRepository;
     private MutableLiveData<Boolean> signgUpStatus = new MutableLiveData<>();
 
@@ -20,22 +21,11 @@ public class RegisterViewModel extends ViewModel {
         return signgUpStatus;
     }
 
-    private static RegisterViewModel instance;
+
 
 
     public RegisterViewModel() {
         registerRepository = RegisterRepository.getInstance();
-    }
-
-    public static RegisterViewModel getInstance(){
-        if(instance == null){
-            instance = new RegisterViewModel();
-        }
-        return instance;
-    }
-
-    public void createAccount(String email, String password){
-        //validation
         registerRepository.getSigngUpStatus().observeForever(new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -46,7 +36,19 @@ public class RegisterViewModel extends ViewModel {
                 }
             }
         });
-        registerRepository.createAccount(email, password);
+    }
+
+    public static RegisterViewModel getInstance(){
+        if(instance == null){
+            instance = new RegisterViewModel();
+        }
+        return instance;
+    }
+
+    public void createAccount(String name, String email, String password){
+        //validation
+        //obserwacja przenisiona z tego miejsca do kostruktora
+        registerRepository.createAccount(name, email, password);
 
     }
 

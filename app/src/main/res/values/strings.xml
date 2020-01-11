@@ -4,13 +4,31 @@
     <string name="loginText">Login</string>
     <string name="email">email</string>
     <string name="passwd">password</string>
+    <string name="name">name</string>
     <string name="reap_passwd">repeat password</string>
     <string name="sign">Sign Up</string>
     <string name="login">Login</string>
     <string name="not_account">Don\'t have an account?</string>
     <string name="have_account">Already have an account?</string>
+    <string name="your_catalogs">Your catalogs</string>
+    <string name="add_catalog">Add new catalog</string>
+    <string name="add_flashcard">Add new flashcard</string>
+    <string name="edit_catalog">Edit catalog</string>
+    <string name="edit_flashcard">Edit flashcard</string>
+    <string name="new_catalog_name">Name</string>
+    <string name="new_catalog_category">Category</string>
+    <string name="new_flashcard_frontside">Frontside</string>
+    <string name="new_flashcard_backside">Backside</string>
+    <string name="lets_play">Let\'s play!</string>
+    <string name="save_and_add">Save and add next</string>
+    <string name="save_and_go_yours_catalogs">Save and back</string>
+    <string name="cancel">Cancel</string>
+    <string name="folders">Folders</string>
+    <string name="cards">Flashcards</string>
+    <string name="learnt">Learnt words</string>
+    <string name="username">Username</string>
+    <string name="alert_remove">Are you sure that you want to remove this catalog?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="home">HOME</string>
 </resources>

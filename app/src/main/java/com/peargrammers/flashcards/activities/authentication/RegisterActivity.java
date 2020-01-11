@@ -17,9 +17,9 @@ import com.peargrammers.flashcards.viewmodels.authentication.RegisterViewModel;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    RegisterViewModel registerViewModel;
+    private RegisterViewModel registerViewModel;
 
-    private EditText mEmail, mPassword1, mPassword2;
+    private EditText mName, mEmail, mPassword1, mPassword2;
     private Button btnSignUp, btnSignIn;
 
     public RegisterActivity() {
@@ -31,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
 
+        mName = findViewById(R.id.et_name);
         mEmail = findViewById(R.id.et_email);
         mPassword1 = findViewById(R.id.et_password1);
         mPassword2 = findViewById(R.id.et_password2);
@@ -45,9 +46,21 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        registerViewModel.getSigngUpStatus().observe(RegisterActivity.this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                if (aBoolean) {
+                    Toast.makeText(RegisterActivity.this, "Supi.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Nie dziala pysiu.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = mName.getText().toString();
                 String email = mEmail.getText().toString();
                 String password1 = mPassword1.getText().toString();
                 String password2 = mPassword2.getText().toString();
@@ -55,21 +68,12 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.i("password", password1);
                 if (registerViewModel.validateUserRegister(email, password1, password2)) {
 
-                    registerViewModel.getSigngUpStatus().observe(RegisterActivity.this, new Observer<Boolean>() {
-                        @Override
-                        public void onChanged(@Nullable Boolean aBoolean) {
-                            if (aBoolean) {
-                                Toast.makeText(RegisterActivity.this, "Your account has been created successfully.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(RegisterActivity.this, "Can't create an account. Try again.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                    registerViewModel.createAccount(email, password1);
+                    //przeniesiono obserwacje z tego miejsca nad listener
+                    registerViewModel.createAccount(name, email, password1);
 
                 }
-                else
-                    Log.i("nana", "buuuu");
+//                else
+//                    Log.i("nana", "buuuu");
             }
         });
 
