@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.peargrammers.flashcards.CatalogAdapter;
@@ -83,7 +82,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
-        floatingActionButton  = view.findViewById(R.id.floatingActionButton);
+        floatingActionButton  = view.findViewById(R.id.nextFloatingButton);
 
         final RecyclerViewClickInterface rvci = this;
         catalogsViewModel.getUsersCatalogsList().observe(CatalogFragment.this, new Observer<ArrayList<Catalog>>() {

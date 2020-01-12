@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.game_modes.QuizFragment"
     >
+
+
 
     <ImageView
         android:layout_width="match_parent"
@@ -13,27 +16,30 @@
 
     </ImageView>
 
+
+
         <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:id="@+id/tv_question_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:text="@string/hello_blank_fragment"
-            android:visibility="invisible" />
 
 
-        <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
             android:layout_width="300dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:background="@color/white">
 
-        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/tv_question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="@string/hello_blank_fragment"
+            android:visibility="visible"
+            tools:text="hhhhhh" />
+    </androidx.cardview.widget.CardView>
+
+
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -137,5 +143,28 @@
 
         </RelativeLayout>
 
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="match_parent"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/circular_bar"
+        android:layout_marginBottom="12dp">
+
+    </ProgressBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/nextFloatingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_media_next"
+        android:visibility="invisible"
+        app:backgroundTint="@color/centre_button_color" />
 
 </RelativeLayout>
