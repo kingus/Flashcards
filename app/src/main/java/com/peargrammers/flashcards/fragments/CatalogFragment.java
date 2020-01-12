@@ -114,15 +114,6 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
-
-        catalogsViewModel.getIfRemoveCatalogProperly().observe(getActivity(), new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                Toast.makeText(getActivity(), "Catalog removed", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
     }
 
 
@@ -144,21 +135,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
 //
 //                    removedCatalog = catalogsList.remove(position);
                     showDialog(position);
-                    //deletedCatalog = method removing the catalog and returning a catalog
-                    //mAdapter.notifyItemRemoved(position);
-                    Snackbar.make(mRecyclerView, "Undo", Snackbar.LENGTH_LONG)
-                            .setAction("Undo", new View.OnClickListener(){
-                                @Override
-                                public void onClick(View v) {
-                                    //method that'll add removed catalog to the list
-                                    addCatalogViewModel.addNewCatalog(removedCatalog.getName(), removedCatalog.getCategory());
-                                    catalogsList.add(position,removedCatalog);
 
-                                    System.out.println("UNDO CLICKED");
-                                    //NEEDED
-                                    //mAdapter.notifyItemInserted();
-                                }
-                            }).show();
                     break;
                 case ItemTouchHelper.RIGHT:
                     //EditCatalogActivity editCatalogActivity = EditCatalogActivity.get
@@ -213,7 +190,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
                 alertDialog.hide();
                 catalogsViewModel.removeCatalogFromList(catalogsList.get(position).getCID());
                 removedCatalog = catalogsList.remove(position);
-                Snackbar.make(mRecyclerView, "Undo", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener(){
+                Snackbar.make(mRecyclerView, "Catalog has been removed.", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
                         addCatalogViewModel.addNewCatalog(removedCatalog.getName(), removedCatalog.getCategory());
