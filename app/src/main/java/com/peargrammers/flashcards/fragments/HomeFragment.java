@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.fragments.game_modes.PlayFramgent;
+import com.peargrammers.flashcards.fragments.game_modes.ChooseCatalogsQTFramgent;
 import com.peargrammers.flashcards.fragments.game_modes.QuizFragment;
 import com.peargrammers.flashcards.fragments.game_modes.ViewCatalogsFragment;
 import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
     GridLayout mGridLayout;
     ViewFlashcards viewFlashcards;
     QuizFragment quizFragment;
-    PlayFramgent playFramgent;
+    ChooseCatalogsQTFramgent chooseCatalogsQTFramgent;
     CatalogFragment catalogFragment;
     ViewCatalogsFragment viewCatalogsFragment;
     public static int gameType = 0;
@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment {
         this.viewFlashcards = new ViewFlashcards();
         this.catalogFragment = new CatalogFragment();
         this.quizFragment = new QuizFragment();
-        this.playFramgent = new PlayFramgent();
+        this.chooseCatalogsQTFramgent = new ChooseCatalogsQTFramgent();
         this.viewCatalogsFragment = new ViewCatalogsFragment();
 
         // Required empty public constructor
@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
                             break;
 
                         case 1:
-                            changeFragment(playFramgent);
+                            changeFragment(chooseCatalogsQTFramgent);
                             System.out.println(1);
                             break;
 
