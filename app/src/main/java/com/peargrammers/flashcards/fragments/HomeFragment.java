@@ -2,20 +2,32 @@ package com.peargrammers.flashcards.fragments;
 
 
 import android.annotation.SuppressLint;
+<<<<<<< HEAD
+import android.os.Bundle;
+import androidx.fragment.app.FragmentManager;
+
+=======
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+>>>>>>> 3da794e5c72bcdc25b7f264629001dabd34fcfb0
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+<<<<<<< HEAD
+
+=======
 import androidx.lifecycle.Observer;
+>>>>>>> 3da794e5c72bcdc25b7f264629001dabd34fcfb0
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+<<<<<<< HEAD
+=======
 import android.widget.GridLayout;
 
 import com.peargrammers.flashcards.R;
@@ -23,10 +35,13 @@ import com.peargrammers.flashcards.fragments.game_modes.PlayFramgent;
 import com.peargrammers.flashcards.fragments.game_modes.QuizFragment;
 import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
 import android.widget.Button;
+>>>>>>> 3da794e5c72bcdc25b7f264629001dabd34fcfb0
 import android.widget.GridLayout;
-import android.widget.TextView;
 
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.fragments.game_modes.PlayFramgent;
+import com.peargrammers.flashcards.fragments.game_modes.QuizFragment;
+import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 
 /**
@@ -41,6 +56,8 @@ public class HomeFragment extends Fragment {
     PlayFramgent playFramgent;
     CatalogFragment catalogFragment;
 
+<<<<<<< HEAD
+=======
 
     public HomeFragment() {
         this.homeViewModel = HomeViewModel.getInstance();
@@ -49,9 +66,15 @@ public class HomeFragment extends Fragment {
         this.quizFragment = new QuizFragment();
         this.playFramgent = new PlayFramgent();
 
+>>>>>>> 3da794e5c72bcdc25b7f264629001dabd34fcfb0
 
     public HomeFragment() {
         this.homeViewModel = HomeViewModel.getInstance();
+        this.viewFlashcards = new ViewFlashcards();
+        this.catalogFragment = new CatalogFragment();
+        this.quizFragment = new QuizFragment();
+        this.playFramgent = new PlayFramgent();
+
         // Required empty public constructor
     }
 
@@ -107,6 +130,11 @@ public class HomeFragment extends Fragment {
                         case 3:
                             System.out.println(3);
                             break;
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 3da794e5c72bcdc25b7f264629001dabd34fcfb0
 
                     }
 
