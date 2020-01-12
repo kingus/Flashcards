@@ -20,6 +20,7 @@ import android.widget.GridLayout;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.fragments.game_modes.PlayFramgent;
 import com.peargrammers.flashcards.fragments.game_modes.QuizFragment;
+import com.peargrammers.flashcards.fragments.game_modes.ViewCatalogsFragment;
 import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 
@@ -34,6 +35,8 @@ public class HomeFragment extends Fragment {
     QuizFragment quizFragment;
     PlayFramgent playFramgent;
     CatalogFragment catalogFragment;
+    ViewCatalogsFragment viewCatalogsFragment;
+    public static int gameType = 0;
 
 
     public HomeFragment() {
@@ -42,6 +45,7 @@ public class HomeFragment extends Fragment {
         this.catalogFragment = new CatalogFragment();
         this.quizFragment = new QuizFragment();
         this.playFramgent = new PlayFramgent();
+        this.viewCatalogsFragment = new ViewCatalogsFragment();
 
         // Required empty public constructor
     }
@@ -78,9 +82,10 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Log.i("CardView", "clicked");
+                    gameType = finalI;
                     switch (finalI){
                         case 0:
-                            changeFragment(quizFragment);
+                            changeFragment(viewCatalogsFragment);
                             break;
 
                         case 1:
@@ -90,12 +95,13 @@ public class HomeFragment extends Fragment {
 
 
                         case 2:
-                            changeFragment(viewFlashcards);
+                            changeFragment(viewCatalogsFragment);
                             System.out.println(2);
                             break;
 
 
                         case 3:
+                            changeFragment(viewCatalogsFragment);
                             System.out.println(3);
                             break;
 
