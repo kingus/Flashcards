@@ -26,11 +26,24 @@
         android:textSize="30sp" />
 
 
+
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="match_parent"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:indeterminateDrawable="@drawable/circular_bar"
+        android:layout_marginBottom="12dp">
+
+    </ProgressBar>
+
+
     <EditText
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="7dp"
         android:ems="50"

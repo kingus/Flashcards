@@ -139,10 +139,11 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
 
             switch(direction){
                 case ItemTouchHelper.LEFT:
-                    Log.i("REMOVE", String.valueOf(position));
-                    catalogsViewModel.removeCatalogFromList(catalogsList.get(position).getCID());
-
-                    removedCatalog = catalogsList.remove(position);
+//                    Log.i("REMOVE", String.valueOf(position));
+//                    catalogsViewModel.removeCatalogFromList(catalogsList.get(position).getCID());
+//
+//                    removedCatalog = catalogsList.remove(position);
+                    showDialog(position);
                     //deletedCatalog = method removing the catalog and returning a catalog
                     //mAdapter.notifyItemRemoved(position);
                     Snackbar.make(mRecyclerView, "Undo", Snackbar.LENGTH_LONG)

@@ -2,19 +2,26 @@ package com.peargrammers.flashcards.fragments;
 
 
 import android.annotation.SuppressLint;
+import android.os.Bundle;
+import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
+
+import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.fragments.game_modes.PlayFramgent;
+import com.peargrammers.flashcards.fragments.game_modes.QuizFragment;
+import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
@@ -29,6 +36,19 @@ public class HomeFragment extends Fragment {
 
     HomeViewModel homeViewModel;
     GridLayout mGridLayout;
+    ViewFlashcards viewFlashcards;
+    QuizFragment quizFragment;
+    PlayFramgent playFramgent;
+    CatalogFragment catalogFragment;
+
+
+    public HomeFragment() {
+        this.homeViewModel = HomeViewModel.getInstance();
+        this.viewFlashcards = new ViewFlashcards();
+        this.catalogFragment = new CatalogFragment();
+        this.quizFragment = new QuizFragment();
+        this.playFramgent = new PlayFramgent();
+
 
     public HomeFragment() {
         this.homeViewModel = HomeViewModel.getInstance();
@@ -69,13 +89,24 @@ public class HomeFragment extends Fragment {
                     Log.i("CardView", "clicked");
                     switch (finalI){
                         case 0:
-                            cardView.setBackgroundColor(R.color.red);
+                            changeFragment(quizFragment);
+                            break;
+
                         case 1:
-                            cardView.setBackgroundColor(R.color.leadningColor);
+                            changeFragment(playFramgent);
+                            System.out.println(1);
+                            break;
+
+
                         case 2:
-                            cardView.setBackgroundColor(R.color.white);
+                            changeFragment(viewFlashcards);
+                            System.out.println(2);
+                            break;
+
+
                         case 3:
-                            cardView.setBackgroundColor(R.color.red);
+                            System.out.println(3);
+                            break;
 
                     }
 
@@ -83,5 +114,14 @@ public class HomeFragment extends Fragment {
             });
 //        }
         }
+    }
+    public void changeFragment(Fragment fragment){
+        FragmentManager fragmentManager2 = getFragmentManager();
+        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+        fragmentTransaction2.addToBackStack(fragment.toString());
+//        fragmentTransaction2.hide(HomeFragment.this);
+        fragmentTransaction2.replace(R.id.main_frame, fragment);
+        fragmentTransaction2.commit();
+        Log.i("FRAGMENT", "changed");
     }
 }

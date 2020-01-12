@@ -3,6 +3,7 @@ package com.peargrammers.flashcards.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
@@ -51,12 +52,12 @@ public class  HomeActivity extends AppCompatActivity {
         NavBar.setNavBar(navigationView);
 
 
-        setFragment(homeFragment);
+        changeFragment(homeFragment);
         navigationView.changeCurrentItem(-1);
         navigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
-                setFragment(homeFragment);
+                changeFragment(homeFragment);
                 navigationView.changeCurrentItem(-1);
             }
 
@@ -64,13 +65,13 @@ public class  HomeActivity extends AppCompatActivity {
             public void onItemClick(int itemIndex, String itemName) {
                 switch (itemIndex){
                     case 0:
-                        setFragment(viewFlashcards);
+                        changeFragment(viewFlashcards);
                         break;
                     case 1:
-                        setFragment(catalogFragment);
+                        changeFragment(catalogFragment);
                         break;
                     case 2:
-                        setFragment(userFragment);
+                        changeFragment(userFragment);
                         break;
                     case 3:
                         logOutViewModel.logOut();
@@ -86,10 +87,20 @@ public class  HomeActivity extends AppCompatActivity {
         });
 
     }
-
-    public void setFragment(Fragment fragment){
+    public void changeFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.main_frame, fragment).commit();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(fragment.toString());
+        fragmentTransaction.replace(R.id.main_frame, fragment).commit();
         Log.i("FRAGMENT", "changed");
     }
+//public void changeFragment(Fragment fragment){
+//        FragmentManager fragmentManager2 = getSupportFragmentManager();
+//    FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+//    fragmentTransaction2.addToBackStack(fragment.toString());
+//    fragmentTransaction2.hide(HomeActivity.this);
+//    fragmentTransaction2.replace(R.id.main_frame, fragment);
+//    fragmentTransaction2.commit();
+//    Log.i("FRAGMENT", "changed");
+//}
 }
