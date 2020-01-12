@@ -27,7 +27,8 @@
     <string name="cards">Flashcards</string>
     <string name="learnt">Learnt words</string>
     <string name="username">Username</string>
-    <string name="alert_remove">Are you sure that you want to remove this catalog?</string>
+    <string name="alert_remove_catalog">Are you sure that you want to remove this catalog?</string>
+    <string name="alert_remove_card">Are you sure that you want to remove this flashcard?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
