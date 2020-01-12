@@ -4,13 +4,14 @@ package com.peargrammers.flashcards.fragments;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
-
+import android.content.Intent;
+import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
+import androidx.lifecycle.Observer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,11 @@ import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.fragments.game_modes.PlayFramgent;
 import com.peargrammers.flashcards.fragments.game_modes.QuizFragment;
 import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
+import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.TextView;
+
+import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 
 /**
@@ -43,6 +49,9 @@ public class HomeFragment extends Fragment {
         this.quizFragment = new QuizFragment();
         this.playFramgent = new PlayFramgent();
 
+
+    public HomeFragment() {
+        this.homeViewModel = HomeViewModel.getInstance();
         // Required empty public constructor
     }
 
@@ -98,8 +107,6 @@ public class HomeFragment extends Fragment {
                         case 3:
                             System.out.println(3);
                             break;
-
-
 
                     }
 

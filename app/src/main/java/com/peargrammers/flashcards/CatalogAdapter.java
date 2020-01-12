@@ -21,8 +21,6 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         catalogs = exList;
         this.recyclerViewClickInterface = recyclerViewClickInterface;
     }
-
-
     @Override
     public int getItemCount() {
         return catalogs.size();

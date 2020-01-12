@@ -62,6 +62,4 @@ public class ViewFlashcards extends Fragment {
 
     }
 
-
-
 }
