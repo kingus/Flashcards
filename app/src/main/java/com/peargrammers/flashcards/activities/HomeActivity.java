@@ -111,4 +111,6 @@ public class  HomeActivity extends AppCompatActivity {
 //    fragmentTransaction2.commit();
 //    Log.i("FRAGMENT", "changed");
 //}
+
+    //dopisuje linie
 }
