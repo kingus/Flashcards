@@ -42,9 +42,6 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.wajahatkarim3.EasyFlipView:EasyFlipView:2.1.2'
-<<<<<<< HEAD
     implementation 'com.google.android.material:material:1.0.0'
 
-=======
->>>>>>> 3da794e5c72bcdc25b7f264629001dabd34fcfb0
 }

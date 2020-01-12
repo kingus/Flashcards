@@ -4,10 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-<<<<<<< HEAD
 
-=======
->>>>>>> 3da794e5c72bcdc25b7f264629001dabd34fcfb0
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
@@ -91,10 +88,7 @@ public class  HomeActivity extends AppCompatActivity {
         });
 
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 3da794e5c72bcdc25b7f264629001dabd34fcfb0
     public void changeFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
