@@ -3,6 +3,7 @@ package com.peargrammers.flashcards.fragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.os.Bundle;
 
@@ -21,14 +22,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import android.widget.EditText;
+import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.peargrammers.flashcards.CatalogAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.RecyclerViewClickInterface;
-import com.peargrammers.flashcards.activities.management.AddCatalogActivity;
-import com.peargrammers.flashcards.activities.management.EditCatalogActivity;
 import com.peargrammers.flashcards.activities.management.FlashcardsActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
@@ -51,6 +51,8 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
     private CatalogsViewModel catalogsViewModel;
     private AddCatalogViewModel addCatalogViewModel;
     private FloatingActionButton floatingActionButton;
+    private EditCatalogViewModel editCatalogViewModel;
+
 
     private final FragmentActivity catalogActivity = getActivity();
 
@@ -62,7 +64,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
     public CatalogFragment() {
         catalogsViewModel = CatalogsViewModel.getInstance();
         addCatalogViewModel = AddCatalogViewModel.getInstance();
-        // Required empty public constructor
+        editCatalogViewModel = EditCatalogViewModel.getInstance();
     }
 
 
@@ -99,8 +101,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(getActivity(), AddCatalogActivity.class);
-                startActivity(myIntent);
+                showAddCatalogDialog();
             }
         });
 
@@ -125,22 +126,14 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
 
             switch(direction){
                 case ItemTouchHelper.LEFT:
-//                    Log.i("REMOVE", String.valueOf(position));
-//                    catalogsViewModel.removeCatalogFromList(catalogsList.get(position).getCID());
-//
-//                    removedCatalog = catalogsList.remove(position);
-                    showDialog(position);
-
+                    showRemoveDialog(position);
                     break;
                 case ItemTouchHelper.RIGHT:
-                    //EditCatalogActivity editCatalogActivity = EditCatalogActivity.get
-
                     EditCatalogViewModel.getInstance().setEditedCatalog(catalogsList.get(position));
-
-                    Intent myIntent = new Intent(getActivity(), EditCatalogActivity.class);
-                    startActivity(myIntent);
+                    showEditDialog(position);
                     break;
             }
+            mAdapter.notifyItemChanged(position);
         }
 
         @Override
@@ -159,18 +152,12 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
 
     @Override
     public void onItemClick(int position) {
-        //Catalog clicked
-        //ManageFlashcardsRepository.getInstance().addFlashcardToCatalog("-Lx463hTbRtrZVwXVT4k", new Flashcard("kot", "kot"));
         FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
         Intent myIntent = new Intent(getActivity(), FlashcardsActivity.class);
         startActivity(myIntent);
-
-
-        System.out.println("CLICKED");
-
     }
 
-    public void showDialog(final int position){
+    public void showRemoveDialog(final int position){
         LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
         View view = layoutInflater.inflate(R.layout.alert_remove_catalog, null);
         Button acceptBut = view.findViewById(R.id.accept);
@@ -190,7 +177,6 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
                     public void onClick(View v) {
                         addCatalogViewModel.addNewCatalog(removedCatalog.getName(), removedCatalog.getCategory());
                         catalogsList.add(position,removedCatalog);
-                        System.out.println("UNDO CLICKED");
                     }
                 }).show();
             }
@@ -199,7 +185,65 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
         declineBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("nana");
+                alertDialog.hide();
+            }
+        });
+    }
+
+    public void showAddCatalogDialog(){
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View view = layoutInflater.inflate(R.layout.alert_catalog, null);
+        Button cancelBut = view.findViewById(R.id.btn_cancel);
+        Button saveBut = view.findViewById(R.id.btn_save_back);
+        final TextView tvMainText = view.findViewById(R.id.tv_main_text);
+        final EditText etCatalogName = view.findViewById(R.id.et_catalog_name);
+        final EditText etCatalogCategory = view.findViewById(R.id.et_catalog_category);
+        final AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setView(view).create();
+        tvMainText.setText(R.string.add_catalog);
+        alertDialog.show();
+        saveBut.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                alertDialog.hide();
+                addCatalogViewModel.addNewCatalog(etCatalogName.getText().toString(), etCatalogCategory.getText().toString());
+            }
+        });
+
+        cancelBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.hide();
+            }
+        });
+    }
+
+
+
+    public void showEditDialog(final int position){
+        LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        View view = layoutInflater.inflate(R.layout.alert_catalog, null);
+        Button cancelBut = view.findViewById(R.id.btn_cancel);
+        Button saveBut = view.findViewById(R.id.btn_save_back);
+        final EditText etCatalogName = view.findViewById(R.id.et_catalog_name);
+        final EditText etCatalogCategory = view.findViewById(R.id.et_catalog_category);
+        etCatalogCategory.setText(catalogsList.get(position).getCategory());
+        etCatalogName.setText(catalogsList.get(position).getName());
+        final AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setView(view).create();
+        alertDialog.show();
+        saveBut.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Log.i("EDIT", String.valueOf(position));
+                alertDialog.hide();
+                editCatalogViewModel.editCatalog(editCatalogViewModel.getEditedCatalog().getCID() ,etCatalogName.getText().toString(), etCatalogCategory.getText().toString());
+            }
+        });
+
+        cancelBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 alertDialog.hide();
             }
         });

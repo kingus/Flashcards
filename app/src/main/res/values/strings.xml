@@ -21,7 +21,7 @@
     <string name="new_flashcard_backside">Backside</string>
     <string name="lets_play">Let\'s play!</string>
     <string name="save_and_add">Save and add next</string>
-    <string name="save_and_go_yours_catalogs">Save and back</string>
+    <string name="save_back">Save and back</string>
     <string name="cancel">Cancel</string>
     <string name="folders">Folders</string>
     <string name="cards">Flashcards</string>
