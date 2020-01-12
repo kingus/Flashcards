@@ -97,7 +97,7 @@ public class ManageFlashcardsRepository {
 
             }
         };
-        dbRef.child("CATALOGS").child(CID).child("flashcards").orderByKey().addValueEventListener(flashcardsListener);
+        dbRef.child("CATALOGS").child(CID).child("flashcards").orderByChild("smallBox").addValueEventListener(flashcardsListener);
     }
 
     public void removeFlashcardFromCatalog(String CID, String FID) {

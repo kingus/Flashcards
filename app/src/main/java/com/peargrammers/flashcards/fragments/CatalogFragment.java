@@ -21,7 +21,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -31,14 +30,10 @@ import com.peargrammers.flashcards.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.management.AddCatalogActivity;
 import com.peargrammers.flashcards.activities.management.EditCatalogActivity;
 import com.peargrammers.flashcards.activities.management.FlashcardsActivity;
-import com.peargrammers.flashcards.activities.management.AddCatalogActivity;
-import com.peargrammers.flashcards.activities.management.EditCatalogActivity;
-import com.peargrammers.flashcards.activities.management.FlashcardsActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.EditCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
-import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 
 import java.util.ArrayList;
@@ -85,7 +80,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
-        floatingActionButton  = view.findViewById(R.id.floatingActionButton);
+        floatingActionButton  = view.findViewById(R.id.nextFloatingButton);
 
         final RecyclerViewClickInterface rvci = this;
         catalogsViewModel.getUsersCatalogsList().observe(CatalogFragment.this, new Observer<ArrayList<Catalog>>() {
