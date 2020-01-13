@@ -30,7 +30,6 @@ import java.util.ArrayList;
  */
 public class QuizFragment extends Fragment {
     private QuizViewModel quizViewModel;
-    private ProgressBar progressBar;
     private Button answerA;
     private Button answerB;
     private Button answerC;
@@ -63,8 +62,6 @@ public class QuizFragment extends Fragment {
         nextFloatingButton = view.findViewById(R.id.nextFloatingButton);
         tvQuestionText = view.findViewById(R.id.tv_question_text);
         tvScore = view.findViewById(R.id.tv_score);
-        progressBar  = view.findViewById(R.id.progress_circular);
-        progressBar.setVisibility(ProgressBar.VISIBLE);
         nextFloatingButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -141,7 +138,6 @@ public class QuizFragment extends Fragment {
         quizViewModel.getFlashcardsList().observe(QuizFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
-                progressBar.setVisibility(ProgressBar.INVISIBLE);
                 QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
 //                answerA.setText();
                 answerA.setText((CharSequence) currentDataSet.getAnswers().get(0));

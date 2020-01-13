@@ -34,7 +34,6 @@ public class ChooseCatalogsQTFramgent extends Fragment implements RecyclerViewCl
     private CatalogsViewModel catalogsViewModel;
     private QuizViewModel quizViewModel;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ProgressBar progressBar;
     private QuizFragment quizFragment;
 
     public ChooseCatalogsQTFramgent() {
@@ -54,8 +53,6 @@ public class ChooseCatalogsQTFramgent extends Fragment implements RecyclerViewCl
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressBar  = view.findViewById(R.id.progress_circular);
-        progressBar.setVisibility(ProgressBar.VISIBLE);
         mRecyclerView = view.findViewById(R.id.recycler_categories);
         mRecyclerView.setHasFixedSize(true);
         final RecyclerViewClickInterface rvci = this;
@@ -65,7 +62,6 @@ public class ChooseCatalogsQTFramgent extends Fragment implements RecyclerViewCl
             public void onChanged(ArrayList<Catalog> catalogs) {
                 catalogsList.clear();
                 catalogsList.addAll(catalogs);
-                progressBar.setVisibility(ProgressBar.INVISIBLE);
                 GridLayoutManager glm = new GridLayoutManager(getContext(), 2);
                 System.out.println(glm.getSpanCount());
                 mLayoutManager = glm;

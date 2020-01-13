@@ -108,7 +108,8 @@ public class  HomeActivity extends AppCompatActivity {
     public void onBackPressed()
     {
         Log.i("PRESSED", "back button");
-        Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
-        startActivity(myIntent);
+//        Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
+//        startActivity(myIntent);
+        changeFragment(homeFragment);
     }
 }
