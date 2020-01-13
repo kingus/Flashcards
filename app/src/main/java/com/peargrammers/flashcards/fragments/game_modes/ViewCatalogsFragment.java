@@ -37,7 +37,6 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
     private ArrayList<Catalog> catalogsList = new ArrayList<>();
     private CatalogsViewModel catalogsViewModel;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ProgressBar progressBar;
     ViewFlashcards viewFlashcards;
     QuizFragment quizFragment;
 
@@ -49,17 +48,13 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_view_catalogs, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressBar  = view.findViewById(R.id.progress_circular);
-        progressBar.setVisibility(ProgressBar.VISIBLE);
         mRecyclerView = view.findViewById(R.id.recycler_catalogs);
         mRecyclerView.setHasFixedSize(true);
 
@@ -69,7 +64,6 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
             public void onChanged(ArrayList<Catalog> catalogs) {
                 catalogsList.clear();
                 catalogsList.addAll(catalogs);
-                progressBar.setVisibility(ProgressBar.INVISIBLE);
                 GridLayoutManager glm = new GridLayoutManager(getContext(), 2);
                 System.out.println(glm.getSpanCount());
                 mLayoutManager = glm;

@@ -13,7 +13,6 @@ public class LoginViewModel extends ViewModel {
     private LoginRepository loginRepository;
     private MutableLiveData<Boolean> signgInStatus = new MutableLiveData<>();
     private MutableLiveData<String> signInException = new MutableLiveData<>();
-
     private static LoginViewModel instance;
 
 
@@ -53,7 +52,6 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void signIn(String email, String password){
-        //validation
 
         loginRepository.signIn(email, password);
 

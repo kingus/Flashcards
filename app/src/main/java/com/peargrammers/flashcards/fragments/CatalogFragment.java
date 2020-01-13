@@ -1,24 +1,18 @@
 package com.peargrammers.flashcards.fragments;
 
-
 import android.app.AlertDialog;
-import android.content.Intent;
-import android.content.res.Resources;
+import android.app.ProgressDialog;
 import android.graphics.Canvas;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,14 +25,13 @@ import com.google.android.material.snackbar.Snackbar;
 import com.peargrammers.flashcards.CatalogAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.EditCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
-
 import java.util.ArrayList;
-
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 /**
@@ -83,6 +76,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
         mRecyclerView = view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         floatingActionButton  = view.findViewById(R.id.nextFloatingButton);
@@ -98,6 +92,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
 
                 mAdapter = new CatalogAdapter(catalogsList, rvci);
                 mRecyclerView.setAdapter(mAdapter);
+                HomeActivity.dialog.dismiss();
             }
         });
 
@@ -157,8 +152,6 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
     public void onItemClick(int position) {
         FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
         FragmentCoordinator.changeFragment(flashcardFragment, getFragmentManager());
-//        Intent myIntent = new Intent(getActivity(), FlashcardsActivity.class);
-//        startActivity(myIntent);
     }
 
     public void showRemoveDialog(final int position){

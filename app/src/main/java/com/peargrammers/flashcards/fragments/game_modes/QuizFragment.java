@@ -40,8 +40,6 @@ public class QuizFragment extends Fragment {
     private TextView tvScore;
 
 
-
-
     public QuizFragment() {
         quizViewModel = QuizViewModel.getInstance();
         // Required empty public constructor
@@ -77,7 +75,7 @@ public class QuizFragment extends Fragment {
                 answerB.setText((CharSequence) currentDataSet.getAnswers().get(1));
                 answerC.setText((CharSequence) currentDataSet.getAnswers().get(2));
                 answerD.setText((CharSequence) currentDataSet.getAnswers().get(3));
-                tvQuestionText.setText(currentDataSet.getFlashcard().getFrontside());
+                tvQuestionText.setText((currentDataSet.getFlashcard().getFrontside()).toLowerCase());
                 tvScore.setText((CharSequence) Integer.toString(currentDataSet.getFlashcard().getSmallBox()));
                 answerA.setEnabled(true);
                 answerB.setEnabled(true);

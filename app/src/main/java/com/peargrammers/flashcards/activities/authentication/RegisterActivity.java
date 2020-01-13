@@ -72,8 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
                     registerViewModel.createAccount(name, email, password1);
 
                 }
-//                else
-//                    Log.i("nana", "buuuu");
             }
         });
 

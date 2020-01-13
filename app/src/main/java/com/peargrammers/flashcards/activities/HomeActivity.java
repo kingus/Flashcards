@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.peargrammers.flashcards.fragments.CatalogFragment;
 import com.peargrammers.flashcards.fragments.ContactFragment;
 import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.fragments.UserFragment;
+import com.peargrammers.flashcards.fragments.game_modes.ChooseCatalogsQTFramgent;
 import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
 import com.peargrammers.flashcards.viewmodels.authentication.LogOutViewModel;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
@@ -34,6 +36,8 @@ public class  HomeActivity extends AppCompatActivity {
     ViewFlashcards viewFlashcards;
     UserFragment userFragment;
     FrameLayout mainFrame;
+    public static ProgressDialog dialog;
+
 
     public HomeActivity() {
         this.homeViewModel = HomeViewModel.getInstance();
@@ -103,22 +107,8 @@ public class  HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        System.out.println("back");
         Log.i("PRESSED", "back button");
         Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
         startActivity(myIntent);
-//        super.onBackPressed();  // optional depending on your needs
     }
-
-//public void changeFragment(Fragment fragment){
-//        FragmentManager fragmentManager2 = getSupportFragmentManager();
-//    FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-//    fragmentTransaction2.addToBackStack(fragment.toString());
-//    fragmentTransaction2.hide(HomeActivity.this);
-//    fragmentTransaction2.replace(R.id.main_frame, fragment);
-//    fragmentTransaction2.commit();
-//    Log.i("FRAGMENT", "changed");
-//}
-
-    //dopisuje linie
 }

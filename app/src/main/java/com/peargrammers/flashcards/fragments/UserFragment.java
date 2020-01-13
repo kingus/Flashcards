@@ -1,6 +1,7 @@
 package com.peargrammers.flashcards.fragments;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,9 +12,11 @@ import androidx.lifecycle.Observer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.models.User;
 import com.peargrammers.flashcards.viewmodels.management.UserViewModel;
 
@@ -30,7 +33,6 @@ public class UserFragment extends Fragment {
     TextView tv_username, tv_username2, tv_email, tv_catalogs_number, tv_flashcards_number, tv_joined;
 
     public UserFragment() {
-        // Required empty public constructor
     }
 
 
@@ -46,6 +48,7 @@ public class UserFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
 
         userViewModel = UserViewModel.getInstance();
         tv_username = view.findViewById(R.id.tv_username);
@@ -58,6 +61,7 @@ public class UserFragment extends Fragment {
         userViewModel.getLoggedUser().observe(UserFragment.this, new Observer<User>() {
             @Override
             public void onChanged(User user) {
+                HomeActivity.dialog.dismiss();
                 tv_username.setText(user.getName());
                 tv_username2.setText(user.getName());
                 tv_email.setText(user.getEmail());
@@ -66,7 +70,6 @@ public class UserFragment extends Fragment {
                 Date date = new Date(user.getCreationTimestamp());
                 Format format = new SimpleDateFormat("dd MMMM yyyy");
                 tv_joined.setText(format.format(date));
-
             }
         });
 

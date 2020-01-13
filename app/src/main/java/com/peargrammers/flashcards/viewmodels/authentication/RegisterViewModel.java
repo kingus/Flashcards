@@ -2,27 +2,19 @@ package com.peargrammers.flashcards.viewmodels.authentication;
 
 import android.text.TextUtils;
 import android.util.Patterns;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
-
 import com.peargrammers.flashcards.repositories.authentication.RegisterRepository;
-
-import java.util.regex.Pattern;
 
 public class RegisterViewModel extends ViewModel {
 
     private static RegisterViewModel instance;
     private RegisterRepository registerRepository;
     private MutableLiveData<Boolean> signgUpStatus = new MutableLiveData<>();
-
     public MutableLiveData<Boolean> getSigngUpStatus() {
         return signgUpStatus;
     }
-
-
-
 
     public RegisterViewModel() {
         registerRepository = RegisterRepository.getInstance();
@@ -46,10 +38,7 @@ public class RegisterViewModel extends ViewModel {
     }
 
     public void createAccount(String name, String email, String password){
-        //validation
-        //obserwacja przenisiona z tego miejsca do kostruktora
         registerRepository.createAccount(name, email, password);
-
     }
 
     public boolean validateUserRegister(String email, String password1, String password2){
@@ -65,8 +54,5 @@ public class RegisterViewModel extends ViewModel {
         else
             return false;
     }
-
-
-
 
 }

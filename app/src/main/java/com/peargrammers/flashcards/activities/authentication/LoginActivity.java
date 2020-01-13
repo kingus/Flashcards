@@ -1,12 +1,12 @@
 package com.peargrammers.flashcards.activities.authentication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     LoginViewModel loginViewModel;
     private EditText mEmail, mPassword;
     private Button btnSignIn, btnSignUp;
-    private ProgressBar progressBar;
+    private ProgressDialog dialog;
 
     public LoginActivity() {
         this.loginViewModel = LoginViewModel.getInstance();
@@ -31,12 +31,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-
         mEmail = findViewById(R.id.et_email);
         mPassword = findViewById(R.id.et_password);
         btnSignIn = findViewById(R.id.btn_sign_in);
         btnSignUp  = findViewById(R.id.btn_sign_up);
-        progressBar  = findViewById(R.id.progress_circular);
 
 
 
@@ -52,13 +50,12 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(ProgressBar.VISIBLE);
+                dialog = ProgressDialog.show(LoginActivity.this, "", "Please Wait...");
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString();
                 Log.i("email", email);
                 Log.i("password", password);
                 loginViewModel.signIn(email, password);
-//                progressBar.setVisibility(ProgressBar.INVISIBLE);
 
             }
         });
@@ -68,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
                     Log.d("LOGIN_ACTIVITY", "LOGIN GIT - activity");
-                    progressBar.setVisibility(ProgressBar.INVISIBLE);
+                    dialog.dismiss();
                     Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(myIntent);
                 } else {
@@ -89,4 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 }
+
 }
+
+

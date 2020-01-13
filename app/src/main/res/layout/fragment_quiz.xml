@@ -7,23 +7,16 @@
     tools:context=".fragments.game_modes.QuizFragment"
     >
 
-
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@drawable/conf2">
-
     </ImageView>
-
-
-
-        <!-- TODO: Update blank fragment layout -->
-
 
     <androidx.cardview.widget.CardView
             android:layout_width="300dp"
             android:layout_height="100dp"
+            android:foregroundGravity="center"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:background="@color/white">
@@ -31,12 +24,10 @@
         <TextView
             android:id="@+id/tv_question_text"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_height="match_parent"
+            android:textSize="36sp"
             android:gravity="center"
-            android:text="@string/hello_blank_fragment"
-            android:visibility="visible"
-            tools:text="hhhhhh" />
+            android:visibility="visible"/>
     </androidx.cardview.widget.CardView>
 
 
@@ -143,16 +134,6 @@
 
         </RelativeLayout>
 
-    <ProgressBar
-        android:id="@+id/progress_circular"
-        android:layout_width="match_parent"
-        android:visibility="invisible"
-        android:layout_height="wrap_content"
-        android:indeterminateDrawable="@drawable/circular_bar"
-        android:layout_marginBottom="12dp">
-
-    </ProgressBar>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/nextFloatingButton"
         android:layout_width="wrap_content"
@@ -163,7 +144,7 @@
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="4dp"
         android:clickable="true"
-        android:src="@android:drawable/ic_media_next"
+        android:src="@drawable/ic_arrow"
         android:visibility="invisible"
         app:backgroundTint="@color/centre_button_color" />
 
