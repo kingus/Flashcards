@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
@@ -12,6 +13,7 @@ import android.widget.FrameLayout;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.activities.authentication.LoginActivity;
 import com.peargrammers.flashcards.activities.authentication.NavBar;
 import com.peargrammers.flashcards.fragments.CatalogFragment;
 import com.peargrammers.flashcards.fragments.ContactFragment;
@@ -96,6 +98,19 @@ public class  HomeActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_frame, fragment).commit();
         Log.i("FRAGMENT", "changed");
     }
+
+
+    @Override
+    public void onBackPressed()
+    {
+        // code here to show dialog
+        System.out.println("back");
+        Log.i("PRESSED", "back button");
+        Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
+        startActivity(myIntent);
+//        super.onBackPressed();  // optional depending on your needs
+    }
+
 //public void changeFragment(Fragment fragment){
 //        FragmentManager fragmentManager2 = getSupportFragmentManager();
 //    FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
