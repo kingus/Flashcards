@@ -23,6 +23,11 @@ public class RegisterRepository {
     private DatabaseReference dbUsersRef;
     private MutableLiveData<Boolean> signgUpStatus = new MutableLiveData<>();
 
+    private OnCompleteListener onCompleteListener;
+    private String myEmail;
+    private String myPassword;
+
+
     public MutableLiveData<Boolean> getSigngUpStatus() {
         return signgUpStatus;
     }
@@ -44,8 +49,8 @@ public class RegisterRepository {
 
 
     public void createAccount(final String name, final String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+        onCompleteListener =  new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -71,7 +76,20 @@ public class RegisterRepository {
                     signgUpStatus.postValue(false);
                 }
             }
-        });
+        };
+        myEmail = email;
+        myPassword = password;
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                mAuth.createUserWithEmailAndPassword(myEmail, myPassword)
+                        .addOnCompleteListener(onCompleteListener);
+
+            }
+        }.start();
+
+
 
     }
 }

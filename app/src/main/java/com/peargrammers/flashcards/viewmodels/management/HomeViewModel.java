@@ -34,9 +34,5 @@ public class HomeViewModel extends ViewModel {
         return instance;
     }
 
-    public void getCurrentUserEmail() {
-        userInfoRepository.getCurrentUserEmail();
-    }
-
 
 }

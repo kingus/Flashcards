@@ -50,9 +50,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (aBoolean) {
-                    Toast.makeText(RegisterActivity.this, "Supi.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "New user heas been registered.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Nie dziala pysiu.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Ouuups, something went wrong...", Toast.LENGTH_SHORT).show();
                 }
             }
         });
