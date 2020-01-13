@@ -2,6 +2,7 @@ package com.peargrammers.flashcards.fragments;
 
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.graphics.Canvas;
 import android.os.Bundle;
 
@@ -29,6 +30,7 @@ import com.peargrammers.flashcards.CatalogAdapter;
 import com.peargrammers.flashcards.FlashcardAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.viewmodels.management.AddFlashcardViewModel;
@@ -82,6 +84,8 @@ public class FlashcardFragment extends Fragment implements RecyclerViewClickInte
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
+
         mRecyclerView = view.findViewById(R.id.rv_flashcards);
         mRecyclerView.setHasFixedSize(true);
         floatingActionButton  = view.findViewById(R.id.fab_add_flashcard);
@@ -99,6 +103,7 @@ public class FlashcardFragment extends Fragment implements RecyclerViewClickInte
 
                 mAdapter = new FlashcardAdapter(flashcardsList, rvci);
                 mRecyclerView.setAdapter(mAdapter);
+                HomeActivity.dialog.dismiss();
             }
         });
 

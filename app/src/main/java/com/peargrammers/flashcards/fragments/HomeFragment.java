@@ -46,8 +46,6 @@ public class HomeFragment extends Fragment {
         this.quizFragment = new QuizFragment();
         this.chooseCatalogsQTFramgent = new ChooseCatalogsQTFramgent();
         this.viewCatalogsFragment = new ViewCatalogsFragment();
-
-        // Required empty public constructor
     }
 
 
@@ -104,8 +102,6 @@ public class HomeFragment extends Fragment {
                             changeFragment(viewCatalogsFragment);
                             System.out.println(3);
                             break;
-
-
 
                     }
 
