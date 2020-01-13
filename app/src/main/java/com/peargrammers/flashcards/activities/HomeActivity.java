@@ -103,7 +103,6 @@ public class  HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        // code here to show dialog
         System.out.println("back");
         Log.i("PRESSED", "back button");
         Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
