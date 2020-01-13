@@ -32,6 +32,15 @@ public class ManageFlashcardsRepository {
     private MutableLiveData<Boolean> ifAddFlashcardProperly = new MutableLiveData<>();
     private MutableLiveData<Boolean> ifRemovedFlashcardProperly = new MutableLiveData<>();
     private MutableLiveData<Boolean> ifEditedFlashcardProperly = new MutableLiveData<>();
+    private String myCID;
+    private String myFID;
+    private Flashcard myflashcard;
+
+    private OnCompleteListener addFlashcardListener;
+    private OnCompleteListener removeFlashcardFromCatalogListener;
+    private OnCompleteListener editFlashcardFromCatalodListener;
+    Map<String, Object> EditFlashcardChildUpdates;
+    ValueEventListener getFlashcardsListener;
 
     public MutableLiveData<Boolean> getIfEditedFlashcardProperly() {
         return ifEditedFlashcardProperly;
@@ -66,7 +75,7 @@ public class ManageFlashcardsRepository {
     }
 
     public void addFlashcardToCatalog(String CID, Flashcard flashcard) {
-        this.dbRef.child("CATALOGS").child(CID).child("flashcards").push().setValue(flashcard).addOnCompleteListener(new OnCompleteListener<Void>() {
+        addFlashcardListener = new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -75,10 +84,20 @@ public class ManageFlashcardsRepository {
                     ifAddFlashcardProperly.postValue(false);
                 }
             }
-        });
+        };
+        myCID = CID;
+        myflashcard = flashcard;
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                dbRef.child("CATALOGS").child(myCID).child("flashcards").push().setValue(myflashcard).addOnCompleteListener(addFlashcardListener);
+            }
+        }.start();
+
     }
     public void getFlashcardsListDB(String CID) {
-        ValueEventListener flashcardsListener = new ValueEventListener() {
+        getFlashcardsListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Flashcard> flashcards = new ArrayList<>();
@@ -97,11 +116,19 @@ public class ManageFlashcardsRepository {
 
             }
         };
-        dbRef.child("CATALOGS").child(CID).child("flashcards").orderByChild("smallBox").addValueEventListener(flashcardsListener);
-    }
+        myCID = CID;
 
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                dbRef.child("CATALOGS").child(myCID).child("flashcards").orderByChild("smallBox").addValueEventListener(getFlashcardsListener);
+            }
+        }.start();
+
+    }
     public void removeFlashcardFromCatalog(String CID, String FID) {
-        dbRef.child("CATALOGS").child(CID).child("flashcards").child(FID).setValue(null).addOnCompleteListener(new OnCompleteListener<Void>() {
+        removeFlashcardFromCatalogListener = new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -110,16 +137,27 @@ public class ManageFlashcardsRepository {
                     ifRemovedFlashcardProperly.setValue(false);
                 }
             }
-        });
+        };
+        myCID = CID;
+        myFID = FID;
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                dbRef.child("CATALOGS").child(myCID).child("flashcards").child(myFID).setValue(null).addOnCompleteListener(removeFlashcardFromCatalogListener);
+
+            }
+        }.start();
+
     }
     public void editFlashcardFromCatalod(String CID, String FID, String frontside, String backside) {
         //dbRef.child("CATALOGS").child(CID).child("flashcards")
 
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/CATALOGS/" + CID + "/flashcards/" + FID + "/frontside/", frontside);
-        childUpdates.put("/CATALOGS/" + CID + "/flashcards/" + FID + "/backside/", backside);
+        EditFlashcardChildUpdates = new HashMap<>();
+        EditFlashcardChildUpdates.put("/CATALOGS/" + CID + "/flashcards/" + FID + "/frontside/", frontside);
+        EditFlashcardChildUpdates.put("/CATALOGS/" + CID + "/flashcards/" + FID + "/backside/", backside);
 
-        dbRef.updateChildren(childUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+        editFlashcardFromCatalodListener = new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -128,7 +166,16 @@ public class ManageFlashcardsRepository {
                     ifEditedFlashcardProperly.postValue(false);
                 }
             }
-        });
+        };
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                dbRef.updateChildren(EditFlashcardChildUpdates).addOnCompleteListener(editFlashcardFromCatalodListener);
+            }
+        }.start();
+
     }
 
 

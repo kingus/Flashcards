@@ -16,15 +16,16 @@
         <activity android:name=".activities.management.AddFlashcardActivity" />
         <activity android:name=".activities.management.FlashcardsActivity" />
         <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
+            <activity android:name=".activities.authentication.LoginActivity">
+                <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.authentication.LoginActivity">
-            <intent-filter>
+        <activity android:name=".MainActivity">
+
+        <intent-filter>
                 <action android:name="android.intent.action.LOGIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />

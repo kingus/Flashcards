@@ -25,7 +25,14 @@ public class LogOutRepository {
 
 
     public void logOut() {
-        mAuth.getInstance().signOut();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                mAuth.getInstance().signOut();
+
+            }
+        }.start();
 
     }
 }

@@ -231,6 +231,7 @@ public class FlashcardFragment extends Fragment implements RecyclerViewClickInte
                 Snackbar.make(mRecyclerView, "Flashcard has been removed.", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
+                        removedFlashcard.setFID(null);
                         addFlashcardViewModel.addFlashcardToCatalog(flashcardsViewModel.getCurrentCatalog().getCID(),removedFlashcard);
                         flashcardsList.add(position, removedFlashcard);
                     }

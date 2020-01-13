@@ -28,7 +28,7 @@ public class UserInfoRepository {
     private DatabaseReference dbUsersRef;
     private MutableLiveData<String> userEmail = new MutableLiveData<>();
     private MutableLiveData<User> loggedUser = new MutableLiveData<>();
-
+    private ValueEventListener loggedUserListener;
 
     public MutableLiveData<User> getLoggedUser() { return loggedUser; }
     public MutableLiveData<String> getUserEmail() {
@@ -78,24 +78,10 @@ public class UserInfoRepository {
         return instance;
     }
 
-    public void getCurrentUserEmail() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-
-            userEmail.postValue(email);
-
-
-        } else {
-            userEmail.postValue("default_username");
-
-        }
-    }
 
     public void getLoggedUserInfo() {
         //User loggedUser = dbUsersRef.child(mAuth.getUid());
-        ValueEventListener loggedUserListener = new ValueEventListener() {
+        loggedUserListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User loggedUserDB = dataSnapshot.getValue(User.class);
@@ -116,6 +102,15 @@ public class UserInfoRepository {
             }
         };
         Log.d(TAG, "sciezka do current USER" + dbUsersRef.child(mAuth.getUid()).toString());
-        dbUsersRef.child(mAuth.getUid()).addListenerForSingleValueEvent(loggedUserListener);
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                dbUsersRef.child(mAuth.getUid()).addListenerForSingleValueEvent(loggedUserListener);
+
+            }
+        };
+        thread.start();
     }
 }

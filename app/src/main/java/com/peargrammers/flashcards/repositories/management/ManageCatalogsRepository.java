@@ -28,6 +28,13 @@ public class ManageCatalogsRepository {
     private FirebaseDatabase mDatabase;
     private DatabaseReference dbCurrentUserRef;
     private DatabaseReference dbRef;
+    private ValueEventListener usersCatalogsListListener;
+    private OnCompleteListener addNewCatalogListener;
+    private OnCompleteListener removeCatalogListener;
+    private OnCompleteListener editCatalogListener;
+    private Map<String, Object> childUpdates;
+    private Map<String, Object> childRemove;
+    private Map<String, Object> childEdit;
 
     private MutableLiveData<Boolean> ifAddCatalogProperly = new MutableLiveData<>();
     private MutableLiveData<Boolean> ifRemoveCatalogProperly = new MutableLiveData<>();
@@ -69,7 +76,7 @@ public class ManageCatalogsRepository {
     }
 
     public void getUsersCatalogsListDB() {
-        ValueEventListener usersCatalogsListListener = new ValueEventListener() {
+        usersCatalogsListListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Catalog> catalogs = new ArrayList<>();
@@ -94,7 +101,14 @@ public class ManageCatalogsRepository {
 
             }
         };
-        dbCurrentUserRef.child("catalogs").orderByKey().addValueEventListener(usersCatalogsListListener);
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                dbCurrentUserRef.child("catalogs").orderByKey().addValueEventListener(usersCatalogsListListener);
+
+            }
+        }.start();
     }
 
     public void addNewCatalog(String name, String category) {
@@ -106,11 +120,11 @@ public class ManageCatalogsRepository {
         Catalog catalogWithOwner = new Catalog(name, category, mAuth.getCurrentUser().getUid());
 
 
-        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates = new HashMap<>();
         childUpdates.put("/CATALOGS/" + key, catalogWithOwner);
         childUpdates.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + key, catalog);
 
-        dbRef.updateChildren(childUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+        addNewCatalogListener = new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -119,29 +133,26 @@ public class ManageCatalogsRepository {
                     ifAddCatalogProperly.postValue(true);
                 }
 
-
-//        DatabaseReference currentRef =  dbCurrentUserRef.child("catalogs").push();
-//        String currentCID = currentRef.getKey();
-//                currentRef.setValue(new Catalog(name, category)).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                if (task.isSuccessful()) {
-//                    ifAddCatalogProperly.postValue(true);
-//                } else {
-//                    ifAddCatalogProperly.postValue(true);
-//                }
             }
-        });
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                dbRef.updateChildren(childUpdates).addOnCompleteListener(addNewCatalogListener);
+            }
+        }.start();
+
+
     }
     public void removeCatalogFromList(String CID) {
         String key = dbCurrentUserRef.child("catalogs").child(CID).getKey();
 
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/CATALOGS/" + key, null);
-        childUpdates.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + key, null);
+        childRemove = new HashMap<>();
+        childRemove.put("/CATALOGS/" + key, null);
+        childRemove.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + key, null);
 
-        //dbCurrentUserRef.child("catalogs").child(CID).removeValue();
-        dbRef.updateChildren(childUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+        removeCatalogListener = new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -150,19 +161,28 @@ public class ManageCatalogsRepository {
                     ifRemoveCatalogProperly.postValue(true);
                 }
             }
+        };
 
-         });
+        //dbCurrentUserRef.child("catalogs").child(CID).removeValue();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                dbRef.updateChildren(childRemove).addOnCompleteListener(removeCatalogListener);
+
+            }
+        }.start();
     }
     public void editCatalog(String CID, String name, String category) {
         //dbCurrentUserRef.child("catalogs").child(CID).removeValue();
 
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/CATALOGS/" + CID + "/name", name);
-        childUpdates.put("/CATALOGS/" + CID + "/category", category);
-        childUpdates.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + CID + "/name", name);
-        childUpdates.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + CID + "/category", category);
+        childEdit = new HashMap<>();
+        childEdit.put("/CATALOGS/" + CID + "/name", name);
+        childEdit.put("/CATALOGS/" + CID + "/category", category);
+        childEdit.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + CID + "/name", name);
+        childEdit.put("/USERS/" +  mAuth.getUid() + "/catalogs/" + CID + "/category", category);
 
-        dbRef.updateChildren(childUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+        editCatalogListener = new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
@@ -171,7 +191,15 @@ public class ManageCatalogsRepository {
                     ifEditedCatalogProperly.postValue(true);
                 }
             }
-        });
+        };
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                dbRef.updateChildren(childEdit).addOnCompleteListener(editCatalogListener);
+            }
+        }.start();
+
     }
 
 

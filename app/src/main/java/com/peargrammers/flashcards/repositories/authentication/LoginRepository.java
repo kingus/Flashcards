@@ -16,6 +16,10 @@ public class LoginRepository {
     private MutableLiveData<Boolean> signInStatus = new MutableLiveData<>();
     private MutableLiveData<String> signInException = new MutableLiveData<>();
 
+    private OnCompleteListener onCompleteListener;
+    private String myEmail;
+    private String myPassword;
+
     public MutableLiveData<Boolean> getSignInStatus() {
         return signInStatus;
     }
@@ -33,26 +37,37 @@ public class LoginRepository {
         return instance;
     }
     public void signIn(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("LOGIN_REPOSITORY", "LOGIN GIT  - REPOSITORY");
-                            //FirebaseUser user = mAuth.getCurrentUser();
-                            //Log.d("LOGIN_REPOSITORY", user.toString());
-                            signInStatus.postValue(true);
+        myEmail=email;
+        myPassword=password;
+        onCompleteListener = new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Log.d("LOGIN_REPOSITORY", "LOGIN GIT  - REPOSITORY");
+                    //FirebaseUser user = mAuth.getCurrentUser();
+                    //Log.d("LOGIN_REPOSITORY", user.toString());
+                    signInStatus.postValue(true);
 
-                        } else {
-                            //Log.w(TAG, "LOGIN ZLE", task.getException());
-                            Log.d("LOGIN_REPOSITORY", "LOGIN ZLE  - REPOZITORY");
+                } else {
+                    //Log.w(TAG, "LOGIN ZLE", task.getException());
+                    Log.d("LOGIN_REPOSITORY", "LOGIN ZLE  - REPOZITORY");
 
 
-                            signInStatus.postValue(false);
-                            signInException.postValue(task.getException().getMessage());
-                        }
-                    }
-                });
+                    signInStatus.postValue(false);
+                    signInException.postValue(task.getException().getMessage());
+                }
+            }
+        };
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                mAuth.signInWithEmailAndPassword(myEmail, myPassword)
+                        .addOnCompleteListener(onCompleteListener);
+            }
+        }.start();
+
 
     }
 
