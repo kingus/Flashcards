@@ -71,4 +71,5 @@ public class FlashcardsViewModel {
     public void removeFlashcardFromCatalog(String CID, String FID) {
         manageFlashcardsRepository.removeFlashcardFromCatalog(CID, FID);
     }
+
 }

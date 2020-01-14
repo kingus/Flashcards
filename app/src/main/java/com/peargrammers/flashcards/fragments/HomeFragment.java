@@ -36,8 +36,6 @@ public class HomeFragment extends Fragment {
     ChooseCatalogsQTFramgent chooseCatalogsQTFramgent;
     CatalogFragment catalogFragment;
     ViewCatalogsFragment viewCatalogsFragment;
-    public static int gameType = 0;
-
 
     public HomeFragment() {
         this.homeViewModel = HomeViewModel.getInstance();
@@ -50,11 +48,8 @@ public class HomeFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
 
     }
@@ -63,14 +58,12 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mGridLayout = view.findViewById(R.id.grid_layout);
-
         setSingleEvent(mGridLayout);
 
     }
 
     private void setSingleEvent(GridLayout gridLayout) {
 
-        System.out.println(gridLayout.getChildCount());
         for (int i = 0; i < gridLayout.getChildCount(); i++) {
             final CardView cardView = (CardView) gridLayout.getChildAt(i);
             final int finalI = i;
@@ -80,7 +73,7 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Log.i("CardView", "clicked");
-                    gameType = finalI;
+                    homeViewModel.setGameMode(finalI);
                     switch (finalI){
                         case 0:
                             changeFragment(viewCatalogsFragment);
