@@ -111,24 +111,5 @@ public class  HomeActivity extends AppCompatActivity {
 //        Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
 //        startActivity(myIntent);
 //    }
-
-    @Override
-    public void onBackPressed() {
-
-        //call the method
-        if (getVisibleFragment()!=null) {
-
-            //check which current visible fragment
-            String nameFragment = getVisibleFragment().toString();
-            if (nameFragment.contains("nameFragmentA")) {
-                //your action A
-            }else if(nameFragment.contains("nameFragmentB")){
-                //your action B
-            }else{
-                //another action
-            }
-
-        }
-    }
-
+    
 }
