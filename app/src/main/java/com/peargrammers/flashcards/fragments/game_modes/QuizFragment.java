@@ -2,6 +2,7 @@ package com.peargrammers.flashcards.fragments.game_modes;
 
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.models.QuizDataSet;
@@ -30,7 +32,6 @@ import java.util.ArrayList;
  */
 public class QuizFragment extends Fragment {
     private QuizViewModel quizViewModel;
-    private ProgressBar progressBar;
     private Button answerA;
     private Button answerB;
     private Button answerC;
@@ -56,6 +57,8 @@ public class QuizFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
+
         answerA = view.findViewById(R.id.answerA);
         answerB = view.findViewById(R.id.answerB);
         answerC = view.findViewById(R.id.answerC);
@@ -63,8 +66,6 @@ public class QuizFragment extends Fragment {
         nextFloatingButton = view.findViewById(R.id.nextFloatingButton);
         tvQuestionText = view.findViewById(R.id.tv_question_text);
         tvScore = view.findViewById(R.id.tv_score);
-        progressBar  = view.findViewById(R.id.progress_circular);
-        progressBar.setVisibility(ProgressBar.VISIBLE);
         nextFloatingButton.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             @Override
@@ -141,9 +142,10 @@ public class QuizFragment extends Fragment {
         quizViewModel.getFlashcardsList().observe(QuizFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
-                progressBar.setVisibility(ProgressBar.INVISIBLE);
                 QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
 //                answerA.setText();
+                HomeActivity.dialog.dismiss();
+
                 answerA.setText((CharSequence) currentDataSet.getAnswers().get(0));
                 answerB.setText((CharSequence) currentDataSet.getAnswers().get(1));
                 answerC.setText((CharSequence) currentDataSet.getAnswers().get(2));
