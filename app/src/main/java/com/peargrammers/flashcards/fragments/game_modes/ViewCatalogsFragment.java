@@ -1,6 +1,7 @@
 package com.peargrammers.flashcards.fragments.game_modes;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.widget.ProgressBar;
 import com.peargrammers.flashcards.CatalogPlayAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
@@ -57,6 +59,7 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = view.findViewById(R.id.recycler_catalogs);
         mRecyclerView.setHasFixedSize(true);
+        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
 
         final RecyclerViewClickInterface rvci = this;
         catalogsViewModel.getUsersCatalogsList().observe(ViewCatalogsFragment.this, new Observer<ArrayList<Catalog>>() {
@@ -70,6 +73,7 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mAdapter = new CatalogPlayAdapter(catalogsList, rvci);
                 mRecyclerView.setAdapter(mAdapter);
+                HomeActivity.dialog.dismiss();
             }
         });
 

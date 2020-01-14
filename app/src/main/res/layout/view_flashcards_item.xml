@@ -47,11 +47,6 @@
 <!--                android:textColor="@color/colorBlack">-->
 <!--            </TextView>-->
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="400dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center">
-
                 <TextView
                     android:id="@+id/tv_frontside"
                     android:layout_width="match_parent"
@@ -60,31 +55,16 @@
                     android:background="@drawable/gradient"
                     android:textSize="30sp"
                     android:textAlignment="center"
-                    android:radius="100dp"
-                    android:elevation="50dp"
-                    android:translationZ="10dp"
                     android:visibility="visible"/>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="400dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center">
-
             <TextView
                 android:id="@+id/tv_backside"
-                android:radius="100dp"
                 android:background="@drawable/gradient"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="30sp"
-                android:elevation="50dp"
-                android:translationZ="10dp"
                 android:visibility="visible"/>
-            </androidx.cardview.widget.CardView>
-
 
         </com.wajahatkarim3.easyflipview.EasyFlipView>
 

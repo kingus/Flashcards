@@ -1,6 +1,7 @@
 package com.peargrammers.flashcards.fragments.game_modes;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +17,9 @@ import android.widget.ProgressBar;
 import com.peargrammers.flashcards.CatalogPlayAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
+import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.game_modes.QuizViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
@@ -34,7 +37,6 @@ public class ChooseCatalogsQTFramgent extends Fragment implements RecyclerViewCl
     private CatalogsViewModel catalogsViewModel;
     private QuizViewModel quizViewModel;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ProgressBar progressBar;
     private QuizFragment quizFragment;
 
     public ChooseCatalogsQTFramgent() {
@@ -54,9 +56,8 @@ public class ChooseCatalogsQTFramgent extends Fragment implements RecyclerViewCl
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        progressBar  = view.findViewById(R.id.progress_circular);
-        progressBar.setVisibility(ProgressBar.VISIBLE);
         mRecyclerView = view.findViewById(R.id.recycler_categories);
+        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
         mRecyclerView.setHasFixedSize(true);
         final RecyclerViewClickInterface rvci = this;
 
@@ -65,13 +66,13 @@ public class ChooseCatalogsQTFramgent extends Fragment implements RecyclerViewCl
             public void onChanged(ArrayList<Catalog> catalogs) {
                 catalogsList.clear();
                 catalogsList.addAll(catalogs);
-                progressBar.setVisibility(ProgressBar.INVISIBLE);
                 GridLayoutManager glm = new GridLayoutManager(getContext(), 2);
                 System.out.println(glm.getSpanCount());
                 mLayoutManager = glm;
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mAdapter = new CatalogPlayAdapter(catalogsList, rvci);
                 mRecyclerView.setAdapter(mAdapter);
+                HomeActivity.dialog.dismiss();
             }
         });
 
