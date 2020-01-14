@@ -90,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:background="#FF0a80"
+                    android:background="@color/leadningColor"
                     android:text="Answer A"
                     android:theme="@style/Widget.AppCompat.Button.Borderless">
 
@@ -101,7 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:background="#FF0a80"
+                    android:background="@color/leadningColor"
                     android:text="Answer B"
                     android:theme="@style/Widget.AppCompat.Button.Borderless">
 
@@ -112,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:background="#FF0a80"
+                    android:background="@color/leadningColor"
                     android:text="Answer C"
                     android:theme="@style/Widget.AppCompat.Button.Borderless">
 
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:background="#FF0a80"
+                    android:background="@color/leadningColor"
                     android:text="Answer D"
                     android:theme="@style/Widget.AppCompat.Button.Borderless">
 
@@ -146,6 +146,6 @@
         android:clickable="true"
         android:src="@drawable/ic_arrow"
         android:visibility="invisible"
-        app:backgroundTint="@color/centre_button_color" />
+        app:backgroundTint="@color/mediumGrey" />
 
 </RelativeLayout>

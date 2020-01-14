@@ -21,41 +21,16 @@
             app:autoFlipBackTime="1000"
             android:foregroundGravity="center"
             android:padding="5dp">
-            <!-- Back Layout Goes Here -->
 
-<!--            <TextView-->
-<!--                android:id="@+id/tv_backside"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:textSize="57sp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="back"-->
-<!--                android:background="@drawable/card2"-->
-<!--                android:textColor="@color/red">-->
-<!--            </TextView>-->
-<!--            &lt;!&ndash; Front Layout Goes Here &ndash;&gt;-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/tv_frontside"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="center"-->
-<!--                android:text="front"-->
-<!--                android:textSize="57sp"-->
-<!--                android:textAlignment="center"-->
-<!--                android:background="@drawable/card"-->
-<!--                android:textColor="@color/colorBlack">-->
-<!--            </TextView>-->
-
-                <TextView
-                    android:id="@+id/tv_frontside"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:background="@drawable/gradient"
-                    android:textSize="30sp"
-                    android:textAlignment="center"
-                    android:visibility="visible"/>
+            <TextView
+                android:id="@+id/tv_frontside"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@drawable/gradient2"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:visibility="visible"/>
             <TextView
                 android:id="@+id/tv_backside"
                 android:background="@drawable/gradient"

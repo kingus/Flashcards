@@ -11,7 +11,7 @@ public class HomeViewModel extends ViewModel {
     private UserInfoRepository userInfoRepository;
     private MutableLiveData<String> userEmail = new MutableLiveData<>();
     private static HomeViewModel instance;
-
+    private int gameMode;
 
     public HomeViewModel() {
         this.userInfoRepository = UserInfoRepository.getInstance();
@@ -34,5 +34,11 @@ public class HomeViewModel extends ViewModel {
         return instance;
     }
 
+    public int getGameMode() {
+        return gameMode;
+    }
 
+    public void setGameMode(int gameMode) {
+        this.gameMode = gameMode;
+    }
 }

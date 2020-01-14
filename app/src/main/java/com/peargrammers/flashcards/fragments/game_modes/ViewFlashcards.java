@@ -8,17 +8,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.vectordrawable.graphics.drawable.ArgbEvaluator;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.peargrammers.flashcards.FlashcardAdapter;
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.ViewFlashcardsAdapter;
 import com.peargrammers.flashcards.fragments.CatalogFragment;
 import com.peargrammers.flashcards.models.Flashcard;
+import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +36,12 @@ public class ViewFlashcards extends Fragment {
 
     ViewPager viewPager;
     ViewFlashcardsAdapter viewFlashcardsAdapter;
-    List<Flashcard> flashcardsList;
+    FlashcardsViewModel flashcardsViewModel = FlashcardsViewModel.getInstance();
+    ArrayList<Flashcard> flashcardsList;
+    Button btnSearch;
+    EditText searchCard;
 
     public ViewFlashcards() {
-        // Required empty public constructor
     }
 
 
@@ -50,18 +58,41 @@ public class ViewFlashcards extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         flashcardsList = new ArrayList<>();
-        flashcardsList.add(new Flashcard("cat", "kot"));
-        flashcardsList.add(new Flashcard("dog", "pies"));
-        flashcardsList.add(new Flashcard("turtle", "zolw"));
-        flashcardsList.add(new Flashcard("mouse", "mysz"));
-
-        viewFlashcardsAdapter = new ViewFlashcardsAdapter(flashcardsList, getActivity());
         viewPager = view.findViewById(R.id.viewPager);
-        viewPager.setAdapter(viewFlashcardsAdapter);
-        viewPager.setPadding(130, 0, 130, 0);
+        searchCard = view.findViewById(R.id.search_card);
+        btnSearch = view.findViewById(R.id.btn_search);
+
+
+        flashcardsViewModel.getFlashcardsList().observe(ViewFlashcards.this, new Observer<ArrayList<Flashcard>>() {
+            @Override
+            public void onChanged(ArrayList<Flashcard> flashcards) {
+                flashcardsList.clear();
+                flashcardsList.addAll(flashcards);
+                viewFlashcardsAdapter = new ViewFlashcardsAdapter(flashcardsList, getActivity());
+                viewPager.setAdapter(viewFlashcardsAdapter);
+                viewPager.setPadding(130, 0, 130, 0);
+            }
+        });
+
+        flashcardsViewModel.getFlashcardsListDB(flashcardsViewModel.getCurrentCatalog().getCID());
+
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = findFlashcardPosition(searchCard.getText().toString());
+                viewPager.setCurrentItem(pos);
+            }
+        });
 
     }
-
-
-
+    //needs to be done in a view model!!!!!!!!!!!!!!!!!
+    public int findFlashcardPosition(String frontside){
+        for (int i=0; i<flashcardsList.size(); i++){
+            if(frontside.toUpperCase().equals(flashcardsList.get(i).getFrontside().toUpperCase()) || frontside.toUpperCase().equals(flashcardsList.get(i).getBackside().toUpperCase())) {
+                return i;
+            }
+        }
+        return 0;
+    }
 }

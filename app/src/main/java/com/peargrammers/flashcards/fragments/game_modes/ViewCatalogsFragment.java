@@ -27,6 +27,7 @@ import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
+import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,7 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
     private ArrayList<Catalog> catalogsList = new ArrayList<>();
     private CatalogsViewModel catalogsViewModel;
     private RecyclerView.LayoutManager mLayoutManager;
+    private HomeViewModel homeViewModel = HomeViewModel.getInstance();
     ViewFlashcards viewFlashcards;
     QuizFragment quizFragment;
 
@@ -85,14 +87,11 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
     @Override
     public void onItemClick(int position) {
         FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
-        System.out.println(catalogsList.get(position).getName());
-        System.out.println(position);
         mRecyclerView.findViewHolderForAdapterPosition(position).itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        switch (HomeFragment.gameType){
+        switch (homeViewModel.getGameMode()){
             case 0:
                 break;
                 case 1:
-                changeFragment(quizFragment);
                 break;
                 case 2:
                 break;

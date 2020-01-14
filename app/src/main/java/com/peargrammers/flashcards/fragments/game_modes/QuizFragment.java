@@ -2,7 +2,6 @@ package com.peargrammers.flashcards.fragments.game_modes;
 
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.models.QuizDataSet;
@@ -57,8 +55,6 @@ public class QuizFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
-
         answerA = view.findViewById(R.id.answerA);
         answerB = view.findViewById(R.id.answerB);
         answerC = view.findViewById(R.id.answerC);
@@ -82,10 +78,10 @@ public class QuizFragment extends Fragment {
                 answerB.setEnabled(true);
                 answerC.setEnabled(true);
                 answerD.setEnabled(true);
-                answerA.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                answerB.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                answerC.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                answerD.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                answerA.setBackgroundColor(getResources().getColor(R.color.leadningColor));
+                answerB.setBackgroundColor(getResources().getColor(R.color.leadningColor));
+                answerC.setBackgroundColor(getResources().getColor(R.color.leadningColor));
+                answerD.setBackgroundColor(getResources().getColor(R.color.leadningColor));
 
             }
         });
@@ -99,7 +95,7 @@ public class QuizFragment extends Fragment {
                 Button clickedButton = v.findViewById(v.getId());
                 if (quizViewModel.processAnswer(clickedButton.getText().toString()))
                 {
-                    clickedButton.setBackgroundColor(getResources().getColor(R.color.leadningColor));
+                    clickedButton.setBackgroundColor(getResources().getColor(R.color.green));
 
                 } else {
                     clickedButton.setBackgroundColor(getResources().getColor(R.color.red));
@@ -111,19 +107,19 @@ public class QuizFragment extends Fragment {
                     String goodAnswer = quizViewModel.getFlashcardsInput().get(quizViewModel.getCurrentFlashardIndex()-1).getBackside();
                     if (answerA.getText().toString().equals(goodAnswer)) {
                         System.out.println("DOBRZE A");
-                        answerA.setBackgroundColor(getResources().getColor(R.color.leadningColor));
+                        answerA.setBackgroundColor(getResources().getColor(R.color.green));
                     }
                     if (answerB.getText().toString().equals(goodAnswer)) {
                         System.out.println("DOBRZE B");
-                        answerB.setBackgroundColor(getResources().getColor(R.color.leadningColor));
+                        answerB.setBackgroundColor(getResources().getColor(R.color.green));
                     }
                     if (answerC.getText().toString().equals(goodAnswer)) {
                         System.out.println("DOBRZE C");
-                        answerC.setBackgroundColor(getResources().getColor(R.color.leadningColor));
+                        answerC.setBackgroundColor(getResources().getColor(R.color.green));
                     }
                     if (answerD.getText().toString().equals(goodAnswer)) {
                         System.out.println("DOBRZE D");
-                        answerD.setBackgroundColor(getResources().getColor(R.color.leadningColor));
+                        answerD.setBackgroundColor(getResources().getColor(R.color.green));
                     }
                 }
                 answerA.setEnabled(false);
@@ -144,8 +140,6 @@ public class QuizFragment extends Fragment {
             public void onChanged(ArrayList<Flashcard> flashcards) {
                 QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
 //                answerA.setText();
-                HomeActivity.dialog.dismiss();
-
                 answerA.setText((CharSequence) currentDataSet.getAnswers().get(0));
                 answerB.setText((CharSequence) currentDataSet.getAnswers().get(1));
                 answerC.setText((CharSequence) currentDataSet.getAnswers().get(2));
