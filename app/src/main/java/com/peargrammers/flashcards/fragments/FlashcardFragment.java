@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,7 +85,7 @@ public class FlashcardFragment extends Fragment implements RecyclerViewClickInte
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
+//        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
 
         mRecyclerView = view.findViewById(R.id.rv_flashcards);
         mRecyclerView.setHasFixedSize(true);
@@ -96,16 +97,18 @@ public class FlashcardFragment extends Fragment implements RecyclerViewClickInte
         flashcardsViewModel.getFlashcardsList().observe(FlashcardFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
+//                HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
+
                 flashcardsList.clear();
                 flashcardsList.addAll(flashcards);
                 mLayoutManager = new LinearLayoutManager(flashcardActivity);
                 mRecyclerView.setLayoutManager(mLayoutManager);
-
                 mAdapter = new FlashcardAdapter(flashcardsList, rvci);
                 mRecyclerView.setAdapter(mAdapter);
-                HomeActivity.dialog.dismiss();
+
             }
         });
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -252,5 +255,17 @@ public class FlashcardFragment extends Fragment implements RecyclerViewClickInte
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        new CountDownTimer(500, 500) {
 
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                HomeActivity.dialog.dismiss();
+            }
+        }.start();
+    }
 }

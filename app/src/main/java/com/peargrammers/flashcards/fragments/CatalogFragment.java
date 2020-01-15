@@ -13,6 +13,9 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.CountDownTimer;
+import android.os.HardwarePropertiesManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,12 +50,8 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
     private FloatingActionButton floatingActionButton;
     private EditCatalogViewModel editCatalogViewModel;
     private FlashcardFragment flashcardFragment;
-
-
     private final FragmentActivity catalogActivity = getActivity();
-
     private ArrayList<Catalog> catalogsList = new ArrayList<>();
-
     private Catalog removedCatalog = null;
 
 
@@ -65,12 +64,9 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_catalog, container, false);
-
     }
 
     @Override
@@ -150,8 +146,11 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
 
     @Override
     public void onItemClick(int position) {
+        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
         FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
         FragmentCoordinator.changeFragment(flashcardFragment, getFragmentManager());
+
+
     }
 
     public void showRemoveDialog(final int position){

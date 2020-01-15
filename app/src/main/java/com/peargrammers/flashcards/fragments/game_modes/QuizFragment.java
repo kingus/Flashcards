@@ -2,6 +2,7 @@ package com.peargrammers.flashcards.fragments.game_modes;
 
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.fragments.SummarizeFragment;
 import com.peargrammers.flashcards.models.Catalog;
@@ -64,6 +66,8 @@ public class QuizFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
+
         answerA = view.findViewById(R.id.answerA);
         answerB = view.findViewById(R.id.answerB);
         answerC = view.findViewById(R.id.answerC);
@@ -161,6 +165,7 @@ public class QuizFragment extends Fragment {
                 tvQuestionText.setText(currentDataSet.getFlashcard().getFrontside());
                 tvScore.setText((CharSequence) Integer.toString(currentDataSet.getFlashcard().getSmallBox()));
                 tvTotal.setText(quizViewModel.getCurrentFlashardIndex() + "/" + quizViewModel.getFlashcardsInput().size());
+                HomeActivity.dialog.dismiss();
 
             }
         });
@@ -168,4 +173,5 @@ public class QuizFragment extends Fragment {
         quizViewModel.getFlashcardsListDB(quizViewModel.getCurrentCID());
 
     }
+
 }
