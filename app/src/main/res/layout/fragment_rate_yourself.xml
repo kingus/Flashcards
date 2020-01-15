@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.game_modes.RateYourselfFragment"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/tv_card"
+        android:layout_marginTop="50dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:background="@drawable/border"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:text="TOUCH TO START"
+        android:visibility="visible"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="100dp"
+        android:paddingRight="20dp"
+        android:gravity="right">
+
+        <ImageButton
+            android:id="@+id/btn_wrong"
+            android:layout_width="wrap_content"
+            android:padding="10dp"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_wrong_round">
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/btn_right"
+            android:layout_width="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_right_round"
+            android:padding="10dp">
+        </ImageButton>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right">
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_marginRight="20dp"
+            android:visibility="invisible"
+            android:background="@drawable/mybutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NEXT">
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>

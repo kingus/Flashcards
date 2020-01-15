@@ -12,18 +12,14 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-
 import com.peargrammers.flashcards.CatalogPlayAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
-import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
@@ -42,12 +38,14 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
     private RecyclerView.LayoutManager mLayoutManager;
     private HomeViewModel homeViewModel = HomeViewModel.getInstance();
     ViewFlashcards viewFlashcards;
+    RateYourselfFragment rateYourselfFragment;
     QuizFragment quizFragment;
 
     public ViewCatalogsFragment() {
         catalogsViewModel = CatalogsViewModel.getInstance();
         this.viewFlashcards = new ViewFlashcards();
         this.quizFragment = new QuizFragment();
+        this.rateYourselfFragment = new RateYourselfFragment();
     }
 
 
@@ -82,6 +80,7 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
 
         catalogsViewModel.getUsetsCatalogListDB();
 
+
     }
 
     @Override
@@ -94,6 +93,7 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
                 case 1:
                 break;
                 case 2:
+                    changeFragment(rateYourselfFragment);
                 break;
                 case 3:
                 changeFragment(viewFlashcards);

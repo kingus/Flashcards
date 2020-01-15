@@ -23,9 +23,18 @@ public class FlashcardsViewModel {
     }
 
     private Catalog currentCatalog;
+    private int currentFlashcardIndex = 0;
 
     public Catalog getCurrentCatalog() {
         return currentCatalog;
+    }
+
+    public int getCurrentFlashcardIndex() {
+        return currentFlashcardIndex;
+    }
+
+    public void setCurrentFlashcardIndex(int currentFlashcardIndex) {
+        this.currentFlashcardIndex = currentFlashcardIndex;
     }
 
     public void setCurrentCatalog(Catalog currentCatalog) {
