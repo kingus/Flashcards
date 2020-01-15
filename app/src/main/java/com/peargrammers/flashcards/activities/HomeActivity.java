@@ -72,7 +72,7 @@ public class  HomeActivity extends AppCompatActivity {
             public void onItemClick(int itemIndex, String itemName) {
                 switch (itemIndex){
                     case 0:
-                        changeFragment(viewFlashcards);
+//                        changeFragment(viewFlashcards);
                         break;
                     case 1:
                         changeFragment(catalogFragment);

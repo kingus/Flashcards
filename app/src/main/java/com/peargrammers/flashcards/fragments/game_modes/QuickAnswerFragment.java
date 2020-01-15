@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.ViewFlashcardsAdapter;
+import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.fragments.SummarizeFragment;
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.models.QuizDataSet;
@@ -158,6 +159,10 @@ public class QuickAnswerFragment extends Fragment {
                 }
                 else{
                     System.out.println("END");
+                    quickAnswerViewModel.removeLearnedFlashcards();
+                    quickAnswerViewModel.updateFlashcardsLevel();
+                    FragmentCoordinator.changeFragment(summarizeFragment, getFragmentManager());
+
                 }
             }
         });

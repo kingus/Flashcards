@@ -103,7 +103,9 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
                     changeFragment(rateYourselfFragment);
                 break;
                 case 3:
+                FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
                 changeFragment(viewFlashcards);
+
                 break;
 
         }
