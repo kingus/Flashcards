@@ -22,6 +22,7 @@ import com.peargrammers.flashcards.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.models.Catalog;
+import com.peargrammers.flashcards.viewmodels.game_modes.QuickAnswerViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
@@ -88,18 +89,23 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
 
     @Override
     public void onItemClick(int position) {
-        FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
+        //QuickAnswerViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
+
         mRecyclerView.findViewHolderForAdapterPosition(position).itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         switch (homeViewModel.getGameMode()){
             case 0:
-                FragmentCoordinator.changeFragment(quickAnswerFragment, getFragmentManager());
+                QuickAnswerViewModel.getInstance().setCurrentCID(catalogsList.get(position).getCID());
+                changeFragment(quickAnswerFragment);
                 break;
+     
                 case 2:
                     FragmentCoordinator.changeFragment(rateYourselfFragment, getFragmentManager());
                     break;
                 case 3:
-                    FragmentCoordinator.changeFragment(viewFlashcards, getFragmentManager());
-                    break;
+                FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
+                changeFragment(viewFlashcards);
+
+                break;
 
         }
 

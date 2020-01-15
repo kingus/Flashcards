@@ -38,9 +38,11 @@ public class ManageFlashcardsRepository {
 
     private OnCompleteListener addFlashcardListener;
     private OnCompleteListener removeFlashcardFromCatalogListener;
+    private OnCompleteListener removeFlashcardsFromCatalogListener;
     private OnCompleteListener editFlashcardFromCatalodListener;
     private OnCompleteListener editFlashcardLevelFromCatalodListener;
     Map<String, Object> EditFlashcardChildUpdates;
+    Map<String, Object> flashcardToRemoveChildRemove;
     Map<String, Object> EditFlashcardLevelChildUpdates;
     ValueEventListener getFlashcardsListener;
 
@@ -120,7 +122,7 @@ public class ManageFlashcardsRepository {
             }
         };
         myCID = CID;
-
+        //System.out.println("MOJE CID");
         new Thread() {
             @Override
             public void run() {
@@ -151,7 +153,6 @@ public class ManageFlashcardsRepository {
 
             }
         }.start();
-
     }
     public void editFlashcardFromCatalod(String CID, String FID, String frontside, String backside) {
         //dbRef.child("CATALOGS").child(CID).child("flashcards")
@@ -208,7 +209,38 @@ public class ManageFlashcardsRepository {
                 dbRef.updateChildren(EditFlashcardLevelChildUpdates).addOnCompleteListener(editFlashcardLevelFromCatalodListener);
             }
         }.start();
+    }
 
+    public void removeFlashcardsFromCatalog(String CID, ArrayList<Flashcard> flashcards) {
+
+        flashcardToRemoveChildRemove = new HashMap<>();
+        for (Flashcard tmp :
+                flashcards) {
+            flashcardToRemoveChildRemove.put("/CATALOGS/" + CID + "/flashcards/" + tmp.getFID() + "/", null);
+
+
+        }
+
+//        removeFlashcardsFromCatalogListener = new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if (task.isSuccessful()) {
+//                    ifRemovedFlashcardProperly.setValue(true);
+//                } else {
+//                    ifRemovedFlashcardProperly.setValue(false);
+//                }
+//            }
+//        };
+        myCID = CID;
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                dbRef.updateChildren(flashcardToRemoveChildRemove);
+//                dbRef.child("CATALOGS").child(myCID).child("flashcards").child(myFID).setValue(null).addOnCompleteListener(removeFlashcardsFromCatalogListener);
+
+            }
+        }.start();
     }
 
 

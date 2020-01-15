@@ -12,7 +12,10 @@ public class QuizDataSet {
         this.flashcard = flashcard;
     }
 
-
+    public QuizDataSet(Flashcard flashcard) {
+        this.flashcard = flashcard;
+        answers = null;
+    }
 
     public ArrayList getAnswers() {
         return answers;

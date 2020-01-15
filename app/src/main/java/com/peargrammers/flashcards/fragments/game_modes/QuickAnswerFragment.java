@@ -25,7 +25,12 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.ViewFlashcardsAdapter;
+import com.peargrammers.flashcards.fragments.FragmentCoordinator;
+import com.peargrammers.flashcards.fragments.SummarizeFragment;
 import com.peargrammers.flashcards.models.Flashcard;
+import com.peargrammers.flashcards.models.QuizDataSet;
+import com.peargrammers.flashcards.viewmodels.game_modes.QuickAnswerViewModel;
+import com.peargrammers.flashcards.viewmodels.game_modes.SummarizeViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 
 import java.util.ArrayList;
@@ -41,6 +46,11 @@ public class QuickAnswerFragment extends Fragment {
     private EditText etAnswer;
     private ImageButton btnHint;
     private FlashcardsViewModel flashcardsViewModel = FlashcardsViewModel.getInstance();
+    private QuickAnswerViewModel quickAnswerViewModel;
+    private SummarizeViewModel summarizeViewModel;
+    private SummarizeFragment summarizeFragment;
+    private QuizDataSet currentDataSet;
+
     ViewFlashcardsAdapter viewFlashcardsAdapter;
     ArrayList<Flashcard> flashcardsList = new ArrayList<>();
     private boolean side = true;
@@ -48,6 +58,9 @@ public class QuickAnswerFragment extends Fragment {
 
 
     public QuickAnswerFragment() {
+        quickAnswerViewModel = QuickAnswerViewModel.getInstance();
+        summarizeViewModel = SummarizeViewModel.getInstance();
+        summarizeFragment = new SummarizeFragment();
         // Required empty public constructor
     }
 
@@ -66,13 +79,17 @@ public class QuickAnswerFragment extends Fragment {
         cardText = view.findViewById(R.id.tv_card);
         fBtnNext = view.findViewById(R.id.fbtn_next);
         btnHint = view.findViewById(R.id.btn_hint);
+        etAnswer = view.findViewById(R.id.et_answer);
 
+
+        /*
         flashcardsViewModel.getFlashcardsList().observe(QuickAnswerFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
+                System.out.println("POBIERAM DANE z BAZY");
                 flashcardsList.clear();
                 flashcardsList.addAll(flashcards);
-                viewFlashcardsAdapter = new ViewFlashcardsAdapter(flashcardsList, getActivity());
+                //viewFlashcardsAdapter = new ViewFlashcardsAdapter(flashcardsList, getActivity());
                 flashcardsViewModel.getFlashcardsListDB(flashcardsViewModel.getCurrentCatalog().getCID());
                 if(side)
                     cardText.setText(flashcardsList.get(flashcardsViewModel.getCurrentFlashcardIndex()).getFrontside());
@@ -82,7 +99,22 @@ public class QuickAnswerFragment extends Fragment {
         });
 
         flashcardsViewModel.getFlashcardsListDB(flashcardsViewModel.getCurrentCatalog().getCID());
+        */
 
+        quickAnswerViewModel.getFlashcardsList().observe(QuickAnswerFragment.this, new Observer<ArrayList<Flashcard>>() {
+            @Override
+            public void onChanged(ArrayList<Flashcard> flashcards) {
+                quickAnswerViewModel.setCurrentFlashardIndex(0);
+                currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
+
+                cardText.setText(currentDataSet.getFlashcard().getFrontside());
+
+
+
+            }
+        });
+
+        quickAnswerViewModel.getFlashcardsListDB(quickAnswerViewModel.getCurrentCID());
 
 
         btnCheck.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +124,9 @@ public class QuickAnswerFragment extends Fragment {
             public void onClick(View v) {
                 fBtnNext.setVisibility(VISIBLE);
                 btnCheck.setEnabled(false);
+
+                cardText.setText(currentDataSet.getFlashcard().getBackside());
+                quickAnswerViewModel.processAnswer(etAnswer.getText().toString());
                 final ObjectAnimator oa1 = ObjectAnimator.ofFloat(cardText, "scaleY", 1f, 0f);
                 final ObjectAnimator oa2 = ObjectAnimator.ofFloat(cardText, "scaleY", 0f, 1f);
                 oa1.setInterpolator(new DecelerateInterpolator());
@@ -113,14 +148,21 @@ public class QuickAnswerFragment extends Fragment {
         fBtnNext.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             public void onClick(View v) {
-                if(flashcardsViewModel.getCurrentFlashcardIndex()<flashcardsList.size()-1) {
+                if(quickAnswerViewModel.getCurrentFlashardIndex() != quickAnswerViewModel.getFlashcardsInput().size()) {
                     fBtnNext.setVisibility(View.INVISIBLE);
                     btnCheck.setEnabled(true);
-                    flashcardsViewModel.setCurrentFlashcardIndex(flashcardsViewModel.getCurrentFlashcardIndex() + 1);
-                    side = true;
+//                    flashcardsViewModel.setCurrentFlashcardIndex(flashcardsViewModel.getCurrentFlashcardIndex() + 1);
+//                    side = true;
+                    currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
+                    cardText.setText(currentDataSet.getFlashcard().getFrontside());
+
                 }
                 else{
                     System.out.println("END");
+                    quickAnswerViewModel.removeLearnedFlashcards();
+                    quickAnswerViewModel.updateFlashcardsLevel();
+                    FragmentCoordinator.changeFragment(summarizeFragment, getFragmentManager());
+
                 }
             }
         });

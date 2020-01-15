@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
                     Log.d("LOGIN_ACTIVITY", "LOGIN GIT - activity");
+                    //if ()
                     dialog.dismiss();
                     Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(myIntent);
