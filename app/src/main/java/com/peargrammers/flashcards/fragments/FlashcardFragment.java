@@ -48,7 +48,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FlashcardFragment extends Fragment implements RecyclerViewClickInterface {
+public class  FlashcardFragment extends Fragment implements RecyclerViewClickInterface {
 
     private FlashcardsViewModel flashcardsViewModel;
     private AddFlashcardViewModel addFlashcardViewModel;
