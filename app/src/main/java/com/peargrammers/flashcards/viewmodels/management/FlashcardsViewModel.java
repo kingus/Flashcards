@@ -80,5 +80,12 @@ public class FlashcardsViewModel {
     public void removeFlashcardFromCatalog(String CID, String FID) {
         manageFlashcardsRepository.removeFlashcardFromCatalog(CID, FID);
     }
-
+    public int findFlashcardPosition(String frontside, ArrayList<Flashcard> flashcardsList){
+        for (int i=0; i<flashcardsList.size(); i++){
+            if(frontside.toUpperCase().equals(flashcardsList.get(i).getFrontside().toUpperCase()) || frontside.toUpperCase().equals(flashcardsList.get(i).getBackside().toUpperCase())) {
+                return i;
+            }
+        }
+        return 0;
+    }
 }

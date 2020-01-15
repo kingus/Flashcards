@@ -80,19 +80,12 @@ public class ViewFlashcards extends Fragment {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pos = findFlashcardPosition(searchCard.getText().toString());
+                int pos = flashcardsViewModel.findFlashcardPosition(searchCard.getText().toString(), flashcardsList);
                 viewPager.setCurrentItem(pos);
             }
         });
 
     }
     //needs to be done in a view model!!!!!!!!!!!!!!!!!
-    public int findFlashcardPosition(String frontside){
-        for (int i=0; i<flashcardsList.size(); i++){
-            if(flashcardsList.get(i).getFrontside().toUpperCase().contains(frontside.toUpperCase()) || (flashcardsList.get(i).getBackside().toUpperCase().contains(frontside.toUpperCase()))){
-                return i;
-            }
-        }
-        return 0;
-    }
+
 }

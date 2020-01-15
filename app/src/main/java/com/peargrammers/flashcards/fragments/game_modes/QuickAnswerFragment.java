@@ -45,6 +45,7 @@ public class QuickAnswerFragment extends Fragment {
     private TextView cardText;
     private EditText etAnswer;
     private ImageButton btnHint;
+    ImageButton btnRight, btnWrong;
     private FlashcardsViewModel flashcardsViewModel = FlashcardsViewModel.getInstance();
     private QuickAnswerViewModel quickAnswerViewModel;
     private SummarizeViewModel summarizeViewModel;
@@ -80,7 +81,8 @@ public class QuickAnswerFragment extends Fragment {
         fBtnNext = view.findViewById(R.id.fbtn_next);
         btnHint = view.findViewById(R.id.btn_hint);
         etAnswer = view.findViewById(R.id.et_answer);
-
+        btnRight = view.findViewById(R.id.btn_right);
+        btnWrong = view.findViewById(R.id.btn_wrong);
 
         /*
         flashcardsViewModel.getFlashcardsList().observe(QuickAnswerFragment.this, new Observer<ArrayList<Flashcard>>() {
@@ -126,7 +128,11 @@ public class QuickAnswerFragment extends Fragment {
                 btnCheck.setEnabled(false);
 
                 cardText.setText(currentDataSet.getFlashcard().getBackside());
-                quickAnswerViewModel.processAnswer(etAnswer.getText().toString());
+                if (quickAnswerViewModel.processAnswer(etAnswer.getText().toString())){
+                    btnRight.setVisibility(VISIBLE);
+                } else {
+                    btnWrong.setVisibility(VISIBLE);
+                }
                 final ObjectAnimator oa1 = ObjectAnimator.ofFloat(cardText, "scaleY", 1f, 0f);
                 final ObjectAnimator oa2 = ObjectAnimator.ofFloat(cardText, "scaleY", 0f, 1f);
                 oa1.setInterpolator(new DecelerateInterpolator());
@@ -148,6 +154,8 @@ public class QuickAnswerFragment extends Fragment {
         fBtnNext.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("RestrictedApi")
             public void onClick(View v) {
+                btnWrong.setVisibility(View.INVISIBLE);
+                btnRight.setVisibility(View.INVISIBLE);
                 if(quickAnswerViewModel.getCurrentFlashardIndex() != quickAnswerViewModel.getFlashcardsInput().size()) {
                     fBtnNext.setVisibility(View.INVISIBLE);
                     btnCheck.setEnabled(true);
