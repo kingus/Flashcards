@@ -89,7 +89,7 @@ public class ViewFlashcards extends Fragment {
     //needs to be done in a view model!!!!!!!!!!!!!!!!!
     public int findFlashcardPosition(String frontside){
         for (int i=0; i<flashcardsList.size(); i++){
-            if(frontside.toUpperCase().equals(flashcardsList.get(i).getFrontside().toUpperCase()) || frontside.toUpperCase().equals(flashcardsList.get(i).getBackside().toUpperCase())) {
+            if(flashcardsList.get(i).getFrontside().toUpperCase().contains(frontside.toUpperCase()) || (flashcardsList.get(i).getBackside().toUpperCase().contains(frontside.toUpperCase()))){
                 return i;
             }
         }
