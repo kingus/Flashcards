@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.ViewFlashcardsAdapter;
 import com.peargrammers.flashcards.models.Flashcard;
@@ -59,6 +60,7 @@ public class RateYourselfFragment extends Fragment {
         btnNext = view.findViewById(R.id.btn_next);
         btnRight = view.findViewById(R.id.btn_right);
         btnWrong = view.findViewById(R.id.btn_wrong);
+        btnNext.setVisibility(View.INVISIBLE);
 
         flashcardsViewModel.getFlashcardsList().observe(RateYourselfFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override

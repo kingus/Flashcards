@@ -40,12 +40,14 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
     ViewFlashcards viewFlashcards;
     RateYourselfFragment rateYourselfFragment;
     QuizFragment quizFragment;
+    QuickAnswerFragment quickAnswerFragment;
 
     public ViewCatalogsFragment() {
         catalogsViewModel = CatalogsViewModel.getInstance();
         this.viewFlashcards = new ViewFlashcards();
         this.quizFragment = new QuizFragment();
         this.rateYourselfFragment = new RateYourselfFragment();
+        this.quickAnswerFragment = new QuickAnswerFragment();
     }
 
 
@@ -89,6 +91,7 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
         mRecyclerView.findViewHolderForAdapterPosition(position).itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         switch (homeViewModel.getGameMode()){
             case 0:
+                changeFragment(quickAnswerFragment);
                 break;
                 case 1:
                 break;
