@@ -41,6 +41,7 @@ public class QuizFragment extends Fragment {
     private TextView tvQuestionText;
     private TextView tvScore;
     private TextView tvTotal;
+
     private SummarizeViewModel summarizeViewModel;
     private SummarizeFragment summarizeFragment;
 
@@ -96,6 +97,7 @@ public class QuizFragment extends Fragment {
                     answerD.setBackgroundColor(getResources().getColor(R.color.leadningColor));
                 } else {
                     System.out.println("Koniec fiszek");
+                    quizViewModel.removeLearnedFlashcards();
                     quizViewModel.updateFlashcardsLevel();
                     FragmentCoordinator.changeFragment(summarizeFragment, getFragmentManager());
 
