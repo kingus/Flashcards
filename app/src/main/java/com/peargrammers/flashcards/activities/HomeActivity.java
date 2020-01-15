@@ -25,6 +25,8 @@ import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
 import com.peargrammers.flashcards.viewmodels.authentication.LogOutViewModel;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 
+import java.util.List;
+
 public class  HomeActivity extends AppCompatActivity {
 
     HomeViewModel homeViewModel;
@@ -99,17 +101,28 @@ public class  HomeActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.addToBackStack(fragment.toString());
+        System.out.println("FRAGMENT!!!!!!!!: " + fragment.toString());
         fragmentTransaction.replace(R.id.main_frame, fragment).commit();
         Log.i("FRAGMENT", "changed");
     }
 
 
-//    @Override
-//    public void onBackPressed()
-//    {
-//        Log.i("PRESSED", "back button");
-//        Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
-//        startActivity(myIntent);
-//    }
+    @Override
+    public void onBackPressed()
+    {
+        Log.i("PRESSED", "back button");
 
+        System.out.println("WRACAM Z FRAGMENTU O NAZWIE:  "+ getVisibleFragment().toString());
+        Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
+        startActivity(myIntent);
+    }
+    private Fragment getVisibleFragment() {
+        FragmentManager fragmentManager = HomeActivity.this.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment != null && fragment.isVisible())
+                return fragment;
+        }
+        return null;
+    }
 }
