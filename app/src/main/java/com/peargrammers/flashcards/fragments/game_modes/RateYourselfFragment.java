@@ -33,7 +33,6 @@ import java.util.ArrayList;
  */
 public class RateYourselfFragment extends Fragment {
     private TextView cardText;
-    private Button btnNext;
     ImageButton btnRight, btnWrong;
     private boolean side = true;
 
@@ -57,10 +56,10 @@ public class RateYourselfFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         cardText = view.findViewById(R.id.tv_card);
-        btnNext = view.findViewById(R.id.btn_next);
         btnRight = view.findViewById(R.id.btn_right);
         btnWrong = view.findViewById(R.id.btn_wrong);
-        btnNext.setVisibility(View.INVISIBLE);
+        btnRight.setVisibility(View.INVISIBLE);
+        btnWrong.setVisibility(View.INVISIBLE);
 
         flashcardsViewModel.getFlashcardsList().observe(RateYourselfFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
@@ -96,6 +95,8 @@ public class RateYourselfFragment extends Fragment {
                         else{
                             side = true;
                         }
+                        btnRight.setVisibility(View.VISIBLE);
+                        btnWrong.setVisibility(View.VISIBLE);
                         oa2.start();
                     }
                 });
@@ -103,33 +104,29 @@ public class RateYourselfFragment extends Fragment {
             }
         });
 
-        btnNext.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                System.out.println("NEXT CLICKED");
-
-                if(flashcardsViewModel.getCurrentFlashcardIndex()<flashcardsList.size()-1) {
-                    flashcardsViewModel.setCurrentFlashcardIndex(flashcardsViewModel.getCurrentFlashcardIndex()+1);
-                    side = true;
-                    btnWrong.setEnabled(true);
-                    btnRight.setEnabled(true);
-                    btnNext.setVisibility(View.INVISIBLE);
-
-                }
-                else
-                    System.out.println("END");
-            }
-
-        });
+//        btnNext.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                System.out.println("NEXT CLICKED");
+//
+//                if(flashcardsViewModel.getCurrentFlashcardIndex()<flashcardsList.size()-1) {
+//                    flashcardsViewModel.setCurrentFlashcardIndex(flashcardsViewModel.getCurrentFlashcardIndex()+1);
+//                    side = true;
+//                    btnNext.setVisibility(View.INVISIBLE);
+//
+//                }
+//                else
+//                    System.out.println("END");
+//            }
+//
+//        });
 
         btnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("RIGHT");
-                btnRight.setEnabled(false);
-                btnWrong.setEnabled(false);
-                btnNext.setVisibility(View.VISIBLE);
+                setFlags();
 
             }
         });
@@ -138,15 +135,26 @@ public class RateYourselfFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("WRONG");
-                btnRight.setEnabled(false);
-                btnWrong.setEnabled(false);
-                btnNext.setVisibility(View.VISIBLE);
-
+                setFlags();
             }
         });
 
 
 
+
+
+    }
+
+    public void setFlags(){
+        btnRight.setVisibility(View.INVISIBLE);
+        btnWrong.setVisibility(View.INVISIBLE);
+        if(flashcardsViewModel.getCurrentFlashcardIndex()<flashcardsList.size()-1) {
+            flashcardsViewModel.setCurrentFlashcardIndex(flashcardsViewModel.getCurrentFlashcardIndex()+1);
+            side = true;
+
+        }
+        else
+            System.out.println("END");
     }
 
 }

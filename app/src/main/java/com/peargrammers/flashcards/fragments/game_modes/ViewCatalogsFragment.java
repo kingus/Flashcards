@@ -20,6 +20,7 @@ import com.peargrammers.flashcards.CatalogPlayAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
+import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
@@ -91,29 +92,27 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
         mRecyclerView.findViewHolderForAdapterPosition(position).itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         switch (homeViewModel.getGameMode()){
             case 0:
-                changeFragment(quickAnswerFragment);
-                break;
-                case 1:
+                FragmentCoordinator.changeFragment(quickAnswerFragment, getFragmentManager());
                 break;
                 case 2:
-                    changeFragment(rateYourselfFragment);
-                break;
+                    FragmentCoordinator.changeFragment(rateYourselfFragment, getFragmentManager());
+                    break;
                 case 3:
-                changeFragment(viewFlashcards);
-                break;
+                    FragmentCoordinator.changeFragment(viewFlashcards, getFragmentManager());
+                    break;
 
         }
 
     }
 
-    public void changeFragment(Fragment fragment){
-        FragmentManager fragmentManager2 = getFragmentManager();
-        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-        fragmentTransaction2.addToBackStack(fragment.toString());
-//        fragmentTransaction2.hide(HomeFragment.this);
-        fragmentTransaction2.replace(R.id.main_frame, fragment);
-        fragmentTransaction2.commit();
-        Log.i("FRAGMENT", "changed");
-    }
+//    public void changeFragment(Fragment fragment){
+//        FragmentManager fragmentManager2 = getFragmentManager();
+//        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+//        fragmentTransaction2.addToBackStack(fragment.toString());
+////        fragmentTransaction2.hide(HomeFragment.this);
+//        fragmentTransaction2.replace(R.id.main_frame, fragment);
+//        fragmentTransaction2.commit();
+//        Log.i("FRAGMENT", "changed");
+//    }
 
 }
