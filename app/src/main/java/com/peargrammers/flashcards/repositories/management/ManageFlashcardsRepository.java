@@ -39,7 +39,9 @@ public class ManageFlashcardsRepository {
     private OnCompleteListener addFlashcardListener;
     private OnCompleteListener removeFlashcardFromCatalogListener;
     private OnCompleteListener editFlashcardFromCatalodListener;
+    private OnCompleteListener editFlashcardLevelFromCatalodListener;
     Map<String, Object> EditFlashcardChildUpdates;
+    Map<String, Object> EditFlashcardLevelChildUpdates;
     ValueEventListener getFlashcardsListener;
 
     public MutableLiveData<Boolean> getIfEditedFlashcardProperly() {
@@ -98,6 +100,7 @@ public class ManageFlashcardsRepository {
     }
     public void getFlashcardsListDB(String CID) {
         getFlashcardsListener = new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Flashcard> flashcards = new ArrayList<>();
@@ -173,6 +176,36 @@ public class ManageFlashcardsRepository {
             public void run() {
                 super.run();
                 dbRef.updateChildren(EditFlashcardChildUpdates).addOnCompleteListener(editFlashcardFromCatalodListener);
+            }
+        }.start();
+
+    }
+    public void editFlashcardsLevelFromCatalog(String CID, ArrayList<Flashcard> flashcards) {
+        //dbRef.child("CATALOGS").child(CID).child("flashcards")
+
+        EditFlashcardLevelChildUpdates = new HashMap<>();
+        for (Flashcard tmp :
+                flashcards) {
+            EditFlashcardLevelChildUpdates.put("/CATALOGS/" + CID + "/flashcards/" + tmp.getFID() + "/smallBox/", tmp.getSmallBox());
+
+        }
+
+        editFlashcardLevelFromCatalodListener = new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    ifEditedFlashcardProperly.postValue(true);
+                } else {
+                    ifEditedFlashcardProperly.postValue(false);
+                }
+            }
+        };
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                dbRef.updateChildren(EditFlashcardLevelChildUpdates).addOnCompleteListener(editFlashcardLevelFromCatalodListener);
             }
         }.start();
 

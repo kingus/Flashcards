@@ -2,6 +2,7 @@ package com.peargrammers.flashcards.viewmodels.game_modes;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.models.QuizDataSet;
@@ -16,7 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
-public class QuizViewModel {
+public class QuizViewModel extends ViewModel {
     private static QuizViewModel instance;
     private ManageFlashcardsRepository manageFlashcardsRepository;
 
@@ -28,12 +29,41 @@ public class QuizViewModel {
         return currentFlashardIndex;
     }
 
+    public void setFlashcardsInput(ArrayList<Flashcard> flashcardsInput) {
+        this.flashcardsInput = flashcardsInput;
+    }
+
+    private SummarizeViewModel summarizeViewModel;
+
     private ArrayList<Flashcard> flashcardsInput = new ArrayList<>();
     private ArrayList<Flashcard> flashcardsOutput = new ArrayList<>();
     private MutableLiveData<ArrayList<Flashcard>> flashcardsList = new MutableLiveData<>();
     private MutableLiveData<QuizDataSet> quizDataSet = new MutableLiveData<>();
     private String currentCID;
+
+    public void setCurrentFlashardIndex(int currentFlashardIndex) {
+        this.currentFlashardIndex = currentFlashardIndex;
+    }
+
     private int currentFlashardIndex;
+    private int goodAnsweredCounter;
+    private int wrongAnsweredCounter;
+
+    public int getGoodAnsweredCounter() {
+        return goodAnsweredCounter;
+    }
+
+    public void setGoodAnsweredCounter(int goodAnsweredCounter) {
+        this.goodAnsweredCounter = goodAnsweredCounter;
+    }
+
+    public int getWrongAnsweredCounter() {
+        return wrongAnsweredCounter;
+    }
+
+    public void setWrongAnsweredCounter(int wrongAnsweredCounter) {
+        this.wrongAnsweredCounter = wrongAnsweredCounter;
+    }
 
     public String getCurrentCID() {
         return currentCID;
@@ -63,6 +93,7 @@ public class QuizViewModel {
 
     public QuizViewModel() {
         currentFlashardIndex = 0;
+        summarizeViewModel = SummarizeViewModel.getInstance();
         manageFlashcardsRepository = ManageFlashcardsRepository.getInstance();
         manageFlashcardsRepository.getFlashcardsList().observeForever(new Observer<ArrayList<Flashcard>>() {
             @Override
@@ -109,6 +140,8 @@ public class QuizViewModel {
         System.out.println("POROWNUJE: " + flashcard.getBackside() + " oraz " +answer );
         if (flashcard.getBackside().equals(answer)) {
             System.out.println("DOOBRZEEE");
+            summarizeViewModel.setGoodAnsweredCounter(++goodAnsweredCounter);
+
             flashcard.setSmallBox(flashcard.getSmallBox()+1);
             if (flashcard.getSmallBox() == 6)
             {
@@ -119,13 +152,18 @@ public class QuizViewModel {
             return true;
         } else {
             System.out.println("ŻLEEE");
-
+            summarizeViewModel.setWrongAnsweredCounter(++wrongAnsweredCounter);
             flashcard.setSmallBox(0);
             flashcardsOutput.add(flashcard);
             return false;
         }
 
     }
+    public void updateFlashcardsLevel(){
+        manageFlashcardsRepository.editFlashcardsLevelFromCatalog(currentCID, flashcardsOutput);
+
+    }
+
 
 
 
