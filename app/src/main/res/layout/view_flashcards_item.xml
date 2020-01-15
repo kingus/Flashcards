@@ -23,7 +23,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/tv_frontside"
+                android:id="@+id/tv_backside"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -32,7 +32,7 @@
                 android:textAlignment="center"
                 android:visibility="visible"/>
             <TextView
-                android:id="@+id/tv_backside"
+                android:id="@+id/tv_frontside"
                 android:background="@drawable/gradient"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

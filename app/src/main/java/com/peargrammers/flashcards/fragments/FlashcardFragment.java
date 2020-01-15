@@ -208,7 +208,7 @@ public class  FlashcardFragment extends Fragment implements RecyclerViewClickInt
             @Override
             public void onClick(View v) {
                 alertDialog.hide();
-                addFlashcardViewModel.addFlashcardToCatalog(flashcardsViewModel.getCurrentCatalog().getCID(), new Flashcard(etFrontside.getText().toString(), etBackside.getText().toString()));
+                addFlashcardViewModel.addFlashcardToCatalog(flashcardsViewModel.getCurrentCatalog().getCID(), new Flashcard(etBackside.getText().toString(), etFrontside.getText().toString()));
             }
         });
 
