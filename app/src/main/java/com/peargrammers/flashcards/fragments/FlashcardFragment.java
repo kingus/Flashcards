@@ -48,7 +48,7 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FlashcardFragment extends Fragment implements RecyclerViewClickInterface {
+public class  FlashcardFragment extends Fragment implements RecyclerViewClickInterface {
 
     private FlashcardsViewModel flashcardsViewModel;
     private AddFlashcardViewModel addFlashcardViewModel;
@@ -208,7 +208,7 @@ public class FlashcardFragment extends Fragment implements RecyclerViewClickInte
             @Override
             public void onClick(View v) {
                 alertDialog.hide();
-                addFlashcardViewModel.addFlashcardToCatalog(flashcardsViewModel.getCurrentCatalog().getCID(), new Flashcard(etFrontside.getText().toString(), etBackside.getText().toString()));
+                addFlashcardViewModel.addFlashcardToCatalog(flashcardsViewModel.getCurrentCatalog().getCID(), new Flashcard(etBackside.getText().toString(), etFrontside.getText().toString()));
             }
         });
 

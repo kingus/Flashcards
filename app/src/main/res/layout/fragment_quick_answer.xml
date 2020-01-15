@@ -25,46 +25,57 @@
         android:visibility="visible"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_gravity="right"
-        android:layout_marginTop="30dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="30dp">
+
+            <ImageButton
+                android:id="@+id/btn_wrong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:visibility="invisible"
+                android:src="@mipmap/ic_wrong_round">
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/btn_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:visibility="invisible"
+                android:src="@mipmap/ic_right_round">
+            </ImageButton>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+        </LinearLayout>
+
         <ImageButton
             android:id="@+id/btn_hint"
             android:layout_width="wrap_content"
-            android:background="@android:color/transparent"
             android:layout_height="wrap_content"
-            android:paddingRight="60dp"
+            android:paddingLeft="180dp"
+            android:background="@android:color/transparent"
             android:src="@mipmap/ic_bulb_round">
         </ImageButton>
+
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingRight="20dp"
-        android:gravity="left">
-
-        <ImageButton
-            android:id="@+id/btn_wrong"
-            android:layout_width="wrap_content"
-            android:padding="10dp"
-            android:background="@android:color/transparent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_wrong_round">
-        </ImageButton>
-
-        <ImageButton
-            android:id="@+id/btn_right"
-            android:layout_width="wrap_content"
-            android:background="@android:color/transparent"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_right_round"
-            android:padding="10dp">
-        </ImageButton>
-    </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="722dp"
