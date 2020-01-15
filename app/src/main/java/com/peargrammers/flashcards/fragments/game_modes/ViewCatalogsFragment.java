@@ -95,7 +95,7 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
         switch (homeViewModel.getGameMode()){
             case 0:
                 QuickAnswerViewModel.getInstance().setCurrentCID(catalogsList.get(position).getCID());
-                changeFragment(quickAnswerFragment);
+                FragmentCoordinator.changeFragment(quickAnswerFragment, getFragmentManager());
                 break;
      
                 case 2:
@@ -103,7 +103,7 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
                     break;
                 case 3:
                 FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
-                changeFragment(viewFlashcards);
+                FragmentCoordinator.changeFragment(viewFlashcards, getFragmentManager());
 
                 break;
 
