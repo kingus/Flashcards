@@ -76,23 +76,23 @@ public class HomeFragment extends Fragment {
                     homeViewModel.setGameMode(finalI);
                     switch (finalI){
                         case 0:
-                            changeFragment(viewCatalogsFragment);
+                            FragmentCoordinator.changeFragment(viewCatalogsFragment, getFragmentManager());
                             break;
 
                         case 1:
-                            changeFragment(chooseCatalogsQTFramgent);
+                            FragmentCoordinator.changeFragment(chooseCatalogsQTFramgent, getFragmentManager());
                             System.out.println(1);
                             break;
 
 
                         case 2:
-                            changeFragment(viewCatalogsFragment);
+                            FragmentCoordinator.changeFragment(viewCatalogsFragment, getFragmentManager());
                             System.out.println(2);
                             break;
 
 
                         case 3:
-                            changeFragment(viewCatalogsFragment);
+                            FragmentCoordinator.changeFragment(viewCatalogsFragment, getFragmentManager());
                             System.out.println(3);
                             break;
 
@@ -103,13 +103,13 @@ public class HomeFragment extends Fragment {
 //        }
         }
     }
-    public void changeFragment(Fragment fragment){
-        FragmentManager fragmentManager2 = getFragmentManager();
-        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-        fragmentTransaction2.addToBackStack(fragment.toString());
-//        fragmentTransaction2.hide(HomeFragment.this);
-        fragmentTransaction2.replace(R.id.main_frame, fragment);
-        fragmentTransaction2.commit();
-        Log.i("FRAGMENT", "changed");
-    }
+//    public void changeFragment(Fragment fragment){
+//        FragmentManager fragmentManager2 = getFragmentManager();
+//        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+//        fragmentTransaction2.addToBackStack(fragment.toString());
+////        fragmentTransaction2.hide(HomeFragment.this);
+//        fragmentTransaction2.replace(R.id.main_frame, fragment);
+//        fragmentTransaction2.commit();
+//        Log.i("FRAGMENT", "changed");
+//    }
 }

@@ -92,5 +92,6 @@ public class ChooseCatalogsQTFramgent extends Fragment implements RecyclerViewCl
         quizViewModel.setWrongAnsweredCounter(0);
         FragmentCoordinator.changeFragment(quizFragment, getFragmentManager());
         mRecyclerView.findViewHolderForAdapterPosition(position).itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
     }
 }

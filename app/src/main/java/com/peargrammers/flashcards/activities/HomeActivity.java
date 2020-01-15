@@ -18,6 +18,7 @@ import com.peargrammers.flashcards.activities.authentication.LoginActivity;
 import com.peargrammers.flashcards.activities.authentication.NavBar;
 import com.peargrammers.flashcards.fragments.CatalogFragment;
 import com.peargrammers.flashcards.fragments.ContactFragment;
+import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.fragments.UserFragment;
 import com.peargrammers.flashcards.fragments.game_modes.ChooseCatalogsQTFramgent;
@@ -72,13 +73,13 @@ public class  HomeActivity extends AppCompatActivity {
             public void onItemClick(int itemIndex, String itemName) {
                 switch (itemIndex){
                     case 0:
-                        changeFragment(viewFlashcards);
+                        FragmentCoordinator.changeFragment(viewFlashcards, getSupportFragmentManager());
                         break;
                     case 1:
-                        changeFragment(catalogFragment);
+                        FragmentCoordinator.changeFragment(catalogFragment, getSupportFragmentManager());
                         break;
                     case 2:
-                        changeFragment(userFragment);
+                        FragmentCoordinator.changeFragment(userFragment, getSupportFragmentManager());
                         break;
                     case 3:
                         logOutViewModel.logOut();
