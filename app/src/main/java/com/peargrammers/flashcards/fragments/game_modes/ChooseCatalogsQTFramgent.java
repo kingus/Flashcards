@@ -84,10 +84,12 @@ public class ChooseCatalogsQTFramgent extends Fragment implements RecyclerViewCl
     @Override
     public void onItemClick(int position) {
         FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
-        System.out.println(catalogsList.get(position).getName());
-        System.out.println(position);
-        System.out.println("CID: " + catalogsList.get(position).getCID());
+//        System.out.println(catalogsList.get(position).getName());
+//        System.out.println(position);
+//        System.out.println("CID: " + catalogsList.get(position).getCID());
         quizViewModel.setCurrentCID(catalogsList.get(position).getCID());
+        quizViewModel.setGoodAnsweredCounter(0);
+        quizViewModel.setWrongAnsweredCounter(0);
         FragmentCoordinator.changeFragment(quizFragment, getFragmentManager());
         mRecyclerView.findViewHolderForAdapterPosition(position).itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
     }
