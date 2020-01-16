@@ -55,19 +55,30 @@ public class RegisterRepository {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "createUserWithEmail:success");
-                    FirebaseUser newUser = mAuth.getCurrentUser();
-                    final Task<Void> voidTask = dbUsersRef.child(newUser.getUid()).setValue(new User(name, email));
-                    voidTask.addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(voidTask.isSuccessful()) {
-                                Log.d(TAG, "createUserWithEmail: ADD USER TO DATABASE");
-                            } else {
-                                Log.d(TAG, "createUserWithEmail: ERROR WHILE ADDING USER TO DATABASE");
 
-                            }
+
+
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            super.run();
+                            FirebaseUser newUser = mAuth.getCurrentUser();
+                            final Task<Void> voidTask = dbUsersRef.child(newUser.getUid()).setValue(new User(name, email));
+                            voidTask.addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(voidTask.isSuccessful()) {
+                                        Log.d(TAG, "createUserWithEmail: ADD USER TO DATABASE");
+                                    } else {
+                                        Log.d(TAG, "createUserWithEmail: ERROR WHILE ADDING USER TO DATABASE");
+
+                                    }
+                                }
+                            });
                         }
-                    });
+                    }.start();
+
+
                     signgUpStatus.postValue(true);
 
 

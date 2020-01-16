@@ -66,11 +66,15 @@ public class RegisterActivity extends AppCompatActivity {
                 String password2 = mPassword2.getText().toString();
                 Log.i("email", email);
                 Log.i("password", password1);
-                if (registerViewModel.validateUserRegister(email, password1, password2)) {
+                if (registerViewModel.checkIfInputsNotEmpty(name, email, password1, password2)){
+                    if (registerViewModel.validateUserRegister(email, password1, password2)) {
+                        registerViewModel.createAccount(name, email, password1);
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "Passwords aren't the same or wrong email format", Toast.LENGTH_SHORT).show();
 
-                    //przeniesiono obserwacje z tego miejsca nad listener
-                    registerViewModel.createAccount(name, email, password1);
-
+                    }
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Any inputs can't be empty.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

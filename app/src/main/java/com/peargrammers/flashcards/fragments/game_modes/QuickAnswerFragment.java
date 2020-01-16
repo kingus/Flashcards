@@ -130,6 +130,7 @@ public class QuickAnswerFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 fBtnNext.setVisibility(VISIBLE);
+                btnHint.setVisibility(View.INVISIBLE);
                 btnCheck.setEnabled(false);
 
                 cardText.setText(currentDataSet.getFlashcard().getBackside());
@@ -161,6 +162,8 @@ public class QuickAnswerFragment extends Fragment {
             public void onClick(View v) {
                 btnWrong.setVisibility(View.INVISIBLE);
                 btnRight.setVisibility(View.INVISIBLE);
+                btnHint.setVisibility(VISIBLE);
+
                 etAnswer.setText("");
                 if(quickAnswerViewModel.getCurrentFlashardIndex() != quickAnswerViewModel.getFlashcardsInput().size()) {
                     fBtnNext.setVisibility(View.INVISIBLE);
@@ -188,7 +191,9 @@ public class QuickAnswerFragment extends Fragment {
             public void onClick(View v) {
                 if(quickAnswerViewModel.getHint()<3){
                     quickAnswerViewModel.setHint(quickAnswerViewModel.getHint()+1);
-                    etAnswer.setText(currentDataSet.getFlashcard().getBackside().substring(0, quickAnswerViewModel.getHint()));
+                    if(currentDataSet.getFlashcard().getBackside().length() >= quickAnswerViewModel.getHint()) {
+                        etAnswer.setText(currentDataSet.getFlashcard().getBackside().substring(0, quickAnswerViewModel.getHint()));
+                    }
                 }
                 else{
                     String text = "You've used all the hints.";

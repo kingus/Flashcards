@@ -49,6 +49,14 @@
             android:textSize="25sp"/>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_go_home"
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mybutton"
+        android:layout_marginTop="100dp"
+        android:text="Go home" />
+
 </LinearLayout>
 
 </LinearLayout>
