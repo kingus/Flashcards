@@ -73,7 +73,16 @@ public class UserFragment extends Fragment {
             }
         });
 
+        userViewModel.getHowManyFlashcards().observe(UserFragment.this, new Observer<Long>() {
+            @Override
+            public void onChanged(Long aLong) {
+                tv_flashcards_number.setText(Long.toString(aLong));
+            }
+        });
+
+
         userViewModel.getLoggedUserInfo();
+        userViewModel.getHowManyFlashcard();
 
 
     }

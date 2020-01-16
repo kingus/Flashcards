@@ -12,6 +12,13 @@ public class UserViewModel extends ViewModel {
     private UserInfoRepository userInfoRepository;
     private MutableLiveData<User> loggedUser;
 
+    public MutableLiveData<Long> getHowManyFlashcards() {
+        return howManyFlashcards;
+    }
+
+    private MutableLiveData<Long> howManyFlashcards = new MutableLiveData<>();
+
+
     public MutableLiveData<User> getLoggedUser() {
         return loggedUser;
     }
@@ -25,6 +32,14 @@ public class UserViewModel extends ViewModel {
                 loggedUser.postValue(user);
             }
         });
+        userInfoRepository.getHowManyFlashcards().observeForever(new Observer<Long>() {
+            @Override
+            public void onChanged(Long aLong) {
+                howManyFlashcards.postValue(aLong);
+            }
+        });
+
+
     }
 
     public static UserViewModel getInstance(){
@@ -36,6 +51,10 @@ public class UserViewModel extends ViewModel {
     public void getLoggedUserInfo(){
         userInfoRepository.getLoggedUserInfo();
     }
+    public void getHowManyFlashcard(){
+        userInfoRepository.getFlashcardsAmount();
+    }
+
 
 
 }

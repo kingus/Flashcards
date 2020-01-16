@@ -26,7 +26,7 @@ public class ManageFlashcardsRepository {
     private static ManageFlashcardsRepository instance;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
-    private DatabaseReference dbCurrentUserRef;
+    //private DatabaseReference dbCurrentUserRef;
     private DatabaseReference dbRef;
     private MutableLiveData<ArrayList<Flashcard>> flashcardsList = new MutableLiveData<>();
     private MutableLiveData<Boolean> ifAddFlashcardProperly = new MutableLiveData<>();
@@ -66,7 +66,7 @@ public class ManageFlashcardsRepository {
     public ManageFlashcardsRepository() {
         this.mAuth = FirebaseAuth.getInstance();
         this.mDatabase = FirebaseDatabase.getInstance();
-        this.dbCurrentUserRef = mDatabase.getReference("/USERS/" + mAuth.getUid());
+       // this.dbCurrentUserRef = mDatabase.getReference("/USERS/" + mAuth.getUid());
         this.dbRef = mDatabase.getReference();
 
     }

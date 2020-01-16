@@ -12,10 +12,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.peargrammers.flashcards.models.Catalog;
+import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.models.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,14 +29,17 @@ public class UserInfoRepository {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference dbUsersRef;
-    private MutableLiveData<String> userEmail = new MutableLiveData<>();
+
+    public MutableLiveData<Long> getHowManyFlashcards() {
+        return howManyFlashcards;
+    }
+
+    private MutableLiveData<Long> howManyFlashcards = new MutableLiveData<>();
     private MutableLiveData<User> loggedUser = new MutableLiveData<>();
     private ValueEventListener loggedUserListener;
+    private ValueEventListener howManyFlashcardsListener;
 
     public MutableLiveData<User> getLoggedUser() { return loggedUser; }
-    public MutableLiveData<String> getUserEmail() {
-        return userEmail;
-    }
 
     public UserInfoRepository() {
         this.mAuth = FirebaseAuth.getInstance();
@@ -108,6 +114,35 @@ public class UserInfoRepository {
             public void run() {
                 super.run();
                 dbUsersRef.child(mAuth.getUid()).addListenerForSingleValueEvent(loggedUserListener);
+
+            }
+        };
+        thread.start();
+    }
+    public void getFlashcardsAmount(){
+        howManyFlashcardsListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Long counter = 0L;
+                for (DataSnapshot elem: dataSnapshot.getChildren()) {
+                    counter+=elem.getChildrenCount();
+                }
+                howManyFlashcards.postValue(counter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "OOOOUPS, SOMETHING WENT WRONG :(");
+
+            }
+        };
+
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                Query query = mDatabase.getReference("/CATALOGS/").orderByChild("owner").equalTo(mAuth.getUid());
+                query.addValueEventListener(howManyFlashcardsListener);
 
             }
         };

@@ -67,7 +67,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        catalogsViewModel.getUsetsCatalogListDB();
         return inflater.inflate(R.layout.fragment_catalog, container, false);
     }
 
@@ -83,6 +83,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
         catalogsViewModel.getUsersCatalogsList().observe(CatalogFragment.this, new Observer<ArrayList<Catalog>>() {
             @Override
             public void onChanged(ArrayList<Catalog> catalogs) {
+                System.out.println("WPLYWAJA KATALOGI: "+ catalogs.size());
                 catalogsList.clear();
                 catalogsList.addAll(catalogs);
                 mLayoutManager = new LinearLayoutManager(catalogActivity);
@@ -102,7 +103,7 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
         });
 
 
-        catalogsViewModel.getUsetsCatalogListDB();
+        //catalogsViewModel.getUsetsCatalogListDB();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 

@@ -15,16 +15,6 @@ public class HomeViewModel extends ViewModel {
 
     public HomeViewModel() {
         this.userInfoRepository = UserInfoRepository.getInstance();
-        userInfoRepository.getUserEmail().observeForever(new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                userEmail.postValue(s);
-            }
-        });
-    }
-
-    public MutableLiveData<String> getUserEmail() {
-        return userEmail;
     }
 
     public static HomeViewModel getInstance(){

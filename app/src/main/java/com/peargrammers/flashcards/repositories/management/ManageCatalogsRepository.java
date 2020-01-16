@@ -48,7 +48,7 @@ public class ManageCatalogsRepository {
         this.mDatabase = FirebaseDatabase.getInstance();
         this.dbCurrentUserRef = mDatabase.getReference("/USERS/" + mAuth.getUid());
         this.dbRef = mDatabase.getReference();
-        Log.d(TAG, "################ sciezka do current USER CATALOGS" + this.dbCurrentUserRef.toString());
+        //Log.d(TAG, "################ sciezka do current USER CATALOGS" + this.dbCurrentUserRef.toString());
 
     }
 
@@ -81,7 +81,7 @@ public class ManageCatalogsRepository {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<Catalog> catalogs = new ArrayList<>();
                 for (DataSnapshot elem: dataSnapshot.getChildren()) {
-                    Log.d(TAG, "################ DATASNAPSHOT" + elem.toString());
+                    //Log.d(TAG, "################ DATASNAPSHOT" + elem.toString());
 
                     Catalog tmp = elem.getValue(Catalog.class);
 
@@ -105,6 +105,8 @@ public class ManageCatalogsRepository {
             @Override
             public void run() {
                 super.run();
+                System.out.println("WYSZUKUJE FISZKI DAL USERA: " + mAuth.getUid());
+                dbCurrentUserRef = mDatabase.getReference("/USERS/" + mAuth.getUid());
                 dbCurrentUserRef.child("catalogs").orderByKey().addValueEventListener(usersCatalogsListListener);
 
             }
