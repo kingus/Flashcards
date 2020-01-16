@@ -161,6 +161,7 @@ public class QuickAnswerFragment extends Fragment {
             public void onClick(View v) {
                 btnWrong.setVisibility(View.INVISIBLE);
                 btnRight.setVisibility(View.INVISIBLE);
+                etAnswer.setText("");
                 if(quickAnswerViewModel.getCurrentFlashardIndex() != quickAnswerViewModel.getFlashcardsInput().size()) {
                     fBtnNext.setVisibility(View.INVISIBLE);
                     btnCheck.setEnabled(true);

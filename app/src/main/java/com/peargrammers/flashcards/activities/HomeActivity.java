@@ -18,11 +18,14 @@ import com.peargrammers.flashcards.activities.authentication.LoginActivity;
 import com.peargrammers.flashcards.activities.authentication.NavBar;
 import com.peargrammers.flashcards.fragments.CatalogFragment;
 import com.peargrammers.flashcards.fragments.ContactFragment;
+import com.peargrammers.flashcards.fragments.FlashcardFragment;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.fragments.HomeFragment;
+import com.peargrammers.flashcards.fragments.SummarizeFragment;
 import com.peargrammers.flashcards.fragments.UserFragment;
 import com.peargrammers.flashcards.fragments.game_modes.ChooseCatalogsQTFramgent;
 import com.peargrammers.flashcards.fragments.game_modes.ViewFlashcards;
+import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.authentication.LogOutViewModel;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
 
@@ -61,13 +64,12 @@ public class  HomeActivity extends AppCompatActivity {
         navigationView.initWithSaveInstanceState(savedInstanceState);
         NavBar.setNavBar(navigationView);
 
-
-        changeFragment(homeFragment);
+        FragmentCoordinator.changeFragment(homeFragment, getSupportFragmentManager());
         navigationView.changeCurrentItem(-1);
         navigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
             public void onCentreButtonClick() {
-                changeFragment(homeFragment);
+                FragmentCoordinator.changeFragment(homeFragment, getSupportFragmentManager());
                 navigationView.changeCurrentItem(-1);
             }
 
@@ -113,9 +115,21 @@ public class  HomeActivity extends AppCompatActivity {
     {
         Log.i("PRESSED", "back button");
 
-        System.out.println("WRACAM Z FRAGMENTU O NAZWIE:  "+ getVisibleFragment().toString());
-        Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
-        startActivity(myIntent);
+
+        Fragment visibleFragment = getVisibleFragment();
+        if (visibleFragment instanceof HomeFragment){
+            //... do nothing
+        } else if (visibleFragment instanceof FlashcardFragment){
+            FragmentCoordinator.changeFragment(catalogFragment, getSupportFragmentManager());
+        } else {
+            FragmentCoordinator.changeFragment(homeFragment, getSupportFragmentManager());
+
+        }
+
+
+
+//        Intent myIntent = new Intent(HomeActivity.this, HomeActivity.class);
+//        startActivity(myIntent);
     }
     private Fragment getVisibleFragment() {
         FragmentManager fragmentManager = HomeActivity.this.getSupportFragmentManager();

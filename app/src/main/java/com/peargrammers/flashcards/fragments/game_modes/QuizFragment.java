@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,9 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.activities.HomeActivity;
+import com.peargrammers.flashcards.activities.authentication.LoginActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
+import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.fragments.SummarizeFragment;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.models.Flashcard;
@@ -43,9 +46,13 @@ public class QuizFragment extends Fragment {
     private TextView tvQuestionText;
     private TextView tvScore;
     private TextView tvTotal;
+//    public static ProgressDialog infoDialog = null;
+
+
 
     private SummarizeViewModel summarizeViewModel;
     private SummarizeFragment summarizeFragment;
+
 
 
     public QuizFragment() {
@@ -65,7 +72,9 @@ public class QuizFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+
+
+
         HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
 
         answerA = view.findViewById(R.id.answerA);
@@ -155,18 +164,45 @@ public class QuizFragment extends Fragment {
         quizViewModel.getFlashcardsList().observe(QuizFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
+
+                System.out.println("SPRAWDZAM ROZMIAR: " + flashcards.size());
+                if (flashcards.size() < 4) {
+                    HomeActivity.dialog.dismiss();
+                    FragmentCoordinator.changeFragment(new HomeFragment(), getFragmentManager());
+
+//                    HomeActivity.dialog.dismiss();
+//
+//                   // FragmentCoordinator.changeFragment(new HomeFragment(), getFragmentManager());
+//
+//                    infoDialog =  ProgressDialog.show(getActivity(), "", "Not enough flashcards. You will be redirected to the start screen.");
+//                    new CountDownTimer(1000, 1000) {
+//
+//                        public void onTick(long millisUntilFinished) {
+//                        }
+//
+//                        public void onFinish() {
+//                            infoDialog.dismiss();
+//                            FragmentCoordinator.changeFragment(new HomeFragment(), getFragmentManager());
+//                            infoDialog.dismiss();
+//                        }
+//                    }.start();
+                } else {
+                   
                 quizViewModel.resetStatistics();
                 quizViewModel.setCurrentFlashardIndex(0);
                 QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
 //                answerA.setText();
-                answerA.setText((CharSequence) currentDataSet.getAnswers().get(0));
-                answerB.setText((CharSequence) currentDataSet.getAnswers().get(1));
-                answerC.setText((CharSequence) currentDataSet.getAnswers().get(2));
-                answerD.setText((CharSequence) currentDataSet.getAnswers().get(3));
-                tvQuestionText.setText(currentDataSet.getFlashcard().getFrontside());
-                tvScore.setText((CharSequence) Integer.toString(currentDataSet.getFlashcard().getSmallBox()));
-                tvTotal.setText(quizViewModel.getCurrentFlashardIndex() + "/" + quizViewModel.getFlashcardsInput().size());
-                HomeActivity.dialog.dismiss();
+                    answerA.setText((CharSequence) currentDataSet.getAnswers().get(0));
+                    answerB.setText((CharSequence) currentDataSet.getAnswers().get(1));
+                    answerC.setText((CharSequence) currentDataSet.getAnswers().get(2));
+                    answerD.setText((CharSequence) currentDataSet.getAnswers().get(3));
+                    tvQuestionText.setText(currentDataSet.getFlashcard().getFrontside());
+                    tvScore.setText((CharSequence) Integer.toString(currentDataSet.getFlashcard().getSmallBox()));
+                    tvTotal.setText(quizViewModel.getCurrentFlashardIndex() + "/" + quizViewModel.getFlashcardsInput().size());
+                    HomeActivity.dialog.dismiss();
+                }
+
+
 
             }
         });

@@ -22,9 +22,11 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEmail, mPassword;
     private Button btnSignIn, btnSignUp;
     private ProgressDialog dialog;
+    private boolean ifLoginClicked;
 
     public LoginActivity() {
         this.loginViewModel = LoginViewModel.getInstance();
+        ifLoginClicked = false;
     }
 
     @Override
@@ -57,11 +59,15 @@ public class LoginActivity extends AppCompatActivity {
 
                     Log.i("email", email);
                     Log.i("password", password);
+                    ifLoginClicked = true;
                     loginViewModel.signIn(email, password);
                 }else{
                     Toast.makeText(LoginActivity.this, "Email or password is too short.", Toast.LENGTH_SHORT).show();
 
                 }
+                Log.i("email", email);
+                Log.i("password", password);
+                loginViewModel.signIn(email, password);
 
             }
         });
@@ -69,25 +75,32 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getSigngInStatus().observe(LoginActivity.this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    Log.d("LOGIN_ACTIVITY", "LOGIN GIT - activity");
-                    //if ()
-                    dialog.dismiss();
-                    Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(myIntent);
-                } else {
-                    Log.d("LOGIN_ACTIVITY", "LOGIN ZLE - activity");
+                if (ifLoginClicked){
+                    ifLoginClicked = false;
+                    if (aBoolean) {
+                        Log.d("LOGIN_ACTIVITY", "LOGIN GIT - activity");
+                        //if ()
+                        dialog.dismiss();
+                        mEmail.setText("");
+                        mPassword.setText("");
+                        Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(myIntent);
+                    } else {
+                        Log.d("LOGIN_ACTIVITY", "LOGIN ZLE - activity");
 
-                    //Toast.makeText(LoginActivity.this, "Złe hasłko czy coś :(.",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this, "Złe hasłko czy coś :(.",Toast.LENGTH_SHORT).show();
 
+                    }
                 }
-                //loginViewModel.getSignInStatus().removeObservers(LoginActivity.this);
+
+                    //loginViewModel.getSignInStatus().removeObservers(LoginActivity.this);
             }
 
         });
         loginViewModel.getSignInException().observe(LoginActivity.this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                dialog.dismiss();
                 Toast.makeText(LoginActivity.this, s, Toast.LENGTH_SHORT).show();
             }
         });

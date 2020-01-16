@@ -268,6 +268,8 @@ public class  FlashcardFragment extends Fragment implements RecyclerViewClickInt
         });
     }
 
+
+    // do zmiany! nie moze tak zostac!
     @Override
     public void onStart() {
         super.onStart();

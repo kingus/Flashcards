@@ -86,6 +86,5 @@ public class ViewFlashcards extends Fragment {
         });
 
     }
-    //needs to be done in a view model!!!!!!!!!!!!!!!!!
 
 }
