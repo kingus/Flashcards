@@ -54,5 +54,10 @@ public class RegisterViewModel extends ViewModel {
         else
             return false;
     }
+    public boolean checkIfInputsNotEmpty(String name, String email, String pass1, String pass2){
+        if(email.length()>0 && pass1.length()>0 && pass2.length()>0 && name.length()>0)
+            return true;
+        return false;
+    }
 
 }

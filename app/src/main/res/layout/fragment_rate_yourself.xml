@@ -9,15 +9,14 @@
 
     <TextView
         android:id="@+id/tv_card"
-        android:layout_marginTop="50dp"
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:gravity="center"
+        android:layout_marginTop="50dp"
         android:background="@drawable/border"
-        android:textSize="30sp"
+        android:gravity="center"
         android:textAlignment="center"
-        android:text="TOUCH TO START"
-        android:visibility="visible"/>
+        android:textSize="30sp"
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.viewmodels.game_modes.SummarizeViewModel;
 
 /**
@@ -22,6 +24,7 @@ public class SummarizeFragment extends Fragment {
     private SummarizeViewModel summarizeViewModel;
     private TextView tvWellAnswered;
     private TextView tvWrongAnswered;
+    private Button btnGoHome;
 
 
 
@@ -45,6 +48,14 @@ public class SummarizeFragment extends Fragment {
 
         tvWellAnswered = view.findViewById(R.id.tv_well_answered);
         tvWrongAnswered = view.findViewById(R.id.tv_wrong_answered);
+        btnGoHome = view.findViewById(R.id.btn_go_home);
+
+        btnGoHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentCoordinator.changeFragment(HomeActivity.homeFragment, getFragmentManager());
+            }
+        });
 
         tvWellAnswered.setText(Integer.toString(summarizeViewModel.getGoodAnsweredCounter()));
         tvWrongAnswered.setText(Integer.toString(summarizeViewModel.getWrongAnsweredCounter()));

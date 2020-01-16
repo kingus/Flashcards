@@ -127,7 +127,7 @@ public class QuickAnswerViewModel extends ViewModel {
     public boolean processAnswer(String answer) {
         Flashcard flashcard = flashcardsInput.get(currentFlashardIndex-1);
         System.out.println("POROWNUJE: " + flashcard.getBackside() + " oraz " +answer );
-        if (flashcard.getBackside().equals(answer)) {
+        if (flashcard.getBackside().toUpperCase().equals(answer.toUpperCase())) {
             System.out.println("DOOBRZEEE");
             summarizeViewModel.setGoodAnsweredCounter(++goodAnsweredCounter);
 

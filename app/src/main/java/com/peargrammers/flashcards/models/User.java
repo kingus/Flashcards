@@ -10,7 +10,7 @@ import java.util.Map;
 public class User extends BaseObservable {
 
 
-    private long creationTimestamp;
+    private Long creationTimestamp;
     @NonNull
     private String email, name;
     private Map<String, Catalog> catalogs;
@@ -25,14 +25,15 @@ public class User extends BaseObservable {
         this.email=email;
         this.name=name;
         this.catalogs = new HashMap<>();
+        this.creationTimestamp = null;
 
     }
 
-    public long getCreationTimestamp() {
+    public Long getCreationTimestamp() {
         return creationTimestamp;
     }
 
-    public void setCreationTimestamp(long creationTimestamp) {
+    public void setCreationTimestamp(Long creationTimestamp) {
         this.creationTimestamp = creationTimestamp;
     }
 
