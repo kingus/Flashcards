@@ -67,8 +67,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 Log.i("email", email);
                 Log.i("password", password);
-                loginViewModel.signIn(email, password);
-
             }
         });
 
