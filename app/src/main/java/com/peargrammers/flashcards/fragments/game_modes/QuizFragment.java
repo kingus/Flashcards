@@ -96,7 +96,7 @@ public class QuizFragment extends Fragment {
                     answerB.setText((CharSequence) currentDataSet.getAnswers().get(1));
                     answerC.setText((CharSequence) currentDataSet.getAnswers().get(2));
                     answerD.setText((CharSequence) currentDataSet.getAnswers().get(3));
-                    tvQuestionText.setText((currentDataSet.getFlashcard().getFrontside()).toLowerCase());
+                    tvQuestionText.setText((currentDataSet.getFlashcard().getFrontside()).toUpperCase());
                     tvScore.setText((CharSequence) Integer.toString(currentDataSet.getFlashcard().getSmallBox()));
                     tvTotal.setText(quizViewModel.getCurrentFlashardIndex() + "/" + quizViewModel.getFlashcardsInput().size());
 
@@ -188,7 +188,7 @@ public class QuizFragment extends Fragment {
 //                    }.start();
                 } else {
                    
-                quizViewModel.resetStatistics();
+//                quizViewModel.resetStatistics();
                 quizViewModel.setCurrentFlashardIndex(0);
                 QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
 //                answerA.setText();
@@ -196,7 +196,7 @@ public class QuizFragment extends Fragment {
                     answerB.setText((CharSequence) currentDataSet.getAnswers().get(1));
                     answerC.setText((CharSequence) currentDataSet.getAnswers().get(2));
                     answerD.setText((CharSequence) currentDataSet.getAnswers().get(3));
-                    tvQuestionText.setText(currentDataSet.getFlashcard().getFrontside());
+                    tvQuestionText.setText(currentDataSet.getFlashcard().getFrontside().toUpperCase());
                     tvScore.setText((CharSequence) Integer.toString(currentDataSet.getFlashcard().getSmallBox()));
                     tvTotal.setText(quizViewModel.getCurrentFlashardIndex() + "/" + quizViewModel.getFlashcardsInput().size());
                     HomeActivity.dialog.dismiss();
