@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.ViewFlashcardsAdapter;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.fragments.SummarizeFragment;
 import com.peargrammers.flashcards.models.Flashcard;
@@ -109,8 +110,14 @@ public class QuickAnswerFragment extends Fragment {
             public void onChanged(ArrayList<Flashcard> flashcards) {
                 quickAnswerViewModel.resetStatistics();
                 quickAnswerViewModel.setCurrentFlashardIndex(0);
-                currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
-                cardText.setText(currentDataSet.getFlashcard().getFrontside());
+
+                if(flashcards.size()>0) {
+                    currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
+                    cardText.setText(currentDataSet.getFlashcard().getFrontside());
+                }
+                else{
+                    FragmentCoordinator.changeFragment(HomeActivity.homeFragment, getFragmentManager());
+                }
             }
         });
 
@@ -188,6 +195,5 @@ public class QuickAnswerFragment extends Fragment {
                 }
             }
         });
-
     }
 }
