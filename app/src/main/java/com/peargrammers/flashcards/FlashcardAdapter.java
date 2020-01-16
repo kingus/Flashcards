@@ -25,12 +25,14 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
     public static class FlashcardViewHolder extends RecyclerView.ViewHolder {
         public TextView frontside;
         public TextView backside;
+        public TextView tvLevel;
 
 
         public FlashcardViewHolder(View itemView) {
             super(itemView);
             frontside = itemView.findViewById(R.id.tv_catalog_name);
             backside = itemView.findViewById(R.id.tv_catalog_category);
+            tvLevel = itemView.findViewById(R.id.tv_level);
 
             itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -57,6 +59,8 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
         Flashcard currentFlashcard = flashcards.get(position);
         holder.frontside.setText(currentFlashcard.getFrontside());
         holder.backside.setText(currentFlashcard.getBackside());
+        String lvl = String.valueOf(currentFlashcard.getSmallBox());
+        holder.tvLevel.setText(lvl);
     }
 
     @Override

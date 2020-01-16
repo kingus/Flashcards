@@ -4,6 +4,7 @@ package com.peargrammers.flashcards.fragments.game_modes;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,38 +12,44 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.ViewFlashcardsAdapter;
+import com.peargrammers.flashcards.activities.HomeActivity;
+import com.peargrammers.flashcards.activities.authentication.LoginActivity;
+import com.peargrammers.flashcards.fragments.FragmentCoordinator;
+import com.peargrammers.flashcards.fragments.HomeFragment;
+import com.peargrammers.flashcards.fragments.SummarizeFragment;
 import com.peargrammers.flashcards.models.Flashcard;
-import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
+import com.peargrammers.flashcards.models.QuizDataSet;
+import com.peargrammers.flashcards.viewmodels.game_modes.RateYourselfViewModel;
 
 import java.util.ArrayList;
+
+import static com.peargrammers.flashcards.activities.HomeActivity.dialog;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RateYourselfFragment extends Fragment {
     private TextView cardText;
-    ImageButton btnRight, btnWrong;
-    private boolean side = true;
-
-    ViewFlashcardsAdapter viewFlashcardsAdapter;
-    ArrayList<Flashcard> flashcardsList = new ArrayList<>();
-
-    private FlashcardsViewModel flashcardsViewModel = FlashcardsViewModel.getInstance();
+    private ImageButton btnRight, btnWrong;
+    private RateYourselfViewModel rateYourselfViewModel;
+    private QuizDataSet currentDataSet;
+    private SummarizeFragment summarizeFragment;
 
     public RateYourselfFragment() {
-        // Required empty public constructor
+        rateYourselfViewModel = RateYourselfViewModel.getInstance();
+        summarizeFragment = new SummarizeFragment();
     }
 
 
@@ -61,21 +68,34 @@ public class RateYourselfFragment extends Fragment {
         btnRight.setVisibility(View.INVISIBLE);
         btnWrong.setVisibility(View.INVISIBLE);
 
-        flashcardsViewModel.getFlashcardsList().observe(RateYourselfFragment.this, new Observer<ArrayList<Flashcard>>() {
+        rateYourselfViewModel.getFlashcardsList().observe(RateYourselfFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
-                flashcardsList.clear();
-                flashcardsList.addAll(flashcards);
-                viewFlashcardsAdapter = new ViewFlashcardsAdapter(flashcardsList, getActivity());
-                flashcardsViewModel.getFlashcardsListDB(flashcardsViewModel.getCurrentCatalog().getCID());
-                if(side)
-                    cardText.setText(flashcardsList.get(flashcardsViewModel.getCurrentFlashcardIndex()).getFrontside());
-                else
-                    cardText.setText(flashcardsList.get(flashcardsViewModel.getCurrentFlashcardIndex()).getBackside());
+                rateYourselfViewModel.resetStatistics();
+                rateYourselfViewModel.setCurrentFlashcardIndex(0);
+                if(flashcards.size()>0) {
+                    currentDataSet = rateYourselfViewModel.getSingleQuizDataSet();
+                    cardText.setText(currentDataSet.getFlashcard().getFrontside());
+                }
+                else{
+//                    HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
+//                    new CountDownTimer(500, 500) {
+//
+//                        public void onTick(long millisUntilFinished) {
+//                        }
+//
+//                        public void onFinish() {
+//                            HomeActivity.dialog.dismiss();
+//
+//                        }
+//                    }.start();
+                    FragmentCoordinator.changeFragment(HomeActivity.homeFragment, getFragmentManager());
+
+                }
+
             }
         });
-
-        flashcardsViewModel.getFlashcardsListDB(flashcardsViewModel.getCurrentCatalog().getCID());
+        rateYourselfViewModel.getFlashcardsListDB(rateYourselfViewModel.getCurrentCID());
 
 
         cardText.setOnClickListener(new View.OnClickListener() {
@@ -89,11 +109,13 @@ public class RateYourselfFragment extends Fragment {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
-                        if(side){
-                            side = false;
+                        if(rateYourselfViewModel.isSide()){
+                            cardText.setText(currentDataSet.getFlashcard().getFrontside());
+                            rateYourselfViewModel.setSide(false);
                         }
                         else{
-                            side = true;
+                            cardText.setText(currentDataSet.getFlashcard().getBackside());
+                            rateYourselfViewModel.setSide(true);
                         }
                         btnRight.setVisibility(View.VISIBLE);
                         btnWrong.setVisibility(View.VISIBLE);
@@ -104,28 +126,11 @@ public class RateYourselfFragment extends Fragment {
             }
         });
 
-//        btnNext.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                System.out.println("NEXT CLICKED");
-//
-//                if(flashcardsViewModel.getCurrentFlashcardIndex()<flashcardsList.size()-1) {
-//                    flashcardsViewModel.setCurrentFlashcardIndex(flashcardsViewModel.getCurrentFlashcardIndex()+1);
-//                    side = true;
-//                    btnNext.setVisibility(View.INVISIBLE);
-//
-//                }
-//                else
-//                    System.out.println("END");
-//            }
-//
-//        });
-
         btnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("RIGHT");
+                rateYourselfViewModel.processAnswer(true);
                 setFlags();
 
             }
@@ -135,26 +140,31 @@ public class RateYourselfFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 System.out.println("WRONG");
+                rateYourselfViewModel.processAnswer(false);
                 setFlags();
+
             }
         });
-
-
-
-
-
     }
 
     public void setFlags(){
         btnRight.setVisibility(View.INVISIBLE);
         btnWrong.setVisibility(View.INVISIBLE);
-        if(flashcardsViewModel.getCurrentFlashcardIndex()<flashcardsList.size()-1) {
-            flashcardsViewModel.setCurrentFlashcardIndex(flashcardsViewModel.getCurrentFlashcardIndex()+1);
-            side = true;
-
+        System.out.println(rateYourselfViewModel.getCurrentFlashcardIndex());
+        System.out.println();
+        if(rateYourselfViewModel.getCurrentFlashcardIndex() != rateYourselfViewModel.getFlashcardsInput().size()) {
+            currentDataSet =  rateYourselfViewModel.getSingleQuizDataSet();
+            cardText.setText(currentDataSet.getFlashcard().getFrontside());
+            rateYourselfViewModel.setSide(false);
         }
-        else
+        else{
             System.out.println("END");
+            rateYourselfViewModel.removeLearnedFlashcards();
+            rateYourselfViewModel.updateFlashcardsLevel();
+            FragmentCoordinator.changeFragment(summarizeFragment, getFragmentManager());
+        }
+
     }
+
 
 }

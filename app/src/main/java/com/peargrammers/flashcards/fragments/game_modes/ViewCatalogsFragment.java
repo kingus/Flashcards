@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
 import com.peargrammers.flashcards.CatalogPlayAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.RecyclerViewClickInterface;
@@ -23,6 +25,7 @@ import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.game_modes.QuickAnswerViewModel;
+import com.peargrammers.flashcards.viewmodels.game_modes.RateYourselfViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
@@ -92,23 +95,22 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
         //QuickAnswerViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
 
         mRecyclerView.findViewHolderForAdapterPosition(position).itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-        switch (homeViewModel.getGameMode()){
-            case 0:
-                QuickAnswerViewModel.getInstance().setCurrentCID(catalogsList.get(position).getCID());
-                FragmentCoordinator.changeFragment(quickAnswerFragment, getFragmentManager());
-                break;
-     
-                case 2:
-                    FragmentCoordinator.changeFragment(rateYourselfFragment, getFragmentManager());
+            switch (homeViewModel.getGameMode()) {
+                case 0:
+                        QuickAnswerViewModel.getInstance().setCurrentCID(catalogsList.get(position).getCID());
+                        FragmentCoordinator.changeFragment(quickAnswerFragment, getFragmentManager());
                     break;
-                case 3:
+
+            case 2:
+                    RateYourselfViewModel.getInstance().setCurrentCID((catalogsList.get(position).getCID()));
+                    FragmentCoordinator.changeFragment(rateYourselfFragment, getFragmentManager());
+
+                break;
+            case 3:
                 FlashcardsViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
                 FragmentCoordinator.changeFragment(viewFlashcards, getFragmentManager());
-
                 break;
-
         }
-
     }
 
 //    public void changeFragment(Fragment fragment){

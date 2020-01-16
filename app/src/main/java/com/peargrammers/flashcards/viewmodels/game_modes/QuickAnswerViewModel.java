@@ -154,4 +154,12 @@ public class QuickAnswerViewModel extends ViewModel {
         manageFlashcardsRepository.removeFlashcardsFromCatalog(currentCID, flashcardsToRevome);
     }
 
+    public void resetStatistics(){
+        flashcardsOutput = new ArrayList<>();
+        flashcardsToRevome = new ArrayList<>();
+        goodAnsweredCounter = 0;
+        wrongAnsweredCounter = 0;
+    }
+
+
 }

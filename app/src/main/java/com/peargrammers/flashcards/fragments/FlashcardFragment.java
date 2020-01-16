@@ -91,6 +91,7 @@ public class  FlashcardFragment extends Fragment implements RecyclerViewClickInt
         mRecyclerView.setHasFixedSize(true);
         floatingActionButton  = view.findViewById(R.id.fab_add_flashcard);
         TextView tvCurrentCatalog = view.findViewById(R.id.tv_current_catalog);
+        TextView tvLevel = view.findViewById(R.id.tv_level);
         tvCurrentCatalog.setText(flashcardsViewModel.getCurrentCatalog().getName());
 
         final RecyclerViewClickInterface rvci = this;

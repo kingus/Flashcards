@@ -155,6 +155,7 @@ public class QuizFragment extends Fragment {
         quizViewModel.getFlashcardsList().observe(QuizFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
+                quizViewModel.resetStatistics();
                 quizViewModel.setCurrentFlashardIndex(0);
                 QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
 //                answerA.setText();

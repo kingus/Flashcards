@@ -66,4 +66,8 @@ public class Catalog extends BaseObservable {
     public void setFlashcards(Map<String, Flashcard> flashcards) {
         this.flashcards = flashcards;
     }
+
+    public int getSize(){
+        return flashcards.size();
+    }
 }

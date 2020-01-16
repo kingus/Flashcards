@@ -106,13 +106,10 @@ public class QuickAnswerFragment extends Fragment {
         quickAnswerViewModel.getFlashcardsList().observe(QuickAnswerFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
+                quickAnswerViewModel.resetStatistics();
                 quickAnswerViewModel.setCurrentFlashardIndex(0);
                 currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
-
                 cardText.setText(currentDataSet.getFlashcard().getFrontside());
-
-
-
             }
         });
 
@@ -163,7 +160,6 @@ public class QuickAnswerFragment extends Fragment {
 //                    side = true;
                     currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
                     cardText.setText(currentDataSet.getFlashcard().getFrontside());
-
                 }
                 else{
                     System.out.println("END");

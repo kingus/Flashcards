@@ -183,24 +183,26 @@ public class ManageFlashcardsRepository {
     }
     public void editFlashcardsLevelFromCatalog(String CID, ArrayList<Flashcard> flashcards) {
         //dbRef.child("CATALOGS").child(CID).child("flashcards")
-
+        System.out.println("zaczynam edycje small box");
+        System.out.println("mam do zmodyfikowania: " + flashcards.size());
         EditFlashcardLevelChildUpdates = new HashMap<>();
         for (Flashcard tmp :
                 flashcards) {
+            System.out.println("NR" + tmp.getSmallBox());
             EditFlashcardLevelChildUpdates.put("/CATALOGS/" + CID + "/flashcards/" + tmp.getFID() + "/smallBox/", tmp.getSmallBox());
 
         }
 
-        editFlashcardLevelFromCatalodListener = new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    ifEditedFlashcardProperly.postValue(true);
-                } else {
-                    ifEditedFlashcardProperly.postValue(false);
-                }
-            }
-        };
+//        editFlashcardLevelFromCatalodListener = new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if (task.isSuccessful()) {
+//                    ifEditedFlashcardProperly.postValue(true);
+//                } else {
+//                    ifEditedFlashcardProperly.postValue(false);
+//                }
+//            }
+//        };
 
         new Thread() {
             @Override
