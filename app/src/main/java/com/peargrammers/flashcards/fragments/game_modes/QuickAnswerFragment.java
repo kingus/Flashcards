@@ -113,7 +113,7 @@ public class QuickAnswerFragment extends Fragment {
 
                 if(flashcards.size()>0) {
                     currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
-                    cardText.setText(currentDataSet.getFlashcard().getFrontside());
+                    cardText.setText(currentDataSet.getFlashcard().getFrontside().toUpperCase());
                 }
                 else{
                     FragmentCoordinator.changeFragment(HomeActivity.homeFragment, getFragmentManager());
@@ -133,7 +133,7 @@ public class QuickAnswerFragment extends Fragment {
                 btnHint.setVisibility(View.INVISIBLE);
                 btnCheck.setEnabled(false);
 
-                cardText.setText(currentDataSet.getFlashcard().getBackside());
+                cardText.setText(currentDataSet.getFlashcard().getBackside().toUpperCase());
                 if (quickAnswerViewModel.processAnswer(etAnswer.getText().toString())){
                     btnRight.setVisibility(VISIBLE);
                 } else {
@@ -171,7 +171,7 @@ public class QuickAnswerFragment extends Fragment {
 //                    flashcardsViewModel.setCurrentFlashcardIndex(flashcardsViewModel.getCurrentFlashcardIndex() + 1);
 //                    side = true;
                     currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
-                    cardText.setText(currentDataSet.getFlashcard().getFrontside());
+                    cardText.setText(currentDataSet.getFlashcard().getFrontside().toUpperCase());
                     quickAnswerViewModel.setHint(0);
                     etAnswer.setText("");
 

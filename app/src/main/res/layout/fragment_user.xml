@@ -48,7 +48,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="300dp"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:layout_marginTop="200dp"
             android:layout_centerHorizontal="true"
             android:background="@color/white">
@@ -56,13 +56,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="6dp"
                 android:weightSum="3">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
@@ -88,6 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <TextView
@@ -107,30 +108,8 @@
                     </TextView>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/learnt_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/learnt">
-                    </TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textSize="24dp"
-                        android:text="10"
-                        android:textStyle="bold">
-                    </TextView>
-                </LinearLayout>
-
             </LinearLayout>
+
 
         </androidx.cardview.widget.CardView>
 

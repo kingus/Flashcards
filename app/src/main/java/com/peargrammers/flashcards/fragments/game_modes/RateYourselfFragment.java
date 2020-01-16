@@ -75,7 +75,7 @@ public class RateYourselfFragment extends Fragment {
                 rateYourselfViewModel.setCurrentFlashcardIndex(0);
                 if(flashcards.size()>0) {
                     currentDataSet = rateYourselfViewModel.getSingleQuizDataSet();
-                    cardText.setText(currentDataSet.getFlashcard().getFrontside());
+                    cardText.setText(currentDataSet.getFlashcard().getFrontside().toUpperCase());
                 }
                 else{
 //                    HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
@@ -110,11 +110,11 @@ public class RateYourselfFragment extends Fragment {
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
                         if(rateYourselfViewModel.isSide()){
-                            cardText.setText(currentDataSet.getFlashcard().getFrontside());
+                            cardText.setText(currentDataSet.getFlashcard().getFrontside().toUpperCase());
                             rateYourselfViewModel.setSide(false);
                         }
                         else{
-                            cardText.setText(currentDataSet.getFlashcard().getBackside());
+                            cardText.setText(currentDataSet.getFlashcard().getBackside().toUpperCase());
                             rateYourselfViewModel.setSide(true);
                         }
                         btnRight.setVisibility(View.VISIBLE);
@@ -154,7 +154,7 @@ public class RateYourselfFragment extends Fragment {
         System.out.println();
         if(rateYourselfViewModel.getCurrentFlashcardIndex() != rateYourselfViewModel.getFlashcardsInput().size()) {
             currentDataSet =  rateYourselfViewModel.getSingleQuizDataSet();
-            cardText.setText(currentDataSet.getFlashcard().getFrontside());
+            cardText.setText(currentDataSet.getFlashcard().getFrontside().toUpperCase());
             rateYourselfViewModel.setSide(false);
         }
         else{
@@ -162,6 +162,7 @@ public class RateYourselfFragment extends Fragment {
             rateYourselfViewModel.removeLearnedFlashcards();
             rateYourselfViewModel.updateFlashcardsLevel();
             FragmentCoordinator.changeFragment(summarizeFragment, getFragmentManager());
+            rateYourselfViewModel.resetStatistics();
         }
 
     }

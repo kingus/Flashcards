@@ -5,11 +5,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
@@ -43,6 +50,7 @@ public class  HomeActivity extends AppCompatActivity {
     UserFragment userFragment;
     FrameLayout mainFrame;
     public static ProgressDialog dialog;
+    Context context = this;
 
 
     public HomeActivity() {
@@ -86,8 +94,8 @@ public class  HomeActivity extends AppCompatActivity {
                         FragmentCoordinator.changeFragment(userFragment, getSupportFragmentManager());
                         break;
                     case 3:
-                        logOutViewModel.logOut();
-                        finish();
+                        showLogOutNotification();
+
                         break;
                 }
             }
@@ -95,6 +103,38 @@ public class  HomeActivity extends AppCompatActivity {
             @Override
             public void onItemReselected(int itemIndex, String itemName) {
 
+            }
+        });
+
+    }
+
+    public void showLogOutNotification(){
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View view = layoutInflater.inflate(R.layout.alert_log_out, null);
+        Button btnNo = view.findViewById(R.id.btn_no);
+        Button btnYes = view.findViewById(R.id.btn_yes);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view);
+        final AlertDialog alert = builder.create();
+        alert.setCancelable(false);
+        alert.show();
+
+        btnYes.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                logOutViewModel.logOut();
+                finish();
+
+            }
+        });
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.hide();
+                changeFragment(homeFragment);
+                navigationView.changeCurrentItem(-1);
             }
         });
 
@@ -123,7 +163,7 @@ public class  HomeActivity extends AppCompatActivity {
             FragmentCoordinator.changeFragment(catalogFragment, getSupportFragmentManager());
         } else {
             FragmentCoordinator.changeFragment(homeFragment, getSupportFragmentManager());
-
+            navigationView.changeCurrentItem(-1);
         }
 
 

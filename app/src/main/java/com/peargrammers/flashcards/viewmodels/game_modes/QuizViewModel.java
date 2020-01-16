@@ -138,6 +138,8 @@ public class QuizViewModel extends ViewModel {
         return newQuizDataSet;
     }
     public boolean processAnswer(String answer) {
+        summarizeViewModel.setGoodAnsweredCounter(goodAnsweredCounter);
+        summarizeViewModel.setWrongAnsweredCounter(wrongAnsweredCounter);
         Flashcard flashcard = flashcardsInput.get(currentFlashardIndex-1);
         System.out.println("POROWNUJE: " + flashcard.getBackside() + " oraz " +answer );
         if (flashcard.getBackside().toUpperCase().equals(answer.toUpperCase())) {

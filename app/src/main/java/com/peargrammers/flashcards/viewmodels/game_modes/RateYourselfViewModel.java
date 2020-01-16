@@ -94,6 +94,8 @@ public class RateYourselfViewModel {
     }
 
     public boolean processAnswer(boolean answer) {
+        summarizeViewModel.setGoodAnsweredCounter(goodAnsweredCounter);
+        summarizeViewModel.setWrongAnsweredCounter(wrongAnsweredCounter);
         Flashcard flashcard = flashcardsInput.get(currentFlashcardIndex-1);
         System.out.println("FISZKA ktora dodamy");
         System.out.println(flashcard.getFrontside());
@@ -138,6 +140,7 @@ public class RateYourselfViewModel {
         flashcardsToRemove = new ArrayList<>();
         goodAnsweredCounter = 0;
         wrongAnsweredCounter = 0;
+        System.out.println("RESET");
         side = false;
     }
 }
