@@ -23,6 +23,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.peargrammers.flashcards.CatalogAdapter;
@@ -201,8 +203,13 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
 
             @Override
             public void onClick(View v) {
-                alertDialog.hide();
-                addCatalogViewModel.addNewCatalog(etCatalogName.getText().toString(), etCatalogCategory.getText().toString());
+                if(addCatalogViewModel.checkNameAndCategoryLength(etCatalogName.getText().toString(), etCatalogCategory.getText().toString())) {
+                    alertDialog.hide();
+                    addCatalogViewModel.addNewCatalog(etCatalogName.getText().toString(), etCatalogCategory.getText().toString());
+                }
+                else{
+                    Toast.makeText(getContext(), "Catalog name or category is too short.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -232,8 +239,14 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
             @Override
             public void onClick(View v) {
                 Log.i("EDIT", String.valueOf(position));
-                alertDialog.hide();
-                editCatalogViewModel.editCatalog(editCatalogViewModel.getEditedCatalog().getCID() ,etCatalogName.getText().toString(), etCatalogCategory.getText().toString());
+                if(addCatalogViewModel.checkNameAndCategoryLength(etCatalogName.getText().toString(), etCatalogCategory.getText().toString())) {
+
+                    alertDialog.hide();
+                    editCatalogViewModel.editCatalog(editCatalogViewModel.getEditedCatalog().getCID(), etCatalogName.getText().toString(), etCatalogCategory.getText().toString());
+                }
+                else{
+                    Toast.makeText(getContext(), "Catalog name or category is too short.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -26,6 +26,7 @@ public class QuickAnswerViewModel extends ViewModel {
     private int currentFlashardIndex;
     private int goodAnsweredCounter;
     private int wrongAnsweredCounter;
+    private int hint;
 
     public int getCurrentFlashardIndex() {
         return currentFlashardIndex;
@@ -94,8 +95,17 @@ public class QuickAnswerViewModel extends ViewModel {
         return instance;
     }
 
+    public int getHint() {
+        return hint;
+    }
+
+    public void setHint(int hint) {
+        this.hint = hint;
+    }
+
     public QuickAnswerViewModel() {
         currentFlashardIndex = 0;
+        hint = 0;
         summarizeViewModel = SummarizeViewModel.getInstance();
         manageFlashcardsRepository = ManageFlashcardsRepository.getInstance();
         manageFlashcardsRepository.getFlashcardsList().observeForever(new Observer<ArrayList<Flashcard>>() {

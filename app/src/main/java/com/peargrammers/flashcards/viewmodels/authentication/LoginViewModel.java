@@ -52,9 +52,13 @@ public class LoginViewModel extends ViewModel {
     }
 
     public void signIn(String email, String password){
-
         loginRepository.signIn(email, password);
+    }
 
+    public boolean checkEmailAndPasswdLength(String email, String passwd){
+        if(email.length()>0 && passwd.length()>0)
+            return true;
+        return false;
     }
 
 }
