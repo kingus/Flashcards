@@ -191,16 +191,16 @@ public class ManageFlashcardsRepository {
 
         }
 
-        editFlashcardLevelFromCatalodListener = new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    ifEditedFlashcardProperly.postValue(true);
-                } else {
-                    ifEditedFlashcardProperly.postValue(false);
-                }
-            }
-        };
+//        editFlashcardLevelFromCatalodListener = new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if (task.isSuccessful()) {
+//                    ifEditedFlashcardProperly.postValue(true);
+//                } else {
+//                    ifEditedFlashcardProperly.postValue(false);
+//                }
+//            }
+//        };
 
         new Thread() {
             @Override
