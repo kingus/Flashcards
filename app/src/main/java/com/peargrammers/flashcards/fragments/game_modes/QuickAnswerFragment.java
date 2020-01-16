@@ -21,10 +21,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.ViewFlashcardsAdapter;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.fragments.SummarizeFragment;
 import com.peargrammers.flashcards.models.Flashcard;
@@ -106,13 +108,16 @@ public class QuickAnswerFragment extends Fragment {
         quickAnswerViewModel.getFlashcardsList().observe(QuickAnswerFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
+                quickAnswerViewModel.resetStatistics();
                 quickAnswerViewModel.setCurrentFlashardIndex(0);
-                currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
 
-                cardText.setText(currentDataSet.getFlashcard().getFrontside());
-
-
-
+                if(flashcards.size()>0) {
+                    currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
+                    cardText.setText(currentDataSet.getFlashcard().getFrontside());
+                }
+                else{
+                    FragmentCoordinator.changeFragment(HomeActivity.homeFragment, getFragmentManager());
+                }
             }
         });
 
@@ -164,6 +169,8 @@ public class QuickAnswerFragment extends Fragment {
 //                    side = true;
                     currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
                     cardText.setText(currentDataSet.getFlashcard().getFrontside());
+                    quickAnswerViewModel.setHint(0);
+                    etAnswer.setText("");
 
                 }
                 else{
@@ -171,6 +178,7 @@ public class QuickAnswerFragment extends Fragment {
                     quickAnswerViewModel.removeLearnedFlashcards();
                     quickAnswerViewModel.updateFlashcardsLevel();
                     FragmentCoordinator.changeFragment(summarizeFragment, getFragmentManager());
+                    etAnswer.setText("");
 
                 }
             }
@@ -178,9 +186,15 @@ public class QuickAnswerFragment extends Fragment {
 
         btnHint.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                if(quickAnswerViewModel.getHint()<3){
+                    quickAnswerViewModel.setHint(quickAnswerViewModel.getHint()+1);
+                    etAnswer.setText(currentDataSet.getFlashcard().getBackside().substring(0, quickAnswerViewModel.getHint()));
+                }
+                else{
+                    String text = "You've used all the hints.";
+                    Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
     }
 }

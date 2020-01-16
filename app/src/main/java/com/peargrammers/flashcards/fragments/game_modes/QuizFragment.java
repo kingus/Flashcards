@@ -164,6 +164,7 @@ public class QuizFragment extends Fragment {
         quizViewModel.getFlashcardsList().observe(QuizFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
+
                 System.out.println("SPRAWDZAM ROZMIAR: " + flashcards.size());
                 if (flashcards.size() < 4) {
                     HomeActivity.dialog.dismiss();
@@ -186,8 +187,10 @@ public class QuizFragment extends Fragment {
 //                        }
 //                    }.start();
                 } else {
-                    quizViewModel.setCurrentFlashardIndex(0);
-                    QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
+                   
+                quizViewModel.resetStatistics();
+                quizViewModel.setCurrentFlashardIndex(0);
+                QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
 //                answerA.setText();
                     answerA.setText((CharSequence) currentDataSet.getAnswers().get(0));
                     answerB.setText((CharSequence) currentDataSet.getAnswers().get(1));

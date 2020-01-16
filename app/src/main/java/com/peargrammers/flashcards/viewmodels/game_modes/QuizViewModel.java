@@ -172,6 +172,13 @@ public class QuizViewModel extends ViewModel {
         manageFlashcardsRepository.removeFlashcardsFromCatalog(currentCID, flashcardsToRevome);
     }
 
+    public void resetStatistics(){
+        goodAnsweredCounter = 0;
+        wrongAnsweredCounter = 0;
+        flashcardsOutput = new ArrayList<>();
+        flashcardsToRevome = new ArrayList<>();
+    }
+
 
 
 

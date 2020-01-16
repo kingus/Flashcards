@@ -37,7 +37,7 @@ public class  HomeActivity extends AppCompatActivity {
     LogOutViewModel logOutViewModel;
     SpaceNavigationView navigationView;
     ContactFragment contactFragment;
-    HomeFragment homeFragment;
+    public static HomeFragment homeFragment;
     CatalogFragment catalogFragment;
     ViewFlashcards viewFlashcards;
     UserFragment userFragment;

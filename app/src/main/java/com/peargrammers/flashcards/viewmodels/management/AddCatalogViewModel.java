@@ -1,9 +1,12 @@
 package com.peargrammers.flashcards.viewmodels.management;
 
+import android.widget.Toast;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
+import com.peargrammers.flashcards.activities.authentication.LoginActivity;
 import com.peargrammers.flashcards.repositories.management.ManageCatalogsRepository;
 
 public class AddCatalogViewModel extends ViewModel {
@@ -39,7 +42,13 @@ public class AddCatalogViewModel extends ViewModel {
     }
 
     public void addNewCatalog(String name, String category) {
-        manageCatalogsRepository.addNewCatalog(name, category);
+            manageCatalogsRepository.addNewCatalog(name, category);
+    }
+
+    public boolean checkNameAndCategoryLength(String name, String category){
+        if(name.length()>0 && category.length()>0)
+            return true;
+        return false;
     }
 
     @Override

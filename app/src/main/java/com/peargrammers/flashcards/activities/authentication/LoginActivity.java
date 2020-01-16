@@ -52,12 +52,21 @@ public class LoginActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog = ProgressDialog.show(LoginActivity.this, "", "Please Wait...");
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString();
+                if(loginViewModel.checkEmailAndPasswdLength(email, password)) {
+                    dialog = ProgressDialog.show(LoginActivity.this, "", "Please Wait...");
+
+                    Log.i("email", email);
+                    Log.i("password", password);
+                    ifLoginClicked = true;
+                    loginViewModel.signIn(email, password);
+                }else{
+                    Toast.makeText(LoginActivity.this, "Email or password is too short.", Toast.LENGTH_SHORT).show();
+
+                }
                 Log.i("email", email);
                 Log.i("password", password);
-                ifLoginClicked = true;
                 loginViewModel.signIn(email, password);
 
             }

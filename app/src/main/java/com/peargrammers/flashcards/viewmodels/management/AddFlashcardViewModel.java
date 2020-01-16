@@ -38,4 +38,10 @@ public class AddFlashcardViewModel {
     public void addFlashcardToCatalog(String CID, Flashcard flashcard){
         manageFlashcardsRepository.addFlashcardToCatalog(CID, flashcard);
     }
+
+    public boolean checkFrontAndBackLength(String front, String back){
+        if(front.length()>0 && back.length()>0)
+            return true;
+        return false;
+    }
 }

@@ -183,10 +183,12 @@ public class ManageFlashcardsRepository {
     }
     public void editFlashcardsLevelFromCatalog(String CID, ArrayList<Flashcard> flashcards) {
         //dbRef.child("CATALOGS").child(CID).child("flashcards")
-
+        System.out.println("zaczynam edycje small box");
+        System.out.println("mam do zmodyfikowania: " + flashcards.size());
         EditFlashcardLevelChildUpdates = new HashMap<>();
         for (Flashcard tmp :
                 flashcards) {
+            System.out.println("NR" + tmp.getSmallBox());
             EditFlashcardLevelChildUpdates.put("/CATALOGS/" + CID + "/flashcards/" + tmp.getFID() + "/smallBox/", tmp.getSmallBox());
 
         }

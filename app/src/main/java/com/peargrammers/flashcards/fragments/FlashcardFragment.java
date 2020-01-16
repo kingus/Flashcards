@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -32,6 +33,7 @@ import com.peargrammers.flashcards.FlashcardAdapter;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
+import com.peargrammers.flashcards.activities.authentication.LoginActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.viewmodels.management.AddFlashcardViewModel;
@@ -91,6 +93,7 @@ public class  FlashcardFragment extends Fragment implements RecyclerViewClickInt
         mRecyclerView.setHasFixedSize(true);
         floatingActionButton  = view.findViewById(R.id.fab_add_flashcard);
         TextView tvCurrentCatalog = view.findViewById(R.id.tv_current_catalog);
+        TextView tvLevel = view.findViewById(R.id.tv_level);
         tvCurrentCatalog.setText(flashcardsViewModel.getCurrentCatalog().getName());
 
         final RecyclerViewClickInterface rvci = this;
@@ -179,9 +182,14 @@ public class  FlashcardFragment extends Fragment implements RecyclerViewClickInt
             @Override
             public void onClick(View v) {
                 Log.i("EDIT", String.valueOf(position));
-                alertDialog.hide();
-                editFlashcardViewModel.editFlashcardFromCatalod(flashcardsViewModel.getCurrentCatalog().getCID(), editFlashcardViewModel.getEditedFlashcard().getFID(), etFrontside.getText().toString(), etBackside.getText().toString());
-            }
+                if(addFlashcardViewModel.checkFrontAndBackLength(etFrontside.getText().toString(), etBackside.getText().toString())) {
+                    alertDialog.hide();
+                    editFlashcardViewModel.editFlashcardFromCatalod(flashcardsViewModel.getCurrentCatalog().getCID(), editFlashcardViewModel.getEditedFlashcard().getFID(), etFrontside.getText().toString(), etBackside.getText().toString());
+                }
+                else{
+                    Toast.makeText(getContext(), "Frontside or backside is too short.", Toast.LENGTH_SHORT).show();
+                }
+                }
         });
 
         cancelBut.setOnClickListener(new View.OnClickListener() {
@@ -207,8 +215,13 @@ public class  FlashcardFragment extends Fragment implements RecyclerViewClickInt
 
             @Override
             public void onClick(View v) {
-                alertDialog.hide();
-                addFlashcardViewModel.addFlashcardToCatalog(flashcardsViewModel.getCurrentCatalog().getCID(), new Flashcard(etBackside.getText().toString(), etFrontside.getText().toString()));
+                if(addFlashcardViewModel.checkFrontAndBackLength(etFrontside.getText().toString(), etBackside.getText().toString())) {
+                    alertDialog.hide();
+                    addFlashcardViewModel.addFlashcardToCatalog(flashcardsViewModel.getCurrentCatalog().getCID(), new Flashcard(etBackside.getText().toString(), etFrontside.getText().toString()));
+                }
+                    else
+                    Toast.makeText(getContext(), "Frontside or backside is too short.", Toast.LENGTH_SHORT).show();
+
             }
         });
 
