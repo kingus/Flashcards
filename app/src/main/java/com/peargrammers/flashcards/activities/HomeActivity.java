@@ -23,6 +23,7 @@ import com.luseen.spacenavigation.SpaceOnClickListener;
 import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.activities.authentication.LoginActivity;
 import com.peargrammers.flashcards.activities.authentication.NavBar;
+import com.peargrammers.flashcards.fragments.AboutFragment;
 import com.peargrammers.flashcards.fragments.CatalogFragment;
 import com.peargrammers.flashcards.fragments.ContactFragment;
 import com.peargrammers.flashcards.fragments.FlashcardFragment;
@@ -49,6 +50,7 @@ public class  HomeActivity extends AppCompatActivity {
     ViewFlashcards viewFlashcards;
     UserFragment userFragment;
     FrameLayout mainFrame;
+    AboutFragment aboutFragment;
     public static ProgressDialog dialog;
     Context context = this;
 
@@ -60,6 +62,7 @@ public class  HomeActivity extends AppCompatActivity {
         this.homeFragment = new HomeFragment();
         this.catalogFragment = new CatalogFragment();
         this.userFragment = new UserFragment();
+        this.aboutFragment = new AboutFragment();
         this.viewFlashcards = new ViewFlashcards();
     }
 
@@ -85,7 +88,7 @@ public class  HomeActivity extends AppCompatActivity {
             public void onItemClick(int itemIndex, String itemName) {
                 switch (itemIndex){
                     case 0:
-                        FragmentCoordinator.changeFragment(viewFlashcards, getSupportFragmentManager());
+                        FragmentCoordinator.changeFragment(aboutFragment, getSupportFragmentManager());
                         break;
                     case 1:
                         FragmentCoordinator.changeFragment(catalogFragment, getSupportFragmentManager());

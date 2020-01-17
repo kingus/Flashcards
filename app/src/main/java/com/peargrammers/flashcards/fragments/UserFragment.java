@@ -66,7 +66,6 @@ public class UserFragment extends Fragment {
                 tv_username2.setText(user.getName());
                 tv_email.setText(user.getEmail());
                 tv_catalogs_number.setText(Integer.toString(user.getCatalogs().size()));
-                tv_flashcards_number.setText("100");
                 Date date = new Date(user.getCreationTimestamp());
                 Format format = new SimpleDateFormat("dd MMMM yyyy");
                 tv_joined.setText(format.format(date));
