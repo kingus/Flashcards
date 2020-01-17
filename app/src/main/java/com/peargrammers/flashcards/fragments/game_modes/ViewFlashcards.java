@@ -6,10 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
-import androidx.vectordrawable.graphics.drawable.ArgbEvaluator;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -18,16 +15,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.peargrammers.flashcards.FlashcardAdapter;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.RecyclerViewClickInterface;
-import com.peargrammers.flashcards.ViewFlashcardsAdapter;
-import com.peargrammers.flashcards.fragments.CatalogFragment;
+import com.peargrammers.flashcards.Adapters.ViewFlashcardsAdapter;
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.

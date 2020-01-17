@@ -188,7 +188,7 @@ public class QuizFragment extends Fragment {
 //                    }.start();
                 } else {
                    
-//                quizViewModel.resetStatistics();
+                quizViewModel.resetStatistics();
                 quizViewModel.setCurrentFlashardIndex(0);
                 QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
 //                answerA.setText();

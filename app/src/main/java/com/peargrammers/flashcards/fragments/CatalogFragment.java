@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.CountDownTimer;
-import android.os.HardwarePropertiesManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +25,9 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.peargrammers.flashcards.CatalogAdapter;
+import com.peargrammers.flashcards.Adapters.CatalogAdapter;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.Adapters.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
