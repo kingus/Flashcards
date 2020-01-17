@@ -125,7 +125,14 @@ public class UserInfoRepository {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Long counter = 0L;
                 for (DataSnapshot elem: dataSnapshot.getChildren()) {
-                    counter+=elem.getChildrenCount();
+                    Catalog tmpCatalog =  elem.getValue(Catalog.class);
+
+                    if (tmpCatalog.getFlashcards() == null) {
+                        tmpCatalog.setFlashcards(new HashMap<String, Flashcard>());
+                    }
+
+                    counter+=tmpCatalog.getFlashcards().size();
+
                 }
                 howManyFlashcards.postValue(counter);
             }

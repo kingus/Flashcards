@@ -13,13 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import com.peargrammers.flashcards.CatalogPlayAdapter;
+
+import com.peargrammers.flashcards.Adapters.CatalogPlayAdapter;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.Adapters.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
-import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.viewmodels.game_modes.QuizViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;

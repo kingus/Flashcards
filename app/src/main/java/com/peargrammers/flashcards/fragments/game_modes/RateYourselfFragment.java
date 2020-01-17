@@ -4,7 +4,6 @@ package com.peargrammers.flashcards.fragments.game_modes;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,22 +18,16 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.ViewFlashcardsAdapter;
 import com.peargrammers.flashcards.activities.HomeActivity;
-import com.peargrammers.flashcards.activities.authentication.LoginActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
-import com.peargrammers.flashcards.fragments.HomeFragment;
 import com.peargrammers.flashcards.fragments.SummarizeFragment;
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.models.QuizDataSet;
 import com.peargrammers.flashcards.viewmodels.game_modes.RateYourselfViewModel;
 
 import java.util.ArrayList;
-
-import static com.peargrammers.flashcards.activities.HomeActivity.dialog;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -1,4 +1,4 @@
-package com.peargrammers.flashcards;
+package com.peargrammers.flashcards.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.peargrammers.flashcards.R;
 import com.peargrammers.flashcards.models.Flashcard;
 
 import java.util.List;

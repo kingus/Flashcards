@@ -2,7 +2,6 @@ package com.peargrammers.flashcards.fragments;
 
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.graphics.Canvas;
 import android.os.Bundle;
 
@@ -28,20 +27,14 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.peargrammers.flashcards.CatalogAdapter;
-import com.peargrammers.flashcards.FlashcardAdapter;
+import com.peargrammers.flashcards.Adapters.FlashcardAdapter;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.Adapters.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
-import com.peargrammers.flashcards.activities.authentication.LoginActivity;
-import com.peargrammers.flashcards.models.Catalog;
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.viewmodels.management.AddFlashcardViewModel;
-import com.peargrammers.flashcards.viewmodels.management.EditCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.EditFlashcardViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
