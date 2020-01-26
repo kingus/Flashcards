@@ -168,14 +168,26 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
                 Log.i("REMOVE", String.valueOf(position));
                 alertDialog.hide();
                 catalogsViewModel.removeCatalogFromList(catalogsList.get(position).getCID());
-                removedCatalog = catalogsList.remove(position);
-                Snackbar.make(mRecyclerView, "Catalog has been removed.", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-                        addCatalogViewModel.addNewCatalog(removedCatalog.getName(), removedCatalog.getCategory());
-                        catalogsList.add(position,removedCatalog);
-                    }
-                }).show();
+//                removedCatalog = catalogsList.remove(position);
+
+//                Snackbar.make(mRecyclerView, "Catalog has been removed.", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener(){
+//                    @Override
+//                    public void onClick(View v) {
+////                        addCatalogViewModel.addNewCatalog(removedCatalog.getName(), removedCatalog.getCategory());
+//                        catalogsList.add(position,removedCatalog);
+//                    }
+//
+//
+//
+//                }).addCallback(new Snackbar.Callback(){
+//                    @Override
+//                    public void onDismissed(Snackbar transientBottomBar, int event) {
+//                        if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT) {
+//                            catalogsViewModel.removeCatalogFromList(removedCatalog.getCID());
+//                        }
+//
+//                    }
+//                }).show();
             }
         });
 
