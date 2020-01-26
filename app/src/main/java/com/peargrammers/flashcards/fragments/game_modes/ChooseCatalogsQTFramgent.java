@@ -14,9 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.peargrammers.flashcards.Adapters.CatalogPlayAdapter;
+import com.peargrammers.flashcards.adapters.CatalogPlayAdapter;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.Adapters.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.adapters.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.models.Catalog;

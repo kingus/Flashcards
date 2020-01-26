@@ -25,16 +25,19 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.peargrammers.flashcards.Adapters.CatalogAdapter;
+import com.peargrammers.flashcards.adapters.CatalogAdapter;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.Adapters.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.adapters.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.models.Catalog;
+import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.viewmodels.management.AddCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.EditCatalogViewModel;
 import com.peargrammers.flashcards.viewmodels.management.CatalogsViewModel;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 import java.util.ArrayList;
+import java.util.Map;
+
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 /**
@@ -99,9 +102,6 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
                 showAddCatalogDialog();
             }
         });
-
-
-        //catalogsViewModel.getUsetsCatalogListDB();
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
@@ -239,7 +239,6 @@ public class CatalogFragment extends Fragment implements RecyclerViewClickInterf
             public void onClick(View v) {
                 Log.i("EDIT", String.valueOf(position));
                 if(addCatalogViewModel.checkNameAndCategoryLength(etCatalogName.getText().toString(), etCatalogCategory.getText().toString())) {
-
                     alertDialog.hide();
                     editCatalogViewModel.editCatalog(editCatalogViewModel.getEditedCatalog().getCID(), etCatalogName.getText().toString(), etCatalogCategory.getText().toString());
                 }

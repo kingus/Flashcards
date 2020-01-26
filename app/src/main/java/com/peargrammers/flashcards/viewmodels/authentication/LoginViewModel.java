@@ -15,7 +15,6 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<String> signInException = new MutableLiveData<>();
     private static LoginViewModel instance;
 
-
     public MutableLiveData<Boolean> getSigngInStatus() {
         return signgInStatus;
     }

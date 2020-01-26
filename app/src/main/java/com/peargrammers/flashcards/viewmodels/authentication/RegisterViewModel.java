@@ -12,6 +12,7 @@ public class RegisterViewModel extends ViewModel {
     private static RegisterViewModel instance;
     private RegisterRepository registerRepository;
     private MutableLiveData<Boolean> signgUpStatus = new MutableLiveData<>();
+
     public MutableLiveData<Boolean> getSigngUpStatus() {
         return signgUpStatus;
     }

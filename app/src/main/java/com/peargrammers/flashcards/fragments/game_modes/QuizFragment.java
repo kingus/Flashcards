@@ -46,20 +46,13 @@ public class QuizFragment extends Fragment {
     private TextView tvQuestionText;
     private TextView tvScore;
     private TextView tvTotal;
-//    public static ProgressDialog infoDialog = null;
-
-
-
-    private SummarizeViewModel summarizeViewModel;
     private SummarizeFragment summarizeFragment;
 
 
 
     public QuizFragment() {
         quizViewModel = QuizViewModel.getInstance();
-        summarizeViewModel = SummarizeViewModel.getInstance();
         summarizeFragment = new SummarizeFragment();
-        // Required empty public constructor
     }
 
 
@@ -169,29 +162,11 @@ public class QuizFragment extends Fragment {
                 if (flashcards.size() < 4) {
                     HomeActivity.dialog.dismiss();
                     FragmentCoordinator.changeFragment(new HomeFragment(), getFragmentManager());
-
-//                    HomeActivity.dialog.dismiss();
-//
-//                   // FragmentCoordinator.changeFragment(new HomeFragment(), getFragmentManager());
-//
-//                    infoDialog =  ProgressDialog.show(getActivity(), "", "Not enough flashcards. You will be redirected to the start screen.");
-//                    new CountDownTimer(1000, 1000) {
-//
-//                        public void onTick(long millisUntilFinished) {
-//                        }
-//
-//                        public void onFinish() {
-//                            infoDialog.dismiss();
-//                            FragmentCoordinator.changeFragment(new HomeFragment(), getFragmentManager());
-//                            infoDialog.dismiss();
-//                        }
-//                    }.start();
                 } else {
                    
-                quizViewModel.resetStatistics();
-                quizViewModel.setCurrentFlashardIndex(0);
-                QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
-//                answerA.setText();
+                    quizViewModel.resetStatistics();
+                    quizViewModel.setCurrentFlashardIndex(0);
+                    QuizDataSet currentDataSet =  quizViewModel.getSingleQuizDataSet();
                     answerA.setText((CharSequence) currentDataSet.getAnswers().get(0));
                     answerB.setText((CharSequence) currentDataSet.getAnswers().get(1));
                     answerC.setText((CharSequence) currentDataSet.getAnswers().get(2));
@@ -201,14 +176,10 @@ public class QuizFragment extends Fragment {
                     tvTotal.setText(quizViewModel.getCurrentFlashardIndex() + "/" + quizViewModel.getFlashcardsInput().size());
                     HomeActivity.dialog.dismiss();
                 }
-
-
-
             }
         });
 
         quizViewModel.getFlashcardsListDB(quizViewModel.getCurrentCID());
-
     }
 
 }

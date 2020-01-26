@@ -18,7 +18,6 @@ import com.peargrammers.flashcards.viewmodels.authentication.RegisterViewModel;
 public class RegisterActivity extends AppCompatActivity {
 
     private RegisterViewModel registerViewModel;
-
     private EditText mName, mEmail, mPassword1, mPassword2;
     private Button btnSignUp, btnSignIn;
 

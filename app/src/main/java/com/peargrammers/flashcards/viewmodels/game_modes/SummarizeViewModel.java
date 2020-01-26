@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel;
 
 public class SummarizeViewModel  extends ViewModel {
     private static SummarizeViewModel instance;
-
     private int goodAnsweredCounter=0;
     private int wrongAnsweredCounter=0;
 

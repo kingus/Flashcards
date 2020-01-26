@@ -15,7 +15,6 @@ public class LoginRepository {
     private FirebaseAuth mAuth;
     private MutableLiveData<Boolean> signInStatus = new MutableLiveData<>();
     private MutableLiveData<String> signInException = new MutableLiveData<>();
-
     private OnCompleteListener onCompleteListener;
     private String myEmail;
     private String myPassword;

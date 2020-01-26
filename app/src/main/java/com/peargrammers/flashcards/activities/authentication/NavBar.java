@@ -14,6 +14,4 @@ public class NavBar {
         navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_user));
         navigationView.addSpaceItem(new SpaceItem("", R.drawable.ic_exit));
     }
-
-
 }

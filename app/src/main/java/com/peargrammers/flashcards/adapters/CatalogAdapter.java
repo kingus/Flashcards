@@ -1,4 +1,4 @@
-package com.peargrammers.flashcards.Adapters;
+package com.peargrammers.flashcards.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,13 +43,11 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
 
                 @Override
                 public void onClick(View v) {
-
                     recyclerViewClickInterface.onItemClick(getAdapterPosition());
                 }
             });
         }
     }
-
 
     @NonNull
     @Override
@@ -59,8 +57,6 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.CatalogV
         return cvh;
 
     }
-
-
 
     @Override
     public void onBindViewHolder(@NonNull CatalogViewHolder holder, int position) {

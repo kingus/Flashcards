@@ -16,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.Adapters.ViewFlashcardsAdapter;
+import com.peargrammers.flashcards.adapters.ViewFlashcardsAdapter;
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.viewmodels.management.FlashcardsViewModel;
 
@@ -27,12 +27,12 @@ import java.util.ArrayList;
  */
 public class ViewFlashcards extends Fragment {
 
-    ViewPager viewPager;
-    ViewFlashcardsAdapter viewFlashcardsAdapter;
-    FlashcardsViewModel flashcardsViewModel = FlashcardsViewModel.getInstance();
-    ArrayList<Flashcard> flashcardsList;
-    Button btnSearch;
-    EditText searchCard;
+    private ViewPager viewPager;
+    private ViewFlashcardsAdapter viewFlashcardsAdapter;
+    private FlashcardsViewModel flashcardsViewModel = FlashcardsViewModel.getInstance();
+    private ArrayList<Flashcard> flashcardsList;
+    private Button btnSearch;
+    private EditText searchCard;
 
     public ViewFlashcards() {
     }
@@ -41,7 +41,6 @@ public class ViewFlashcards extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_view_flashcards, container, false);
     }
 
@@ -54,7 +53,6 @@ public class ViewFlashcards extends Fragment {
         viewPager = view.findViewById(R.id.viewPager);
         searchCard = view.findViewById(R.id.search_card);
         btnSearch = view.findViewById(R.id.btn_search);
-
 
         flashcardsViewModel.getFlashcardsList().observe(ViewFlashcards.this, new Observer<ArrayList<Flashcard>>() {
             @Override
