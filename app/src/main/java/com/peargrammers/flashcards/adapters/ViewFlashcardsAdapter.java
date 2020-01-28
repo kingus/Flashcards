@@ -1,4 +1,4 @@
-package com.peargrammers.flashcards.Adapters;
+package com.peargrammers.flashcards.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -48,7 +48,6 @@ public class ViewFlashcardsAdapter extends PagerAdapter {
         backside.setText(flashcardsList.get(position).getBackside());
         System.out.println(flashcardsList.get(position).getFrontside());
         container.addView(view, 0);
-
         return view;
     }
 

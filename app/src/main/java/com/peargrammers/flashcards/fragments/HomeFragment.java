@@ -29,19 +29,13 @@ import com.peargrammers.flashcards.viewmodels.management.HomeViewModel;
  */
 public class HomeFragment extends Fragment {
 
-    HomeViewModel homeViewModel;
-    GridLayout mGridLayout;
-    ViewFlashcards viewFlashcards;
-    QuizFragment quizFragment;
-    ChooseCatalogsQTFramgent chooseCatalogsQTFramgent;
-    CatalogFragment catalogFragment;
-    ViewCatalogsFragment viewCatalogsFragment;
+    private HomeViewModel homeViewModel;
+    private GridLayout mGridLayout;
+    private ChooseCatalogsQTFramgent chooseCatalogsQTFramgent;
+    private ViewCatalogsFragment viewCatalogsFragment;
 
     public HomeFragment() {
         this.homeViewModel = HomeViewModel.getInstance();
-        this.viewFlashcards = new ViewFlashcards();
-        this.catalogFragment = new CatalogFragment();
-        this.quizFragment = new QuizFragment();
         this.chooseCatalogsQTFramgent = new ChooseCatalogsQTFramgent();
         this.viewCatalogsFragment = new ViewCatalogsFragment();
     }
@@ -100,16 +94,7 @@ public class HomeFragment extends Fragment {
 
                 }
             });
-//        }
         }
     }
-//    public void changeFragment(Fragment fragment){
-//        FragmentManager fragmentManager2 = getFragmentManager();
-//        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-//        fragmentTransaction2.addToBackStack(fragment.toString());
-////        fragmentTransaction2.hide(HomeFragment.this);
-//        fragmentTransaction2.replace(R.id.main_frame, fragment);
-//        fragmentTransaction2.commit();
-//        Log.i("FRAGMENT", "changed");
-//    }
+
 }

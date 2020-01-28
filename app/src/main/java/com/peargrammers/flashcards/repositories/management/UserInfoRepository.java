@@ -29,52 +29,20 @@ public class UserInfoRepository {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private DatabaseReference dbUsersRef;
-
-    public MutableLiveData<Long> getHowManyFlashcards() {
-        return howManyFlashcards;
-    }
-
     private MutableLiveData<Long> howManyFlashcards = new MutableLiveData<>();
     private MutableLiveData<User> loggedUser = new MutableLiveData<>();
     private ValueEventListener loggedUserListener;
     private ValueEventListener howManyFlashcardsListener;
 
     public MutableLiveData<User> getLoggedUser() { return loggedUser; }
+    public MutableLiveData<Long> getHowManyFlashcards() {
+        return howManyFlashcards;
+    }
 
     public UserInfoRepository() {
         this.mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         dbUsersRef = mDatabase.getReference("/USERS");
-
-        /*
-              to git
-         myRef.child("UID"+mAuth.getCurrentUser().getUid()).child("name").setValue("Szymek");
-        adding multiple posts at the same time
-        Map<String, User> users = new HashMap<>();
-        users.put("UID:"+mAuth.getCurrentUser().getUid(), new User("gruz@wp.org", "AlanTuring"));
-        users.put("gracehop", new User("buziaczek@onet.pl", "Grace Hopper"));
-
-        myRef.setValue(users);
-
-
-        myRef.setValue(new User("grusza123@gmail.com", "Szymon"));
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-*/
     }
 
     public static UserInfoRepository getInstance() {
@@ -86,7 +54,6 @@ public class UserInfoRepository {
 
 
     public void getLoggedUserInfo() {
-        //User loggedUser = dbUsersRef.child(mAuth.getUid());
         loggedUserListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -96,9 +63,7 @@ public class UserInfoRepository {
                     loggedUserDB.setCatalogs(new HashMap<String, Catalog>());
                 }
 
-                //Log.d(TAG, loggedUserDB.toString());
                 loggedUser.postValue(loggedUserDB);
-
             }
 
             @Override
@@ -140,7 +105,6 @@ public class UserInfoRepository {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d(TAG, "OOOOUPS, SOMETHING WENT WRONG :(");
-
             }
         };
 

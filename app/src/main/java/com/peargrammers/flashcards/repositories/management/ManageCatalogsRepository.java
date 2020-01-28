@@ -35,12 +35,10 @@ public class ManageCatalogsRepository {
     private Map<String, Object> childUpdates;
     private Map<String, Object> childRemove;
     private Map<String, Object> childEdit;
-
-    private MutableLiveData<Boolean> ifAddCatalogProperly = new MutableLiveData<>();
-    private MutableLiveData<Boolean> ifRemoveCatalogProperly = new MutableLiveData<>();
-    private MutableLiveData<Boolean> ifEditedCatalogProperly = new MutableLiveData<>();
-    private MutableLiveData<ArrayList<Catalog>> usersCatalogsList = new MutableLiveData<>();
-
+    private MutableLiveData<Boolean> ifAddCatalogProperly;
+    private MutableLiveData<Boolean> ifRemoveCatalogProperly;
+    private MutableLiveData<Boolean> ifEditedCatalogProperly;
+    private MutableLiveData<ArrayList<Catalog>> usersCatalogsList;
 
 
     public ManageCatalogsRepository() {
@@ -48,7 +46,10 @@ public class ManageCatalogsRepository {
         this.mDatabase = FirebaseDatabase.getInstance();
         this.dbCurrentUserRef = mDatabase.getReference("/USERS/" + mAuth.getUid());
         this.dbRef = mDatabase.getReference();
-        //Log.d(TAG, "################ sciezka do current USER CATALOGS" + this.dbCurrentUserRef.toString());
+        this.ifAddCatalogProperly = new MutableLiveData<>();
+        this.ifRemoveCatalogProperly = new MutableLiveData<>();
+        this.ifEditedCatalogProperly = new MutableLiveData<>();
+        this.usersCatalogsList = new MutableLiveData<>();
 
     }
 

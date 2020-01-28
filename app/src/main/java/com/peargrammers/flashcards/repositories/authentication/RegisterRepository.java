@@ -22,11 +22,9 @@ public class RegisterRepository {
     private FirebaseDatabase mDatabase;
     private DatabaseReference dbUsersRef;
     private MutableLiveData<Boolean> signgUpStatus = new MutableLiveData<>();
-
     private OnCompleteListener onCompleteListener;
     private String myEmail;
     private String myPassword;
-
 
     public MutableLiveData<Boolean> getSigngUpStatus() {
         return signgUpStatus;

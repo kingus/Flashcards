@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.Adapters.ViewFlashcardsAdapter;
+import com.peargrammers.flashcards.adapters.ViewFlashcardsAdapter;
 import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.fragments.SummarizeFragment;
@@ -47,31 +47,22 @@ public class QuickAnswerFragment extends Fragment {
     private TextView cardText;
     private EditText etAnswer;
     private ImageButton btnHint;
-    ImageButton btnRight, btnWrong;
-    private FlashcardsViewModel flashcardsViewModel = FlashcardsViewModel.getInstance();
+    private ImageButton btnRight, btnWrong;
     private QuickAnswerViewModel quickAnswerViewModel;
-    private SummarizeViewModel summarizeViewModel;
     private SummarizeFragment summarizeFragment;
     private QuizDataSet currentDataSet;
-
-    ViewFlashcardsAdapter viewFlashcardsAdapter;
-    ArrayList<Flashcard> flashcardsList = new ArrayList<>();
-    private boolean side = true;
-    FloatingActionButton fBtnNext;
+    private FloatingActionButton fBtnNext;
 
 
     public QuickAnswerFragment() {
         quickAnswerViewModel = QuickAnswerViewModel.getInstance();
-        summarizeViewModel = SummarizeViewModel.getInstance();
         summarizeFragment = new SummarizeFragment();
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_quick_answer, container, false);
     }
 
@@ -85,25 +76,6 @@ public class QuickAnswerFragment extends Fragment {
         etAnswer = view.findViewById(R.id.et_answer);
         btnRight = view.findViewById(R.id.btn_right);
         btnWrong = view.findViewById(R.id.btn_wrong);
-
-        /*
-        flashcardsViewModel.getFlashcardsList().observe(QuickAnswerFragment.this, new Observer<ArrayList<Flashcard>>() {
-            @Override
-            public void onChanged(ArrayList<Flashcard> flashcards) {
-                System.out.println("POBIERAM DANE z BAZY");
-                flashcardsList.clear();
-                flashcardsList.addAll(flashcards);
-                //viewFlashcardsAdapter = new ViewFlashcardsAdapter(flashcardsList, getActivity());
-                flashcardsViewModel.getFlashcardsListDB(flashcardsViewModel.getCurrentCatalog().getCID());
-                if(side)
-                    cardText.setText(flashcardsList.get(flashcardsViewModel.getCurrentFlashcardIndex()).getFrontside());
-                else
-                    cardText.setText(flashcardsList.get(flashcardsViewModel.getCurrentFlashcardIndex()).getBackside());
-            }
-        });
-
-        flashcardsViewModel.getFlashcardsListDB(flashcardsViewModel.getCurrentCatalog().getCID());
-        */
 
         quickAnswerViewModel.getFlashcardsList().observe(QuickAnswerFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
@@ -147,7 +119,6 @@ public class QuickAnswerFragment extends Fragment {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         super.onAnimationEnd(animation);
-                        side = false;
                         oa2.start();
                     }
                 });
@@ -168,8 +139,6 @@ public class QuickAnswerFragment extends Fragment {
                 if(quickAnswerViewModel.getCurrentFlashardIndex() != quickAnswerViewModel.getFlashcardsInput().size()) {
                     fBtnNext.setVisibility(View.INVISIBLE);
                     btnCheck.setEnabled(true);
-//                    flashcardsViewModel.setCurrentFlashcardIndex(flashcardsViewModel.getCurrentFlashcardIndex() + 1);
-//                    side = true;
                     currentDataSet =  quickAnswerViewModel.getSingleQuizDataSet();
                     cardText.setText(currentDataSet.getFlashcard().getFrontside().toUpperCase());
                     quickAnswerViewModel.setHint(0);

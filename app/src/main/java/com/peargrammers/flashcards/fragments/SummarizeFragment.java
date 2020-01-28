@@ -26,8 +26,6 @@ public class SummarizeFragment extends Fragment {
     private TextView tvWrongAnswered;
     private Button btnGoHome;
 
-
-
     public SummarizeFragment() {
         summarizeViewModel = SummarizeViewModel.getInstance();
         // Required empty public constructor
@@ -37,9 +35,7 @@ public class SummarizeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_summarize, container, false);
-
     }
 
     @Override
@@ -59,11 +55,5 @@ public class SummarizeFragment extends Fragment {
 
         tvWellAnswered.setText(Integer.toString(summarizeViewModel.getGoodAnsweredCounter()));
         tvWrongAnswered.setText(Integer.toString(summarizeViewModel.getWrongAnsweredCounter()));
-
-//        tvWellAnswered.setText("jeden");
-//        tvWrongAnswered.setText("DWA");
-//
-
-
     }
 }

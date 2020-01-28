@@ -15,9 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.peargrammers.flashcards.Adapters.CatalogPlayAdapter;
+import com.peargrammers.flashcards.adapters.CatalogPlayAdapter;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.Adapters.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.adapters.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.fragments.FragmentCoordinator;
 import com.peargrammers.flashcards.models.Catalog;
@@ -39,15 +39,13 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
     private CatalogsViewModel catalogsViewModel;
     private RecyclerView.LayoutManager mLayoutManager;
     private HomeViewModel homeViewModel = HomeViewModel.getInstance();
-    ViewFlashcards viewFlashcards;
-    RateYourselfFragment rateYourselfFragment;
-    QuizFragment quizFragment;
-    QuickAnswerFragment quickAnswerFragment;
+    private ViewFlashcards viewFlashcards;
+    private RateYourselfFragment rateYourselfFragment;
+    private QuickAnswerFragment quickAnswerFragment;
 
     public ViewCatalogsFragment() {
         catalogsViewModel = CatalogsViewModel.getInstance();
         this.viewFlashcards = new ViewFlashcards();
-        this.quizFragment = new QuizFragment();
         this.rateYourselfFragment = new RateYourselfFragment();
         this.quickAnswerFragment = new QuickAnswerFragment();
     }
@@ -89,8 +87,6 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
 
     @Override
     public void onItemClick(int position) {
-        //QuickAnswerViewModel.getInstance().setCurrentCatalog(catalogsList.get(position));
-
         mRecyclerView.findViewHolderForAdapterPosition(position).itemView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             switch (homeViewModel.getGameMode()) {
                 case 0:
@@ -109,15 +105,4 @@ public class ViewCatalogsFragment extends Fragment implements RecyclerViewClickI
                 break;
         }
     }
-
-//    public void changeFragment(Fragment fragment){
-//        FragmentManager fragmentManager2 = getFragmentManager();
-//        FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-//        fragmentTransaction2.addToBackStack(fragment.toString());
-////        fragmentTransaction2.hide(HomeFragment.this);
-//        fragmentTransaction2.replace(R.id.main_frame, fragment);
-//        fragmentTransaction2.commit();
-//        Log.i("FRAGMENT", "changed");
-//    }
-
 }

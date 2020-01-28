@@ -70,19 +70,7 @@ public class RateYourselfFragment extends Fragment {
                     cardText.setText(currentDataSet.getFlashcard().getFrontside().toUpperCase());
                 }
                 else{
-//                    HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
-//                    new CountDownTimer(500, 500) {
-//
-//                        public void onTick(long millisUntilFinished) {
-//                        }
-//
-//                        public void onFinish() {
-//                            HomeActivity.dialog.dismiss();
-//
-//                        }
-//                    }.start();
                     FragmentCoordinator.changeFragment(HomeActivity.homeFragment, getFragmentManager());
-
                 }
 
             }

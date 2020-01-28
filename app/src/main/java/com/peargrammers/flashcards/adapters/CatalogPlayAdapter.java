@@ -1,4 +1,4 @@
-package com.peargrammers.flashcards.Adapters;
+package com.peargrammers.flashcards.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;

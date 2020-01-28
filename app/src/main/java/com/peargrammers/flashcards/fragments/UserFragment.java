@@ -29,8 +29,8 @@ import java.util.Date;
  */
 public class UserFragment extends Fragment {
 
-    UserViewModel userViewModel;
-    TextView tv_username, tv_username2, tv_email, tv_catalogs_number, tv_flashcards_number, tv_joined;
+    private UserViewModel userViewModel;
+    private TextView tv_username, tv_username2, tv_email, tv_catalogs_number, tv_flashcards_number, tv_joined;
 
     public UserFragment() {
     }
@@ -40,8 +40,6 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
 

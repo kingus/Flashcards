@@ -11,6 +11,7 @@ import com.peargrammers.flashcards.models.User;
 public class LogOutRepository {
     private static LogOutRepository instance;
     private FirebaseAuth mAuth;
+
     public LogOutRepository() {
         this.mAuth = FirebaseAuth.getInstance();
     }

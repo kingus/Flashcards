@@ -21,7 +21,6 @@ public class QuickAnswerViewModel extends ViewModel {
     private ArrayList<Flashcard> flashcardsOutput = new ArrayList<>();
     private ArrayList<Flashcard> flashcardsToRevome = new ArrayList<>();
     private MutableLiveData<ArrayList<Flashcard>> flashcardsList = new MutableLiveData<>();
-    private MutableLiveData<QuizDataSet> quizDataSet = new MutableLiveData<>();
     private String currentCID;
     private int currentFlashardIndex;
     private int goodAnsweredCounter;

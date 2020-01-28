@@ -27,9 +27,9 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.peargrammers.flashcards.Adapters.FlashcardAdapter;
+import com.peargrammers.flashcards.adapters.FlashcardAdapter;
 import com.peargrammers.flashcards.R;
-import com.peargrammers.flashcards.Adapters.RecyclerViewClickInterface;
+import com.peargrammers.flashcards.adapters.RecyclerViewClickInterface;
 import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.models.Flashcard;
 import com.peargrammers.flashcards.viewmodels.management.AddFlashcardViewModel;
@@ -45,24 +45,23 @@ import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
  */
 public class  FlashcardFragment extends Fragment implements RecyclerViewClickInterface {
 
+    private final FragmentActivity flashcardActivity = getActivity();
     private FlashcardsViewModel flashcardsViewModel;
     private AddFlashcardViewModel addFlashcardViewModel;
     private FloatingActionButton floatingActionButton;
-    private final FragmentActivity flashcardActivity = getActivity();
     private EditFlashcardViewModel editFlashcardViewModel;
-
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
-    private ArrayList<Flashcard> flashcardsList = new ArrayList<>();
-
-    private Flashcard removedFlashcard = null;
+    private ArrayList<Flashcard> flashcardsList;
+    private Flashcard removedFlashcard;
 
     public FlashcardFragment() {
         flashcardsViewModel = FlashcardsViewModel.getInstance();
         addFlashcardViewModel = AddFlashcardViewModel.getInstance();
         editFlashcardViewModel = EditFlashcardViewModel.getInstance();
+        flashcardsList = new ArrayList<>();
+        removedFlashcard = null;
     }
 
 
@@ -80,28 +79,22 @@ public class  FlashcardFragment extends Fragment implements RecyclerViewClickInt
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
-
         mRecyclerView = view.findViewById(R.id.rv_flashcards);
         mRecyclerView.setHasFixedSize(true);
         floatingActionButton  = view.findViewById(R.id.fab_add_flashcard);
         TextView tvCurrentCatalog = view.findViewById(R.id.tv_current_catalog);
-        TextView tvLevel = view.findViewById(R.id.tv_level);
         tvCurrentCatalog.setText(flashcardsViewModel.getCurrentCatalog().getName());
 
         final RecyclerViewClickInterface rvci = this;
         flashcardsViewModel.getFlashcardsList().observe(FlashcardFragment.this, new Observer<ArrayList<Flashcard>>() {
             @Override
             public void onChanged(ArrayList<Flashcard> flashcards) {
-//                HomeActivity.dialog = ProgressDialog.show(getContext(), "", "Please Wait...");
-
                 flashcardsList.clear();
                 flashcardsList.addAll(flashcards);
                 mLayoutManager = new LinearLayoutManager(flashcardActivity);
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mAdapter = new FlashcardAdapter(flashcardsList, rvci);
                 mRecyclerView.setAdapter(mAdapter);
-
             }
         });
 
@@ -112,13 +105,9 @@ public class  FlashcardFragment extends Fragment implements RecyclerViewClickInt
                 showAddCardDialog();
             }
         });
-
-
         flashcardsViewModel.getFlashcardsListDB(flashcardsViewModel.getCurrentCatalog().getCID());
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
-
-
     }
 
 

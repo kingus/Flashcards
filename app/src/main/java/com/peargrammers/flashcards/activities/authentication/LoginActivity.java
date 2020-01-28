@@ -18,7 +18,7 @@ import com.peargrammers.flashcards.viewmodels.authentication.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
-    LoginViewModel loginViewModel;
+    private LoginViewModel loginViewModel;
     private EditText mEmail, mPassword;
     private Button btnSignIn, btnSignUp;
     private ProgressDialog dialog;
@@ -37,8 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = findViewById(R.id.et_password);
         btnSignIn = findViewById(R.id.btn_sign_in);
         btnSignUp  = findViewById(R.id.btn_sign_up);
-
-
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,13 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(myIntent);
                     } else {
                         Log.d("LOGIN_ACTIVITY", "LOGIN ZLE - activity");
-
-                        //Toast.makeText(LoginActivity.this, "Złe hasłko czy coś :(.",Toast.LENGTH_SHORT).show();
-
                     }
                 }
-
-                    //loginViewModel.getSignInStatus().removeObservers(LoginActivity.this);
             }
 
         });
