@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.game_modes.QuickAnswerFragment"
+>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_card"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingTop="20dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="30dp">
+
+            <ImageButton
+                android:id="@+id/btn_wrong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:visibility="invisible"
+                android:src="@mipmap/ic_wrong_round">
+            </ImageButton>
+
+            <ImageButton
+                android:id="@+id/btn_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:padding="10dp"
+                android:visibility="invisible"
+                android:src="@mipmap/ic_right_round">
+            </ImageButton>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="180dp"
+            android:background="@android:color/transparent"
+            android:src="@mipmap/ic_bulb_round">
+        </ImageButton>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="722dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/et_answer"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_edit"
+            android:drawablePadding="7dp"
+            android:ems="50"
+            android:hint="Enter flashcard"
+            android:inputType="text"
+            android:textColor="#111"
+            android:textCursorDrawable="@color/colorBlack" />
+
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_check"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mybutton"
+        android:text="CHECK">
+    </Button>
+
+</LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fbtn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:clickable="true"
+            android:visibility="invisible"
+            android:src="@drawable/ic_arrow"
+            app:backgroundTint="@color/mediumGrey" />
+
+</RelativeLayout>

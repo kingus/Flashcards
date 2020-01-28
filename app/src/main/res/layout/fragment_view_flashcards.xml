@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.game_modes.ViewFlashcards"
+    android:orientation="vertical"
+    android:gravity="center">
+
+<!--    <EditText-->
+<!--        android:id="@+id/search_card"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Enter flashcard name">-->
+
+<!--    </EditText>-->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="20dp"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/search_card"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:drawableStart="@drawable/ic_edit"
+        android:drawablePadding="7dp"
+        android:ems="50"
+        android:hint="Enter flashcard"
+        android:inputType="text"
+        android:textColor="#111"
+        android:textCursorDrawable="@color/colorBlack" />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mybutton"
+        android:text="SEARCH">
+    </Button>
+
+</LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
+        android:layout_centerInParent="true"
+        android:foregroundGravity="center"
+        >
+
+    </androidx.viewpager.widget.ViewPager>
+</LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="30dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:id="@+id/alert_flashcard">
+
+    <TextView
+        android:id="@+id/tv_main_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="@string/edit_flashcard">
+    </TextView>
+
+    <EditText
+        android:id="@+id/et_flashcard_frontside"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Flashcard frontside"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/et_flashcard_backside"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Flashcard backside"
+        android:inputType="textPersonName" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"
+        >
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:background="@drawable/mybutton"
+            android:text="@string/cancel"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp">
+        </Button>
+
+        <Button
+            android:id="@+id/btn_save_back"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:text="@string/save_back"
+            android:background="@drawable/mybutton"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp">
+
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>

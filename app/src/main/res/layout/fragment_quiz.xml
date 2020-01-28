@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.game_modes.QuizFragment"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/conf2">
+    </ImageView>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:foregroundGravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv_question_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="36sp"
+            android:gravity="center"
+            android:visibility="visible"/>
+    </androidx.cardview.widget.CardView>
+
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="30dp"
+            android:paddingTop="20dp">
+
+            <LinearLayout
+
+                android:id="@+id/group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="10dp">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/tv_score"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:textSize="36sp"></TextView>
+
+                    <TextView
+                        android:id="@+id/tv_total"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="1/10"
+                        android:textColor="@android:color/black"
+                        android:textSize="36sp"></TextView>
+
+                </LinearLayout>
+
+                <ProgressBar
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:max="5"></ProgressBar>
+
+                <Button
+                    android:id="@+id/answerA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@color/leadningColor"
+                    android:text="Answer A"
+                    android:theme="@style/Widget.AppCompat.Button.Borderless">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/answerB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@color/leadningColor"
+                    android:text="Answer B"
+                    android:theme="@style/Widget.AppCompat.Button.Borderless">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/answerC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@color/leadningColor"
+                    android:text="Answer C"
+                    android:theme="@style/Widget.AppCompat.Button.Borderless">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/answerD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@color/leadningColor"
+                    android:text="Answer D"
+                    android:theme="@style/Widget.AppCompat.Button.Borderless">
+
+                </Button>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/nextFloatingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:clickable="true"
+        android:src="@drawable/ic_arrow"
+        android:visibility="invisible"
+        app:backgroundTint="@color/mediumGrey" />
+
+</RelativeLayout>
