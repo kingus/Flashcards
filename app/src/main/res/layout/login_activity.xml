@@ -36,6 +36,7 @@
         android:ems="50"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
+        android:text="jan.kowalski@gmail.com"
         android:textColor="#111"
         android:textCursorDrawable="@color/colorBlack" />
 
@@ -49,6 +50,7 @@
         android:ems="10"
         android:hint="@string/passwd"
         android:inputType="textPassword"
+        android:text="haslo1234"
         android:textColor="#111"
         android:textCursorDrawable="@color/colorBlack" />
 

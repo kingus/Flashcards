@@ -1,5 +1,6 @@
 package com.peargrammers.flashcards.adapters;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.models.Flashcard;
 
 import java.util.ArrayList;
@@ -62,6 +64,15 @@ public class FlashcardAdapter extends RecyclerView.Adapter<FlashcardAdapter.Flas
         holder.backside.setText(currentFlashcard.getBackside());
         String lvl = String.valueOf(currentFlashcard.getSmallBox());
         holder.tvLevel.setText(lvl);
+        new CountDownTimer(500, 500) {
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                HomeActivity.dialog.dismiss();
+            }
+        }.start();
+
     }
 
     @Override

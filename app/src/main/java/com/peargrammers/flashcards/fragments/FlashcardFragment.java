@@ -251,18 +251,10 @@ public class  FlashcardFragment extends Fragment implements RecyclerViewClickInt
     }
 
 
-    // do zmiany! nie moze tak zostac!
+
     @Override
     public void onStart() {
         super.onStart();
-        new CountDownTimer(500, 500) {
 
-            public void onTick(long millisUntilFinished) {
-            }
-
-            public void onFinish() {
-                HomeActivity.dialog.dismiss();
-            }
-        }.start();
     }
 }
