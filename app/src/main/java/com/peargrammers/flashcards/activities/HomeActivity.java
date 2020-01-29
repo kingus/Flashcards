@@ -102,6 +102,7 @@ public class  HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 logOutViewModel.logOut();
+                alert.dismiss();
                 finish();
 
             }
@@ -120,7 +121,6 @@ public class  HomeActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.addToBackStack(fragment.toString());
-        System.out.println("FRAGMENT!!!!!!!!: " + fragment.toString());
         fragmentTransaction.replace(R.id.main_frame, fragment).commit();
         Log.i("FRAGMENT", "changed");
     }
