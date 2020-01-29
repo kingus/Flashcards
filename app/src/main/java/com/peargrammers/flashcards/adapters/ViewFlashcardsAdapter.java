@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.peargrammers.flashcards.R;
+import com.peargrammers.flashcards.activities.HomeActivity;
 import com.peargrammers.flashcards.models.Flashcard;
 
 import java.util.List;
